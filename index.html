@@ -1,524 +1,151 @@
-<!doctype html>
-<html lang="ar">
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
 <head>
-<meta charset="utf-8" />
-<meta name="viewport" content="width=device-width,initial-scale=1" />
-<title>حاسبة نظام غذائي — إصدار المجلة</title>
-
-<!-- Google Font -->
-<link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@300;400;600;700;800&display=swap" rel="stylesheet">
-
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>حاسبة النظام الغذائي</title>
+<link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;700&display=swap" rel="stylesheet">
 <style>
-  :root{
-    --primary:#0b74de;
-    --accent:#15a085;
-    --card:#ffffff;
-    --muted:#6b7280;
-    --glass: rgba(255,255,255,0.75);
-    --glass-strong: rgba(255,255,255,0.90);
-    --bg-overlay: rgba(7,20,38,0.45);
-    --radius:14px;
-    --glass-radius:18px;
-  }
-
-  *{box-sizing:border-box}
-  html,body{height:100%}
-  body {
-    margin:0;
-    font-family: "Tajawal", system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
-    direction: rtl;
-    background-image: linear-gradient(180deg, rgba(7,20,38,0.25), rgba(7,20,38,0.25)), url('https://images.unsplash.com/photo-1512621776951-a57141f2eefd?auto=format&fit=crop&w=1600&q=70');
-    background-size: cover;
-    background-position: center;
-    color: #0b1a2b;
-    -webkit-font-smoothing:antialiased;
-    -moz-osx-font-smoothing:grayscale;
-    padding:40px;
-  }
-
-  /* Magazine container */
-  .container {
-    max-width:1100px;
-    margin: 0 auto;
-    background: linear-gradient(180deg, rgba(255,255,255,0.85), rgba(255,255,255,0.95));
-    border-radius:24px;
-    box-shadow: 0 12px 40px rgba(2,6,23,0.45);
-    overflow: hidden;
-    backdrop-filter: blur(6px);
-    border: 1px solid rgba(255,255,255,0.5);
-  }
-
-  /* Header magazine style */
-  .hero{
-    display:flex;
-    gap:20px;
-    align-items:center;
-    padding:28px;
-  }
-  .hero-left{
-    flex:1.1;
-  }
-  .title{
-    font-size:28px;
-    color:var(--primary);
-    margin:0 0 6px 0;
-    font-weight:800;
-    letter-spacing:0.6px;
-  }
-  .subtitle{
-    margin:0;
-    color:var(--muted);
-    font-size:14px;
-  }
-  .hero-right{
-    width:200px;
-    text-align:center;
-  }
-  .cover-badge{
-    background: linear-gradient(135deg,var(--accent),var(--primary));
-    color:white;
-    padding:10px 14px;
-    border-radius:12px;
-    font-weight:700;
-    display:inline-block;
-    box-shadow: 0 8px 25px rgba(11,116,222,0.2);
-    transform: translateY(-6px);
-  }
-
-  /* layout */
-  .main{
-    display:grid;
-    grid-template-columns: 380px 1fr;
-    gap:24px;
-    padding:20px 28px 40px 28px;
-  }
-
-  /* Inputs card */
-  .panel{
-    background: var(--glass-strong);
-    border-radius: var(--glass-radius);
-    padding:18px;
-    box-shadow: 0 6px 20px rgba(2,6,23,0.08);
-    border: 1px solid rgba(10,10,10,0.03);
-  }
-  .panel h2{
-    margin:0 0 12px 0;
-    color:#07203a;
-    font-size:18px;
-  }
-  .field{
-    display:flex;
-    gap:12px;
-    align-items:center;
-    margin-top:12px;
-    background: white;
-    padding:10px;
-    border-radius:12px;
-    border:1px solid rgba(10,10,10,0.04);
-    transition: transform .25s ease, box-shadow .25s ease;
-  }
-  .field:hover{ transform: translateY(-4px); box-shadow: 0 8px 22px rgba(2,6,23,0.06); }
-  .field .icon{
-    width:46px;
-    height:46px;
-    border-radius:10px;
-    background: linear-gradient(180deg, rgba(11,116,222,0.08), rgba(21,160,133,0.06));
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    font-size:20px;
-    color:var(--primary);
-    flex-shrink:0;
-  }
-  .field label{
-    font-weight:700;
-    font-size:13px;
-    color:#07203a;
-    margin-bottom:6px;
-  }
-  .field .inputs{
-    flex:1;
-  }
-  input[type="number"], select{
-    width:100%;
-    border:none;
-    outline:none;
-    font-size:15px;
-    padding:8px 6px;
-    background:transparent;
-  }
-
-  /* CTA */
-  .cta{
-    margin-top:16px;
-    display:flex;
-    gap:8px;
-  }
-  button#generateBtn{
-    flex:1;
-    padding:12px 14px;
-    background: linear-gradient(90deg,var(--primary),#0a62bd);
-    border:none;
-    color:white;
-    border-radius:12px;
-    font-weight:800;
-    font-size:16px;
-    cursor:pointer;
-    box-shadow: 0 12px 30px rgba(11,116,222,0.18);
-    transition: transform .18s ease, box-shadow .18s ease;
-  }
-  button#generateBtn:active{ transform: translateY(2px); box-shadow: 0 6px 18px rgba(11,116,222,0.12); }
-  button#resetBtn{
-    padding:10px 12px;
-    background:transparent;
-    border:1px dashed rgba(10,10,10,0.06);
-    border-radius:12px;
-    color:var(--muted);
-    cursor:pointer;
-    font-weight:700;
-  }
-
-  /* Result area (magazine page) */
-  .resultWrap{
-    padding:6px;
-  }
-  .result{
-    min-height:90vh;
-    background: linear-gradient(180deg, rgba(255,255,255,0.98), rgba(250,250,250,0.96));
-    border-radius:18px;
-    padding:20px;
-    overflow:auto;
-    border:1px solid rgba(2,6,23,0.03);
-  }
-
-  .summary{
-    display:flex;
-    gap:18px;
-    align-items:center;
-    margin-bottom:16px;
-    padding:12px;
-    border-radius:12px;
-    background: linear-gradient(90deg, rgba(11,116,222,0.06), rgba(21,160,133,0.03));
-  }
-  .summary .meta{ flex:1 }
-  .summary .meta p{ margin:4px 0; color:#08304a; font-weight:700; }
-  .progress{
-    width:160px;
-    text-align:center;
-  }
-
-  /* Days list: magazine cards */
-  .days{
-    display:grid;
-    grid-template-columns: repeat(auto-fill, minmax(240px,1fr));
-    gap:16px;
-  }
-  .dayCard{
-    background: white;
-    border-radius:12px;
-    padding:12px;
-    box-shadow: 0 10px 30px rgba(2,6,23,0.04);
-    transition: transform .16s ease;
-    overflow:hidden;
-  }
-  .dayCard:hover{ transform: translateY(-6px); }
-  .dayHead{
-    display:flex;
-    align-items:center;
-    justify-content:space-between;
-    margin-bottom:10px;
-  }
-  .dayHead h3{ margin:0; font-size:15px; color:#07203a; }
-  .calBadge{
-    background:linear-gradient(135deg,var(--primary),var(--accent));
-    color:white;
-    padding:6px 8px;
-    border-radius:10px;
-    font-weight:800;
-    font-size:13px;
-  }
-
-  .meal{
-    display:flex;
-    gap:10px;
-    align-items:flex-start;
-    margin-top:8px;
-    padding-top:8px;
-    border-top:1px dashed rgba(10,10,10,0.04);
-  }
-  .meal .m-icon{
-    width:44px; height:44px; border-radius:10px;
-    background: linear-gradient(180deg, rgba(11,116,222,0.06), rgba(21,160,133,0.03));
-    display:flex; align-items:center; justify-content:center;
-    font-size:18px;
-    color:var(--primary);
-    flex-shrink:0;
-  }
-  .meal .m-body{ flex:1; }
-  .meal .m-body .name{ font-weight:700; color:#07203a; font-size:13px; }
-  .meal .m-body .items{ font-size:12px; color:var(--muted); margin-top:6px; line-height:1.45; }
-
-  /* responsive */
-  @media (max-width:1000px){
-    .main{ grid-template-columns: 1fr; padding:18px; }
-    .hero-right{ display:none; }
-    .container{ margin:20px; }
-  }
-  @media (max-width:520px){
-    body{ padding:18px; }
-    .title{ font-size:22px; }
-    .hero{ gap:12px; padding:18px 16px; }
-  }
-
-  /* subtle entry animations */
-  .fadeIn{ animation: fadeIn .7s ease both; }
-  @keyframes fadeIn{ from{ opacity:0; transform: translateY(10px)} to{ opacity:1; transform: translateY(0)}}
+    body {
+        font-family: 'Tajawal', sans-serif;
+        margin: 0;
+        padding: 0;
+        background: linear-gradient(270deg, #FFD93D, #6C63FF);
+        background-size: 400% 400%;
+        animation: gradientMove 12s ease infinite;
+        color: #333;
+    }
+    @keyframes gradientMove {
+        0% {background-position: 0% 50%;}
+        50% {background-position: 100% 50%;}
+        100% {background-position: 0% 50%;}
+    }
+    header {
+        text-align: center;
+        padding: 20px;
+        color: #fff;
+        font-size: 2em;
+        font-weight: bold;
+        text-shadow: 1px 1px 4px rgba(0,0,0,0.3);
+    }
+    .container {
+        max-width: 800px;
+        margin: auto;
+        background: rgba(255, 255, 255, 0.95);
+        padding: 20px;
+        border-radius: 12px;
+        box-shadow: 0 4px 20px rgba(0,0,0,0.2);
+    }
+    .card {
+        background: #fff;
+        padding: 15px;
+        margin-bottom: 15px;
+        border-radius: 10px;
+        box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    }
+    label {
+        font-weight: bold;
+        margin-bottom: 5px;
+        display: block;
+    }
+    input, select, button {
+        width: 100%;
+        padding: 10px;
+        margin-top: 5px;
+        border-radius: 6px;
+        border: 1px solid #ccc;
+        font-size: 1em;
+    }
+    button {
+        background: linear-gradient(90deg, #FFD93D, #6C63FF);
+        border: none;
+        color: white;
+        font-weight: bold;
+        cursor: pointer;
+        transition: transform 0.2s ease;
+    }
+    button:hover {
+        transform: scale(1.05);
+    }
+    .results {
+        margin-top: 20px;
+    }
+    .meal {
+        display: flex;
+        align-items: center;
+        background: #f9f9f9;
+        margin: 5px 0;
+        padding: 10px;
+        border-radius: 8px;
+    }
+    .meal-icon {
+        font-size: 1.5em;
+        margin-right: 10px;
+    }
 </style>
 </head>
 <body>
-
-<div class="container fadeIn">
-
-  <div class="hero" role="banner" aria-hidden="false">
-    <div class="hero-left">
-      <h1 class="title">حاسبة النظام الغذائي — إصدار المجلة</h1>
-      <p class="subtitle">خطة غذائية مبسطة لمدة 30 يوم مع عرض تصفّحي أنيق يحسس العميل أنه داخل مجلة تغذية احترافية.</p>
-    </div>
-    <div class="hero-right">
-      <div class="cover-badge">خطة 30 يوم</div>
-      <div style="margin-top:10px;color:var(--muted);font-size:13px">سريعة — مفهومة — ملهمة</div>
-    </div>
-  </div>
-
-  <div class="main">
-    <!-- Sidebar inputs -->
-    <aside class="panel" aria-label="إعدادات الحاسبة">
-      <h2>أدخل بياناتك</h2>
-
-      <div class="field">
-        <div class="icon">🎂</div>
-        <div class="inputs">
-          <label for="age">العمر (سنة)</label>
-          <input id="age" type="number" min="10" max="100" placeholder="مثلاً: 30">
-        </div>
-      </div>
-
-      <div class="field">
-        <div class="icon">👤</div>
-        <div class="inputs">
-          <label for="gender">الجنس</label>
-          <select id="gender">
-            <option value="" disabled selected>اختر الجنس</option>
-            <option value="male">ذكر</option>
-            <option value="female">أنثى</option>
-          </select>
-        </div>
-      </div>
-
-      <div class="field">
-        <div class="icon">📏</div>
-        <div class="inputs">
-          <label for="height">الطول (سم)</label>
-          <input id="height" type="number" min="100" max="230" placeholder="مثلاً: 175">
-        </div>
-      </div>
-
-      <div class="field">
-        <div class="icon">⚖️</div>
-        <div class="inputs">
-          <label for="weight">الوزن (كغ)</label>
-          <input id="weight" type="number" min="30" max="250" placeholder="مثلاً: 70">
-        </div>
-      </div>
-
-      <div class="field">
-        <div class="icon">🏃</div>
-        <div class="inputs">
-          <label for="activity">مستوى النشاط</label>
-          <select id="activity">
-            <option value="" disabled selected>اختر مستوى النشاط</option>
+<header>حاسبة النظام الغذائي</header>
+<div class="container">
+    <div class="card">
+        <label>الوزن (كجم)</label>
+        <input type="number" id="weight" placeholder="أدخل وزنك">
+        <label>الطول (سم)</label>
+        <input type="number" id="height" placeholder="أدخل طولك">
+        <label>العمر</label>
+        <input type="number" id="age" placeholder="أدخل عمرك">
+        <label>مستوى النشاط</label>
+        <select id="activity">
             <option value="1.2">قليل الحركة</option>
-            <option value="1.375">تمارين خفيفة 1-3 أيام</option>
-            <option value="1.55">تمارين معتدلة 3-5 أيام</option>
-            <option value="1.725">تمارين كثيفة 6-7 أيام</option>
-            <option value="1.9">نشاط عالي جداً</option>
-          </select>
-        </div>
-      </div>
-
-      <div class="field" style="margin-bottom:6px;">
-        <div class="icon">🎯</div>
-        <div class="inputs">
-          <label for="goal">هدف النظام</label>
-          <select id="goal">
-            <option value="" disabled selected>اختر الهدف</option>
-            <option value="lose">نقص وزن</option>
-            <option value="maintain">الحفاظ على الوزن</option>
+            <option value="1.375">نشاط خفيف</option>
+            <option value="1.55">نشاط متوسط</option>
+            <option value="1.725">نشاط عالي</option>
+        </select>
+        <label>الهدف</label>
+        <select id="goal">
+            <option value="lose">خسارة وزن</option>
+            <option value="maintain">حفاظ على الوزن</option>
             <option value="gain">زيادة وزن</option>
-          </select>
-        </div>
-      </div>
-
-      <div class="cta">
-        <button id="generateBtn">احسب واطلع خطة الـ 30 يوم</button>
-        <button id="resetBtn" type="button">إعادة ضبط</button>
-      </div>
-
-      <p style="color:var(--muted);font-size:13px;margin-top:12px;text-align:center">
-        النتائج تقريبية — استشر أخصائي التغذية للحالات الخاصة.
-      </p>
-    </aside>
-
-    <!-- Results -->
-    <section class="resultWrap">
-      <div id="resultArea" class="result" aria-live="polite">
-        <div class="summary">
-          <div class="meta">
-            <p id="metaLine">لم يتم الحساب بعد — أدخل بياناتك ثم اضغط "احسب".</p>
-            <div style="font-size:13px;color:var(--muted);">عرض النتائج يظهر على هيئة مجلّة قابلة للتصفح.</div>
-          </div>
-          <div class="progress">
-            <div style="font-weight:800;color:var(--primary);font-size:18px" id="tdeeBadge">—</div>
-            <div style="font-size:12px;color:var(--muted);margin-top:6px">سعرات يومية مستهدفة</div>
-          </div>
-        </div>
-
-        <div id="daysContainer">
-          <!-- Day cards generated here -->
-          <div style="text-align:center;color:var(--muted);padding:40px 20px">لا توجد بيانات بعد.</div>
-        </div>
-
-      </div>
-    </section>
-  </div>
+        </select>
+        <button onclick="calculatePlan()">احسب</button>
+    </div>
+    <div class="results" id="results"></div>
 </div>
 
 <script>
-/* ---------- بيانات الوجبات (كما في كودك الأصلي) ---------- */
-const mealsData = {
-  1200: [{ breakfast:[{food:"بيض مسلوق",qty:"3 بيضات",kcal:210}], preWorkout:[{food:"موزة",qty:"1",kcal:100}], postWorkout:[{food:"صدر دجاج مشوي",qty:"100 غ",kcal:165}], lunch:[{food:"لحم بقري قليل الدهن",qty:"120 غ",kcal:250}], dinner:[{food:"سمك مشوي",qty:"120 غ",kcal:200}], snacks:[{food:"مكسرات",qty:"20 غ",kcal:120}]}],
-  1500: [{ breakfast:[{food:"4 بيضات مسلوقة",qty:"4",kcal:280}], preWorkout:[{food:"موزة كبيرة",qty:"1",kcal:120}], postWorkout:[{food:"صدر دجاج مشوي",qty:"150 غ",kcal:250}], lunch:[{food:"لحم بقري قليل الدهن",qty:"180 غ",kcal:370}], dinner:[{food:"سمك مشوي",qty:"150 غ",kcal:250}], snacks:[{food:"مكسرات",qty:"25 غ",kcal:150}]}],
-  1800: [{ breakfast:[{food:"4 بيضات أومليت",qty:"4",kcal:280}], preWorkout:[{food:"موزة كبيرة",qty:"1",kcal:120}], postWorkout:[{food:"صدر دجاج مشوي",qty:"180 غ",kcal:300}], lunch:[{food:"لحم بقري قليل الدهن",qty:"200 غ",kcal:400}], dinner:[{food:"سمك مشوي",qty:"180 غ",kcal:300}], snacks:[{food:"مكسرات",qty:"30 غ",kcal:180}]}],
-  2200: [{ breakfast:[{food:"5 بيضات أومليت",qty:"5",kcal:350}], preWorkout:[{food:"موزتين",qty:"2",kcal:240}], postWorkout:[{food:"صدر دجاج مشوي",qty:"200 غ",kcal:350}], lunch:[{food:"لحم بقري قليل الدهن",qty:"250 غ",kcal:460}], dinner:[{food:"سمك مشوي",qty:"200 غ",kcal:350}], snacks:[{food:"مكسرات",qty:"35 غ",kcal:210}]}],
-};
+function calculatePlan() {
+    const weight = parseFloat(document.getElementById('weight').value);
+    const height = parseFloat(document.getElementById('height').value);
+    const age = parseFloat(document.getElementById('age').value);
+    const activity = parseFloat(document.getElementById('activity').value);
+    const goal = document.getElementById('goal').value;
 
-/* ---------- وظائف الحساب ---------- */
-function roundCalories(kcal){
-  const keys = Object.keys(mealsData).map(x=>parseInt(x));
-  let nearest = keys[0];
-  let minDiff = Math.abs(kcal - nearest);
-  for(const k of keys){
-    const diff = Math.abs(kcal - k);
-    if(diff < minDiff){ minDiff = diff; nearest = k; }
-  }
-  return nearest;
-}
-function calculateBMR(weight,height,age,gender){
-  if(gender==="male") return 10*weight + 6.25*height - 5*age + 5;
-  if(gender==="female") return 10*weight + 6.25*height - 5*age -161;
-  return 10*weight + 6.25*height - 5*age;
-}
-function generatePlan(bandCalories){
-  const dayPlans=[];
-  const baseMeal = mealsData[bandCalories][0];
-  for(let day=1;day<=30;day++){
-    dayPlans.push({day, meals: baseMeal});
-  }
-  return dayPlans;
-}
+    if (!weight || !height || !age) {
+        alert("يرجى إدخال جميع القيم");
+        return;
+    }
 
-/* ---------- رندرة نتائج بشكل مجلة ---------- */
-function renderMagazine(age,gender,height,weight,activity,goal){
-  const bmr = calculateBMR(weight,height,age,gender);
-  let tdee = Math.round(bmr * activity);
-  if(goal === "lose") tdee = Math.round(tdee - 500);
-  else if(goal === "gain") tdee = Math.round(tdee + 400);
-  if(tdee < 1200) tdee = 1200;
+    let bmr = 10 * weight + 6.25 * height - 5 * age + 5;
+    let calories = bmr * activity;
 
-  const band = roundCalories(tdee);
-  const bmi = (weight / ((height/100)**2)).toFixed(1);
-  const days = generatePlan(band);
+    if (goal === "lose") calories -= 500;
+    if (goal === "gain") calories += 500;
 
-  // Header meta
-  document.getElementById('metaLine').innerHTML =
-    `العمر: <strong>${age}</strong>  •  الجنس: <strong>${gender==="male"?"ذكر":"أنثى"}</strong>  •  الطول: <strong>${height} سم</strong>  •  الوزن: <strong>${weight} كغ</strong>  •  BMI: <strong>${bmi}</strong>`;
-  document.getElementById('tdeeBadge').textContent = `${tdee} kcal`;
-
-  // Build day cards
-  const container = document.getElementById('daysContainer');
-  container.innerHTML = '';
-  const fragment = document.createDocumentFragment();
-
-  // For performance, show first 7 days expanded then the rest collapsed
-  days.forEach(({day, meals}) => {
-    const card = document.createElement('article');
-    card.className = 'dayCard fadeIn';
-    const head = document.createElement('div'); head.className='dayHead';
-    head.innerHTML = `<h3>اليوم ${day}</h3><div class="calBadge">${band} kcal</div>`;
-    card.appendChild(head);
-
-    // list of meals with icons
-    const mealOrder = [
-      {key:'breakfast', name:'الفطور', icon:'🍳'},
-      {key:'preWorkout', name:'وجبة قبل التمرين', icon:'⚡'},
-      {key:'postWorkout', name:'وجبة بعد التمرين', icon:'🏋️'},
-      {key:'lunch', name:'الغداء', icon:'🥗'},
-      {key:'dinner', name:'العشاء', icon:'🍽️'},
-      {key:'snacks', name:'السناكات', icon:'🥜'},
+    let meals = [
+        { icon: "🍳", name: "بيض مسلوق + شوفان + فواكه" },
+        { icon: "🥗", name: "سلطة خضار + صدر دجاج مشوي" },
+        { icon: "🍽", name: "أرز بني + سمك مشوي + خضار" },
+        { icon: "🥜", name: "مكسرات + زبادي قليل الدسم" }
     ];
-    mealOrder.forEach(m=>{
-      if(meals[m.key] && meals[m.key].length){
-        const mDiv = document.createElement('div'); mDiv.className='meal';
-        mDiv.innerHTML = `
-          <div class="m-icon" aria-hidden="true">${m.icon}</div>
-          <div class="m-body">
-            <div class="name">${m.name}</div>
-            <div class="items">${meals[m.key].map(it=>`${it.qty} — ${it.food} (${it.kcal} kcal)`).join('<br>')}</div>
-          </div>
-        `;
-        card.appendChild(mDiv);
-      }
+
+    let html = `<h3>السعرات اليومية: ${Math.round(calories)} سعرة حرارية</h3>`;
+    html += `<h4>الخطة الغذائية المقترحة:</h4>`;
+    meals.forEach(meal => {
+        html += `<div class="meal"><div class="meal-icon">${meal.icon}</div>${meal.name}</div>`;
     });
 
-    fragment.appendChild(card);
-  });
-
-  container.appendChild(fragment);
-
-  // Scroll to results area
-  const resultArea = document.getElementById('resultArea');
-  resultArea.scrollIntoView({behavior:'smooth', block:'start'});
+    document.getElementById('results').innerHTML = html;
 }
-
-/* ---------- أحداث الواجهة ---------- */
-document.getElementById('generateBtn').addEventListener('click', ()=>{
-  const age = parseInt(document.getElementById('age').value);
-  const gender = document.getElementById('gender').value;
-  const height = parseInt(document.getElementById('height').value);
-  const weight = parseInt(document.getElementById('weight').value);
-  const activity = parseFloat(document.getElementById('activity').value);
-  const goal = document.getElementById('goal').value;
-
-  if(!age || !gender || !height || !weight || !activity || !goal){
-    alert('يرجى تعبئة جميع الحقول بشكل صحيح.');
-    return;
-  }
-
-  renderMagazine(age,gender,height,weight,activity,goal);
-});
-
-document.getElementById('resetBtn').addEventListener('click', ()=>{
-  document.getElementById('age').value='';
-  document.getElementById('gender').selectedIndex=0;
-  document.getElementById('height').value='';
-  document.getElementById('weight').value='';
-  document.getElementById('activity').selectedIndex=0;
-  document.getElementById('goal').selectedIndex=0;
-  document.getElementById('metaLine').textContent = 'لم يتم الحساب بعد — أدخل بياناتك ثم اضغط "احسب".';
-  document.getElementById('tdeeBadge').textContent = '—';
-  document.getElementById('daysContainer').innerHTML = '<div style="text-align:center;color:var(--muted);padding:40px 20px">لا توجد بيانات بعد.</div>';
-});
 </script>
-
 </body>
 </html>
