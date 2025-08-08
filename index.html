@@ -3,199 +3,295 @@
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width,initial-scale=1" />
-<title>حاسبة التغذية — خطتك الشخصية لمدة 30 يوم</title>
+<title>حاسبة نظام غذائي تفصيلي 30 يوم</title>
 <style>
-  body{font-family:system-ui, Arial, "Helvetica Neue", sans-serif;direction:rtl;background:#fefefe;margin:0;padding:24px;color:#222}
-  .card{background:#fff;border-radius:14px;padding:20px;margin:14px 0;box-shadow:0 3px 12px rgba(0,0,0,.1)}
-  h1{margin:0 0 6px;font-size:24px;text-align:center;color:#0b74de;font-weight:900}
-  h2{text-align:center;color:#444;margin-top:0;font-weight:600}
-  .logo{text-align:center;margin-bottom:14px;font-weight:bold;color:#0b74de;font-size:32px;letter-spacing:6px;user-select:none;font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;}
-  label{display:block;margin:12px 0 6px;font-weight:700;color:#333}
-  input,select{width:100%;padding:12px;border:1px solid #ccc;border-radius:12px;font-size:16px;box-sizing:border-box}
-  .row{display:flex;gap:12px}
-  .row > *{flex:1}
-  button{padding:14px 18px;border:none;border-radius:12px;background:#0b74de;color:#fff;font-weight:700;cursor:pointer;transition:background .3s}
-  button:hover{background:#094d99}
-  .result{white-space:pre-wrap;font-family:inherit;margin-top:18px;color:#222;line-height:1.5}
-  .actions{display:flex;gap:12px;margin-top:16px}
-  .small{text-align:center;color:#555;font-size:14px;margin-top:8px}
-  footer{font-size:12px;color:#888;margin-top:28px;text-align:center}
-  @media(min-width:700px){body{padding:32px;}}
-
+  body { font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif; direction: rtl; background: #f9f9f9; color: #222; padding: 20px; }
+  h1 { text-align: center; color: #0b74de; margin-bottom: 10px; }
+  label { display: block; margin-top: 15px; font-weight: 700; }
+  input, select { width: 100%; padding: 10px; font-size: 16px; margin-top: 5px; border-radius: 8px; border: 1px solid #ccc; box-sizing: border-box; }
+  button { margin-top: 20px; padding: 12px 18px; width: 100%; font-size: 18px; background-color: #0b74de; border: none; border-radius: 10px; color: white; cursor: pointer; transition: background-color 0.3s; }
+  button:hover { background-color: #094d99; }
+  .result { white-space: pre-wrap; background: white; padding: 20px; border-radius: 10px; margin-top: 30px; max-height: 600px; overflow-y: auto; box-shadow: 0 0 10px rgba(0,0,0,0.1); }
+  .small { font-size: 13px; color: #555; text-align: center; margin-top: 12px; }
 </style>
 </head>
 <body>
-  <div class="card">
-    <div class="logo">🧬 نِظامك</div>
-    <h1>حاسبة التغذية — خطتك الشخصية لمدة 30 يوم</h1>
-    <h2>ادخل معلوماتك للحصول على خطة غذائية مصممة لك</h2>
 
-    <label>العمر (سنة)</label>
-    <input id="age" type="number" min="10" max="100" value="">
+<h1>حاسبة نظام غذائي تفصيلي لمدة 30 يوم</h1>
 
-    <div class="row">
-      <div>
-        <label>الطول (سم)</label>
-        <input id="height" type="number" min="100" max="230" value="">
-      </div>
-      <div>
-        <label>الوزن (كغ)</label>
-        <input id="weight" type="number" min="30" max="250" value="">
-      </div>
-    </div>
+<label for="age">العمر (سنة):</label>
+<input type="number" id="age" min="10" max="100" placeholder="مثلاً: 30" />
 
-    <div class="row" style="margin-top:8px">
-      <div>
-        <label>الجنس</label>
-        <select id="gender">
-          <option value="" disabled selected>اختر</option>
-          <option value="male">ذكر</option>
-          <option value="female">أنثى</option>
-          <option value="other">أفضل عدم التحديد</option>
-        </select>
-      </div>
-      <div>
-        <label>مستوى النشاط</label>
-        <select id="activity">
-          <option value="" disabled selected>اختر</option>
-          <option value="1.2">قليل الحركة (قليل التمرين)</option>
-          <option value="1.375">تمارين خفيفة 1-3 أيام</option>
-          <option value="1.55">تمارين معتدلة 3-5 أيام</option>
-          <option value="1.725">تمارين كثيفة 6-7 أيام</option>
-          <option value="1.9">حرفي/نشيط جداً</option>
-        </select>
-      </div>
-    </div>
+<label for="gender">الجنس:</label>
+<select id="gender">
+  <option value="" disabled selected>اختر الجنس</option>
+  <option value="male">ذكر</option>
+  <option value="female">أنثى</option>
+  <option value="other">أفضل عدم التحديد</option>
+</select>
 
-    <label>الهدف</label>
-    <select id="goal">
-      <option value="" disabled selected>اختر</option>
-      <option value="lose">نقص وزن (خسارة)</option>
-      <option value="maintain">الحفاظ على الوزن</option>
-      <option value="gain">زيادة وزن (كتلة)</option>
-    </select>
+<label for="height">الطول (سم):</label>
+<input type="number" id="height" min="100" max="230" placeholder="مثلاً: 175" />
 
-    <div class="actions">
-      <button id="calcBtn">احسب واطلع الخطة</button>
-      <button id="printBtn" style="background:#2dbe60">طبع / حفظ كـ PDF</button>
-    </div>
-    <p class="small">جميع النتائج تقديرية، استشر مختص تغذية لأي حالة خاصة.</p>
-  </div>
+<label for="weight">الوزن (كغ):</label>
+<input type="number" id="weight" min="30" max="250" placeholder="مثلاً: 70" />
 
-  <div id="output" class="card" style="display:none"></div>
+<label for="activity">مستوى النشاط البدني:</label>
+<select id="activity">
+  <option value="" disabled selected>اختر مستوى النشاط</option>
+  <option value="1.2">قليل الحركة (قليل التمرين)</option>
+  <option value="1.375">تمارين خفيفة 1-3 أيام في الأسبوع</option>
+  <option value="1.55">تمارين معتدلة 3-5 أيام في الأسبوع</option>
+  <option value="1.725">تمارين كثيفة 6-7 أيام في الأسبوع</option>
+  <option value="1.9">نشاط بدني عالي جداً / عمل شاق</option>
+</select>
+
+<label for="goal">هدف النظام الغذائي:</label>
+<select id="goal">
+  <option value="" disabled selected>اختر الهدف</option>
+  <option value="lose">نقص وزن (خسارة)</option>
+  <option value="maintain">الحفاظ على الوزن</option>
+  <option value="gain">زيادة وزن (كتلة عضلية)</option>
+</select>
+
+<button id="generateBtn">احسب واطلع خطة الـ 30 يوم</button>
+
+<div id="output" class="result" style="display:none;"></div>
+
+<div class="small">النتائج تقديرية فقط، يرجى استشارة أخصائي تغذية لأي حالة خاصة.</div>
 
 <script>
-function roundToBand(kcal){
-  const bands=[1200,1400,1500,1600,1800,2000,2200,2400,2600,2800,3000,3200];
-  let best=bands[0],md=Math.abs(kcal-bands[0]);
-  for(let b of bands){let d=Math.abs(kcal-b); if(d<md){md=d;best=b;}}
-  return best;
-}
+// بيانات الوجبات التفصيلية حسب السعرات (كمية + سعرات تقريبية لكل مكون)
+const mealsData = {
+  1200: [
+    {
+      breakfast: [
+        { food: "بيض مسلوق", qty: "3 بيضات", kcal: 210 },
+        { food: "توست بر", qty: "2 قطعة", kcal: 160 },
+        { food: "زبدة فول سوداني", qty: "1.5 ملعقة كبيرة", kcal: 140 },
+        { food: "كوب عصير فواكه طبيعي", qty: "1 كوب", kcal: 100 },
+      ],
+      preWorkout: [
+        { food: "موزة", qty: "1 متوسطة", kcal: 100 },
+        { food: "زبادي قليل الدسم", qty: "100 غ", kcal: 60 },
+      ],
+      postWorkout: [
+        { food: "صدر دجاج مشوي", qty: "100 غ", kcal: 165 },
+        { food: "أرز بني", qty: "80 غ", kcal: 110 },
+      ],
+      lunch: [
+        { food: "لحم بقري قليل الدهن", qty: "120 غ", kcal: 250 },
+        { food: "بطاطا مشوية", qty: "150 غ", kcal: 130 },
+        { food: "سلطة خضراء", qty: "100 غ", kcal: 40 },
+      ],
+      dinner: [
+        { food: "سمك مشوي", qty: "120 غ", kcal: 200 },
+        { food: "خضار مطهوة", qty: "150 غ", kcal: 80 },
+        { food: "تفاحة", qty: "1", kcal: 80 },
+      ],
+      snacks: [
+        { food: "مكسرات مشكلة", qty: "20 غ", kcal: 120 },
+      ],
+    },
+    // أيام 2-7 نفس التركيبة مع تغيير بسيط (لو تبي تنوع أكبر ممكن تضيف)
+  ],
+  1500: [
+    {
+      breakfast: [
+        { food: "4 بيضات مسلوقة", qty: "4 بيضات", kcal: 280 },
+        { food: "توست بر", qty: "2 قطعة", kcal: 160 },
+        { food: "زبدة فول سوداني", qty: "2 ملعقة كبيرة", kcal: 190 },
+        { food: "كوب عصير فواكه طبيعي", qty: "1 كوب", kcal: 100 },
+      ],
+      preWorkout: [
+        { food: "موزة كبيرة", qty: "1", kcal: 120 },
+        { food: "زبادي قليل الدسم", qty: "150 غ", kcal: 90 },
+      ],
+      postWorkout: [
+        { food: "صدر دجاج مشوي", qty: "150 غ", kcal: 250 },
+        { food: "أرز بني", qty: "100 غ", kcal: 130 },
+      ],
+      lunch: [
+        { food: "لحم بقري قليل الدهن", qty: "180 غ", kcal: 370 },
+        { food: "بطاطا مشوية", qty: "150 غ", kcal: 130 },
+        { food: "سلطة خضراء", qty: "120 غ", kcal: 50 },
+      ],
+      dinner: [
+        { food: "سمك مشوي", qty: "150 غ", kcal: 250 },
+        { food: "خضار مطهوة", qty: "150 غ", kcal: 80 },
+        { food: "تفاحة", qty: "1", kcal: 80 },
+      ],
+      snacks: [
+        { food: "مكسرات مشكلة", qty: "25 غ", kcal: 150 },
+      ],
+    },
+  ],
+  1800: [
+    {
+      breakfast: [
+        { food: "4 بيضات أومليت", qty: "4 بيضات", kcal: 280 },
+        { food: "توست بر", qty: "3 قطع", kcal: 240 },
+        { food: "زبدة فول سوداني", qty: "2 ملعقة كبيرة", kcal: 190 },
+        { food: "كوب عصير فواكه طبيعي", qty: "1 كوب", kcal: 100 },
+      ],
+      preWorkout: [
+        { food: "موزة كبيرة", qty: "1", kcal: 120 },
+        { food: "زبادي قليل الدسم", qty: "150 غ", kcal: 90 },
+      ],
+      postWorkout: [
+        { food: "صدر دجاج مشوي", qty: "180 غ", kcal: 300 },
+        { food: "أرز بني", qty: "120 غ", kcal: 150 },
+      ],
+      lunch: [
+        { food: "لحم بقري قليل الدهن", qty: "200 غ", kcal: 400 },
+        { food: "بطاطا مشوية", qty: "200 غ", kcal: 180 },
+        { food: "سلطة خضراء", qty: "150 غ", kcal: 60 },
+      ],
+      dinner: [
+        { food: "سمك مشوي", qty: "180 غ", kcal: 300 },
+        { food: "خضار مطهوة", qty: "180 غ", kcal: 100 },
+        { food: "تفاحة", qty: "1", kcal: 80 },
+      ],
+      snacks: [
+        { food: "مكسرات مشكلة", qty: "30 غ", kcal: 180 },
+      ],
+    },
+  ],
+  2200: [
+    {
+      breakfast: [
+        { food: "5 بيضات أومليت", qty: "5 بيضات", kcal: 350 },
+        { food: "توست بر", qty: "3 قطع", kcal: 240 },
+        { food: "زبدة فول سوداني", qty: "3 ملعقة كبيرة", kcal: 280 },
+        { food: "كوب عصير فواكه طبيعي", qty: "1 كوب", kcal: 100 },
+      ],
+      preWorkout: [
+        { food: "موزتين كبيرتين", qty: "2", kcal: 240 },
+        { food: "زبادي قليل الدسم", qty: "200 غ", kcal: 120 },
+      ],
+      postWorkout: [
+        { food: "صدر دجاج مشوي", qty: "200 غ", kcal: 350 },
+        { food: "أرز بني", qty: "150 غ", kcal: 200 },
+      ],
+      lunch: [
+        { food: "لحم بقري قليل الدهن", qty: "250 غ", kcal: 460 },
+        { food: "بطاطا مشوية", qty: "250 غ", kcal: 220 },
+        { food: "سلطة خضراء", qty: "150 غ", kcal: 60 },
+      ],
+      dinner: [
+        { food: "سمك مشوي", qty: "200 غ", kcal: 350 },
+        { food: "خضار مطهوة", qty: "200 غ", kcal: 120 },
+        { food: "تفاحة", qty: "1", kcal: 80 },
+      ],
+      snacks: [
+        { food: "مكسرات مشكلة", qty: "35 غ", kcal: 210 },
+      ],
+    },
+  ],
+};
 
-function generateWeekMeals(band){
-  const templates = {
-    1200: [
-      ["شوفان مع لبن خالي الدسم","صدر دجاج مشوي","سمك مشوي","تفاحة","زبادي"],
-      ["توست + بيضتين","برغر دجاج صغير","تونة","موزة","لوز"],
-      ["سموثي","سلطة كينوا","دجاج مشوي","مكسرات","خيار"],
-      ["زبادي وجرانولا","سندويتش تركي","سلمون صغير","برتقال","كاجو"],
-      ["بيض + توست","تبولة + دجاج","لحم بقري","تفاح","زبادي"],
-      ["عصير خضار","شوربة عدس","سمك مشوي","موزة","جوز"],
-      ["فول + بيضة","سلطة حمص","دجاج مع خضار","خيار","زبادي"]
-    ],
-    1500: [
-      ["شوفان","دجاج مشوي","سمك","تفاحة","زبادي"],
-      ["توست + بيض","برجر لحم صغير","أرز بني + دجاج","موز","مكسرات"],
-      ["سموثي بروتين","سلطة تونة","كاري خضار","برتقال","زبادي"],
-      ["بانكيك","سلطة جبن","سلمون","تفاح","لوز"],
-      ["بيض مسلوق + توست","تبولة + لحم","معكرونة قمح","موز","زبادي"],
-      ["عصير + زبادي","حساء + دجاج","ستيك","برتقال","مكسرات"],
-      ["فول","سندويتش دجاج","خضار + سمك","تفاح","زبادي"]
-    ],
-    1800: [
-      ["شوفان+بيض","دجاج + أرز بني","سلمون","موز","زبادي"],
-      ["توست+أفوكادو+بيضة","برجر دجاج","باستا","برتقال","مكسرات"],
-      ["سموثي بروتين","كينوا + تونة","ستيك","تفاح","زبادي"],
-      ["بانكيك شوفان","سلطة + دجاج","سمك","موز","لوز"],
-      ["بيض + توست","سلطة + لحم","أرز + دجاج","تفاح","زبادي"],
-      ["عصير + توست","حساء + ديك رومي","ستيك","برتقال","مكسرات"],
-      ["فول","سندويتش جبن","خضار+سمك","تفاح","زبادي"]
-    ],
-    2200: [
-      ["شوفان + بيض + موز","دجاج مشوي + أرز بني + سلطة","لحم مشوي","تفاح","زبادي"],
-      ["توست + أفوكادو + بيضة + لبن","برجر دجاج متوسط الحجم","باستا + صلصة طماطم","برتقال","مكسرات"],
-      ["سموثي بروتين + مكسرات","كينوا + تونة + خضروات","ستيك لحم","تفاح","زبادي"],
-      ["بانكيك شوفان + عسل","سلطة دجاج + جبن","سمك مشوي","موز","لوز"],
-      ["بيض + توست + جبن","تبولة + لحم + أرز","معكرونة قمح","موز","زبادي"],
-      ["عصير + توست + زبادي","حساء ديك رومي + سلطة","ستيك لحم","برتقال","مكسرات"],
-      ["فول + بيض + جبن","سندويتش دجاج + خضروات","سمك مشوي","تفاح","زبادي"]
-    ],
-    2600: [
-      ["شوفان + بيض + موز + مكسرات","دجاج مشوي + أرز بني + سلطة كبيرة","لحم مشوي","تفاح","زبادي"],
-      ["توست + أفوكادو + بيضة + لبن","برجر دجاج كبير","باستا + صلصة طماطم + جبن","برتقال","مكسرات"],
-      ["سموثي بروتين + مكسرات","كينوا + تونة + خضروات","ستيك لحم كبير","تفاح","زبادي"],
-      ["بانكيك شوفان + عسل + موز","سلطة دجاج + جبن + زيت زيتون","سمك مشوي","موز","لوز"],
-      ["بيض + توست + جبن + زبدة","تبولة + لحم + أرز + خضار","معكرونة قمح","موز","زبادي"],
-      ["عصير + توست + زبادي + مكسرات","حساء ديك رومي + سلطة كبيرة","ستيك لحم","برتقال","مكسرات"],
-      ["فول + بيض + جبن + زبدة","سندويتش دجاج + خضروات + جبن","سمك مشوي","تفاح","زبادي"]
-    ]
-  };
-  if(!templates[band]){
-    const keys=Object.keys(templates).map(k=>parseInt(k));
-    let nearest=keys.reduce((a,b)=> Math.abs(a-band) < Math.abs(b-band) ? a : b );
-    return templates[nearest];
+// تقريب السعرات للدرجة الأقرب المتاحة في بيانات الوجبات
+function roundCalories(kcal) {
+  const keys = Object.keys(mealsData).map(x => parseInt(x));
+  let nearest = keys[0];
+  let minDiff = Math.abs(kcal - nearest);
+  for (const k of keys) {
+    const diff = Math.abs(kcal - k);
+    if (diff < minDiff) {
+      minDiff = diff;
+      nearest = k;
+    }
   }
-  return templates[band];
+  return nearest;
 }
 
-function calcAndRender(){
-  const age=Number(document.getElementById('age').value);
-  const height=Number(document.getElementById('height').value);
-  const weight=Number(document.getElementById('weight').value);
-  const gender=document.getElementById('gender').value;
-  const activity=Number(document.getElementById('activity').value);
-  const goal=document.getElementById('goal').value;
+// حساب BMR حسب الجنس والوزن والطول والعمر
+function calculateBMR(weight, height, age, gender) {
+  if (gender === "male") {
+    return 10 * weight + 6.25 * height - 5 * age + 5;
+  } else if (gender === "female") {
+    return 10 * weight + 6.25 * height - 5 * age - 161;
+  } else {
+    // متوسط بين الذكر والأنثى
+    const maleBMR = 10 * weight + 6.25 * height - 5 * age + 5;
+    const femaleBMR = 10 * weight + 6.25 * height - 5 * age - 161;
+    return (maleBMR + femaleBMR) / 2;
+  }
+}
 
-  if(!age || !height || !weight || !gender || !activity || !goal){
-    alert('يرجى تعبئة جميع الحقول بشكل صحيح.');
+// توليد خطة 30 يوم مع تنويع بسيط (نفس نموذج اليوم يتكرر لكن ممكن نعدل لو حبينا)
+function generatePlan(bandCalories) {
+  const dayPlans = [];
+  const baseMeal = mealsData[bandCalories][0]; // نستخدم أول نموذج وجبة (تقدر تضيف أكثر لو تريد)
+
+  for (let day = 1; day <= 30; day++) {
+    dayPlans.push({ day, meals: baseMeal });
+  }
+  return dayPlans;
+}
+
+// تحويل قائمة مكونات وجبة لنص مرتب مع السعرات
+function formatMeal(name, items) {
+  let total = 0;
+  let lines = [`${name}:`];
+  for (const item of items) {
+    lines.push(`  • ${item.qty} ${item.food} (${item.kcal} سعر حراري)`);
+    total += item.kcal;
+  }
+  lines.push(`  مجموع السعرات: ${total} سعر حراري\n`);
+  return lines.join("\n");
+}
+
+function renderPlan(age, gender, height, weight, activity, goal) {
+  const bmr = calculateBMR(weight, height, age, gender);
+  let tdee = Math.round(bmr * activity);
+  if (goal === "lose") tdee = Math.round(tdee - 500);
+  else if (goal === "gain") tdee = Math.round(tdee + 400);
+  if (tdee < 1200) tdee = 1200; // أقل سعرات مقبولة
+
+  const band = roundCalories(tdee);
+  const bmi = (weight / ((height / 100) ** 2)).toFixed(1);
+  const planDays = generatePlan(band);
+
+  let output = "";
+  output += `العمر: ${age} سنة\nالجنس: ${gender === "male" ? "ذكر" : gender === "female" ? "أنثى" : "عدم تحديد"}\nالطول: ${height} سم\nالوزن: ${weight} كغ\nمستوى النشاط: ${activity}\nالهدف: ${goal}\n\n`;
+  output += `معدل الأيض الأساسي (BMR): ${Math.round(bmr)} سعر حراري\nمعدل السعرات اليومية الموصى بها (TDEE): ${tdee} سعر حراري\nBMI: ${bmi}\n\n`;
+  output += `خطة غذائية تفصيلية لمدة 30 يوم:\n\n`;
+
+  planDays.forEach(({ day, meals }) => {
+    output += `اليوم ${day}:\n`;
+    output += formatMeal("الفطور", meals.breakfast);
+    output += formatMeal("وجبة قبل التمرين", meals.preWorkout);
+    output += formatMeal("وجبة بعد التمرين", meals.postWorkout);
+    output += formatMeal("الغداء", meals.lunch);
+    output += formatMeal("العشاء", meals.dinner);
+    output += formatMeal("السناكات", meals.snacks);
+    output += "--------------------------------------\n\n";
+  });
+
+  return output;
+}
+
+document.getElementById("generateBtn").addEventListener("click", () => {
+  const age = parseInt(document.getElementById("age").value);
+  const gender = document.getElementById("gender").value;
+  const height = parseInt(document.getElementById("height").value);
+  const weight = parseInt(document.getElementById("weight").value);
+  const activity = parseFloat(document.getElementById("activity").value);
+  const goal = document.getElementById("goal").value;
+
+  if (!age || !gender || !height || !weight || !activity || !goal) {
+    alert("يرجى تعبئة جميع الحقول بشكل صحيح.");
     return;
   }
 
-  let bmrMale = 10*weight + 6.25*height - 5*age + 5;
-  let bmrFemale = 10*weight + 6.25*height - 5*age - 161;
-  let bmr;
-  if(gender==='male') bmr = bmrMale;
-  else if(gender==='female') bmr = bmrFemale;
-  else bmr = (bmrMale + bmrFemale)/2;
-
-  let tdee = Math.round(bmr * activity);
-
-  let targetKcal = tdee;
-  if(goal==='lose') targetKcal = Math.round(tdee - 500);
-  else if(goal==='gain') targetKcal = Math.round(tdee + 400);
-  if(targetKcal < 1200) targetKcal = 1200;
-
-  const band = roundToBand(targetKcal);
-  const bmi = (weight / ((height/100)*(height/100))).toFixed(1);
-
-  const week = generateWeekMeals(band);
-  let plan="";
-  plan += `BMR ≈ ${Math.round(bmr)} kcal/day\nTDEE ≈ ${tdee} kcal/day\nالسعرات الموصى بها ≈ ${targetKcal} kcal/day\nBMI = ${bmi}\n\nخطة غذائية 30 يوم:\n\n`;
-
-  for(let day=1; day<=30; day++){
-    const wIndex = (day-1) % 7;
-    const meals = week[wIndex];
-    plan += `اليوم ${day}: فطور: ${meals[0]} | غداء: ${meals[1]} | عشاء: ${meals[2]} | سناك1: ${meals[3]} | سناك2: ${meals[4]}\n\n`; // سطر فارغ بعد كل يوم
-  }
-
-  const out = document.getElementById('output');
-  out.style.display = 'block';
-  out.innerHTML = `<h2>الخطة جاهزة</h2><pre class="result">${plan}</pre>`;
-  window.scrollTo({top:0,behavior:'smooth'});
-}
-
-document.getElementById('calcBtn').addEventListener('click',calcAndRender);
-document.getElementById('printBtn').addEventListener('click',()=> window.print());
+  const planText = renderPlan(age, gender, height, weight, activity, goal);
+  const output = document.getElementById("output");
+  output.style.display = "block";
+  output.textContent = planText;
+  window.scrollTo({ top: output.offsetTop, behavior: "smooth" });
+});
 </script>
+
 </body>
 </html>
