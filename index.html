@@ -3,154 +3,98 @@
 <head>
 <meta charset="utf-8"/>
 <meta name="viewport" content="width=device-width,initial-scale=1"/>
-<title>حاسبة نظام غذائي — نهائي (30 يوم)</title>
+<title>حاسبة نظام غذائي — نهائي</title>
+<link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@300;400;600;700;800&display=swap" rel="stylesheet">
 <style>
-  :root{
-    --accent1: #FFD93D; /* أصفر */
-    --accent2: #6C63FF; /* بنفسجي */
-    --bg-grad: linear-gradient(120deg,var(--accent1),var(--accent2));
-    --card-bg: rgba(255,255,255,0.96);
-    --muted: #6b7280;
-    --radius: 12px;
-    --red: #dc3545;
-    --yellow: #f0c040;
-    --green: #28a745;
-  }
-  *{box-sizing:border-box}
-  html,body{height:100%;margin:0;padding:0;font-family: "Tajawal", "Segoe UI", Tahoma, sans-serif;background:var(--bg-grad);background-size:300% 300%;animation:bgShift 12s linear infinite;color:#07203a}
-  @keyframes bgShift{0%{background-position:0% 50%}50%{background-position:100% 50%}100%{background-position:0% 50%}}
-  .wrap{max-width:1150px;margin:28px auto;padding:18px;}
-  .card{
-    background: var(--card-bg);
-    border-radius:16px;
-    padding:18px;
-    box-shadow: 0 12px 40px rgba(2,6,23,0.12);
-    border:1px solid rgba(0,0,0,0.04);
-  }
-  header.appHead{display:flex;justify-content:space-between;align-items:center;gap:12px;margin-bottom:16px}
-  .title{font-size:20px;color:#0b74de;font-weight:800}
-  .subtitle{font-size:13px;color:var(--muted)}
-
-  .layout{display:grid;grid-template-columns:360px 1fr;gap:18px}
-  /* sidebar */
-  .panel{background:white;border-radius:12px;padding:14px;border:1px solid rgba(0,0,0,0.03)}
-  .panel h3{margin:0 0 10px 0}
-  .field{margin-top:12px}
-  label{display:block;font-weight:700;color:#07203a;margin-bottom:6px;font-size:13px}
-  input[type="number"], select{width:100%;padding:10px;border-radius:10px;border:1px solid #e6e6e6;font-size:14px;background:transparent}
-  .actions{display:flex;gap:8px;margin-top:14px}
-  .btn{flex:1;padding:10px;border-radius:10px;border:none;cursor:pointer;font-weight:800}
-  .btn-primary{background:linear-gradient(90deg,var(--accent1),var(--accent2));color:white}
-  .btn-ghost{background:transparent;border:1px dashed rgba(0,0,0,0.06);color:var(--muted)}
-
-  /* result area */
-  .result{background:white;border-radius:12px;padding:14px;border:1px solid rgba(0,0,0,0.03);min-height:64vh}
-  .metaRow{display:flex;justify-content:space-between;align-items:center;margin-bottom:12px}
-  .metaText{font-weight:800;color:#08304a}
-  .tdeeBox{font-weight:900;color:var(--accent2)}
-
-  .daysGrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:12px}
-  .dayCard{background:#fff;border-radius:10px;padding:12px;border:1px solid rgba(0,0,0,0.04);box-shadow:0 8px 20px rgba(2,6,23,0.04);display:flex;flex-direction:column;gap:8px}
-  .dayHead{display:flex;justify-content:space-between;align-items:center}
-  .dayHead h4{margin:0;font-size:15px;color:#07203a}
-  .calBadge{background:linear-gradient(135deg,var(--accent2),var(--accent1));color:white;padding:6px 8px;border-radius:8px;font-weight:800;font-size:13px}
-
-  .mealsList{display:flex;flex-direction:column;gap:6px;margin-top:6px}
-  .mealRow{display:flex;justify-content:space-between;align-items:center;padding:8px;border-radius:8px;background:rgba(0,0,0,0.02)}
-  .mealLeft{ text-align:right; }
-  .mealName{font-weight:700;color:#07203a}
-  .mealMeta{font-size:13px;color:var(--muted);margin-top:4px}
-
-  .checkbox{transform:scale(1.05);cursor:pointer;margin-left:8px}
-
-  .progressOuter{height:18px;background:#f1f1f1;border-radius:9px;overflow:hidden;margin-top:8px}
-  .progressInner{height:100%;width:0%;display:flex;align-items:center;justify-content:center;color:white;font-weight:800;transition:width .4s ease, background .25s ease;font-size:13px}
-
-  .progressInfo{display:flex;justify-content:space-between;font-size:13px;color:var(--muted);margin-top:6px}
-
-  .footerNote{font-size:13px;color:var(--muted);margin-top:10px;text-align:center}
-
-  @media (max-width:980px){ .layout{grid-template-columns:1fr} .panel{order:2} .result{order:1} }
-
+:root{
+  --accent1:#FFD93D; --accent2:#6C63FF;
+  --bg:linear-gradient(120deg,var(--accent1),var(--accent2));
+  --card:#ffffff; --muted:#6b7280; --radius:12px;
+  --red:#dc3545; --yellow:#f0c040; --green:#28a745;
+}
+*{box-sizing:border-box}
+html,body{height:100%;margin:0;padding:0;font-family:"Tajawal",sans-serif;background:var(--bg);background-size:300% 300%;animation:bgShift 12s linear infinite;color:#07203a}
+@keyframes bgShift{0%{background-position:0% 50%}50%{background-position:100% 50%}100%{background-position:0% 50%}}
+.container{max-width:1100px;margin:28px auto;padding:18px}
+.card{background:var(--card);border-radius:16px;padding:18px;box-shadow:0 12px 40px rgba(2,6,23,0.12);}
+.header{display:flex;justify-content:space-between;align-items:center;margin-bottom:12px}
+.title{font-size:20px;color:#0b74de;font-weight:800}
+.subtitle{color:var(--muted)}
+.layout{display:grid;grid-template-columns:360px 1fr;gap:18px}
+.panel{background:white;border-radius:12px;padding:14px;border:1px solid rgba(0,0,0,0.03)}
+.panel h3{margin:0 0 10px 0}
+.field{margin-top:12px}
+label{display:block;font-weight:700;color:#07203a;margin-bottom:6px}
+input[type="number"], select{width:100%;padding:10px;border-radius:10px;border:1px solid #e6e6e6;background:transparent}
+.actions{display:flex;gap:8px;margin-top:14px}
+.btn{flex:1;padding:10px;border-radius:10px;border:none;cursor:pointer;font-weight:800}
+.btn-primary{background:linear-gradient(90deg,var(--accent1),var(--accent2));color:white}
+.btn-ghost{background:transparent;border:1px dashed rgba(0,0,0,0.06);color:var(--muted)}
+.result{background:white;border-radius:12px;padding:14px;border:1px solid rgba(0,0,0,0.03);min-height:64vh}
+.metaRow{display:flex;justify-content:space-between;align-items:center;margin-bottom:12px}
+.metaText{font-weight:800;color:#08304a}
+.tdeeBox{font-weight:900;color:var(--accent2)}
+.daysGrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:12px}
+.dayCard{background:#fff;border-radius:10px;padding:12px;border:1px solid rgba(0,0,0,0.04);box-shadow:0 8px 20px rgba(2,6,23,0.04);display:flex;flex-direction:column;gap:8px}
+.dayHead{display:flex;justify-content:space-between;align-items:center}
+.calBadge{background:linear-gradient(135deg,var(--accent2),var(--accent1));color:white;padding:6px 8px;border-radius:8px;font-weight:800;font-size:13px}
+.mealsList{display:flex;flex-direction:column;gap:6px;margin-top:6px}
+.mealRow{display:flex;justify-content:space-between;align-items:center;padding:8px;border-radius:8px;background:rgba(0,0,0,0.02)}
+.mealLeft{text-align:right}
+.mealName{font-weight:700;color:#07203a}
+.mealMeta{font-size:13px;color:var(--muted);margin-top:4px}
+.checkbox{transform:scale(1.05);cursor:pointer;margin-left:8px}
+.progressOuter{height:18px;background:#f1f1f1;border-radius:9px;overflow:hidden;margin-top:8px}
+.progressInner{height:100%;width:0%;display:flex;align-items:center;justify-content:center;color:white;font-weight:800;transition:width .4s ease, background .25s ease;font-size:13px}
+.progressInfo{display:flex;justify-content:space-between;font-size:13px;color:var(--muted);margin-top:6px}
+.footerNote{font-size:13px;color:var(--muted);margin-top:10px;text-align:center}
+@media (max-width:980px){.layout{grid-template-columns:1fr}.panel{order:2}.result{order:1}}
 </style>
 </head>
 <body>
-  <div class="wrap">
+  <div class="container">
     <div class="card">
-      <header class="appHead">
+      <div class="header">
         <div>
-          <div class="title">حاسبة نظام غذائي تفصيلي — 30 يوم</div>
-          <div class="subtitle">املأ بياناتك واحصل خطة يومية قابلة للمتابعة — العلامات محفوظة تلقائياً</div>
+          <div class="title">حاسبة نظام غذائي — 30 يوم</div>
+          <div class="subtitle">املأ البيانات ثم اضغط احسب — كل يوم يمكن تعليم وجباتك وسيُحفظ تقدّمك</div>
         </div>
         <div class="tdeeBox" id="topTdee">— kcal</div>
-      </header>
+      </div>
 
       <div class="layout">
-        <!-- sidebar -->
-        <aside class="panel" aria-label="إعدادات">
+        <aside class="panel">
           <h3>أدخل بياناتك</h3>
-
-          <div class="field">
-            <label for="age">العمر (سنة)</label>
-            <input id="age" type="number" min="10" max="100" placeholder="مثلاً: 30">
-          </div>
-
-          <div class="field">
-            <label for="gender">الجنس</label>
-            <select id="gender">
-              <option value="" disabled selected>اختر</option>
-              <option value="male">ذكر</option>
-              <option value="female">أنثى</option>
-            </select>
-          </div>
-
-          <div class="field">
-            <label for="height">الطول (سم)</label>
-            <input id="height" type="number" min="100" max="230" placeholder="مثلاً: 175">
-          </div>
-
-          <div class="field">
-            <label for="weight">الوزن (كغ)</label>
-            <input id="weight" type="number" min="30" max="250" placeholder="مثلاً: 70">
-          </div>
-
-          <div class="field">
-            <label for="activity">مستوى النشاط</label>
-            <select id="activity">
-              <option value="" disabled selected>اختر مستوى النشاط</option>
-              <option value="1.2">قليل الحركة (قليل التمرين)</option>
-              <option value="1.375">تمارين خفيفة (1-3 أيام بالأسبوع)</option>
-              <option value="1.55">تمارين معتدلة (3-5 أيام بالأسبوع)</option>
-              <option value="1.725">تمارين كثيفة (6-7 أيام بالأسبوع)</option>
-              <option value="1.9">نشاط بدني عالي جداً / عمل شاق</option>
-            </select>
-          </div>
-
-          <div class="field">
-            <label for="goal">هدف النظام</label>
-            <select id="goal">
-              <option value="" disabled selected>اختر الهدف</option>
-              <option value="lose">نقص وزن</option>
-              <option value="maintain">الحفاظ على الوزن</option>
-              <option value="gain">زيادة وزن</option>
-            </select>
-          </div>
+          <div class="field"><label>العمر (سنة)</label><input id="age" type="number" min="10" max="100" placeholder="مثلاً: 30"></div>
+          <div class="field"><label>الجنس</label><select id="gender"><option value="" disabled selected>اختر</option><option value="male">ذكر</option><option value="female">أنثى</option></select></div>
+          <div class="field"><label>الطول (سم)</label><input id="height" type="number" min="100" max="230" placeholder="مثلاً: 175"></div>
+          <div class="field"><label>الوزن (كغ)</label><input id="weight" type="number" min="30" max="250" placeholder="مثلاً: 70"></div>
+          <div class="field"><label>مستوى النشاط</label><select id="activity">
+            <option value="" disabled selected>اختر مستوى النشاط</option>
+            <option value="1.2">قليل الحركة (قليل التمرين)</option>
+            <option value="1.375">تمارين خفيفة (1-3 أيام)</option>
+            <option value="1.55">تمارين معتدلة (3-5 أيام)</option>
+            <option value="1.725">تمارين كثيفة (6-7 أيام)</option>
+            <option value="1.9">نشاط عالي جداً / عمل شاق</option>
+          </select></div>
+          <div class="field"><label>هدف النظام</label><select id="goal">
+            <option value="" disabled selected>اختر الهدف</option>
+            <option value="lose">نقص وزن</option>
+            <option value="maintain">الحفاظ على الوزن</option>
+            <option value="gain">زيادة وزن</option>
+          </select></div>
 
           <div class="actions">
-            <button id="generateBtn" class="btn btn-primary">احسب واطلع خطة الـ 30 يوم</button>
-            <button id="clearPlanProgress" class="btn btn-ghost">مسح تقدم الخطة الحالية</button>
+            <button id="generateBtn" class="btn btn-primary">احسب خطة الـ 30 يوم</button>
+            <button id="clearPlanProgress" class="btn btn-ghost" title="مسح تقدم الخطة الحالية">مسح تقدم الخطة الحالية</button>
           </div>
-
-          <p class="footerNote">النتائج تقريبية — استشر أخصائي التغذية للحالات الخاصة.</p>
+          <p class="footerNote">النتائج تقديرية — استشر أخصائي تغذية للحالات الخاصة.</p>
         </aside>
 
-        <!-- results -->
         <section class="result">
           <div class="metaRow">
             <div class="metaText" id="metaLine">لم يتم الحساب بعد — أدخل بياناتك ثم اضغط "احسب".</div>
-            <div class="legend" aria-hidden="true" style="font-size:13px;color:var(--muted)">
-              <span style="font-weight:800">شريط التقدم: لون يتغير حسب النسبة</span>
-            </div>
+            <div style="font-size:13px;color:var(--muted)"><strong>شريط التقدم: يعكس نسبة السعرات المكتسبة من الهدف اليومي</strong></div>
           </div>
 
           <div id="daysContainer" class="daysGrid">
@@ -163,104 +107,47 @@
   </div>
 
 <script>
-/* ========== بيانات وجبات — قوالب متنوعة لكل هدف ========== 
-   (تقدر تضيف قوالب أكثر لاحقًا لزيادة التنوع)
-======================================================== */
+/* ====== قواعد الوجبات (قوالب لكل هدف) ======
+   أضفت عدة قوالب لكل هدف — تقدر تضيف قوالب أكثر في الميلبولز.
+*/
 const mealPools = {
   lose: [
-    {
-      breakfast: [{food:"بيض مسلوق",qty:"2 بيض",kcal:140},{food:"شوفان مع لبن قليل الدسم",qty:"50 غ",kcal:180}],
-      preWorkout: [{food:"موزة صغيرة",qty:"1",kcal:80}],
-      postWorkout: [{food:"صدر دجاج مشوي",qty:"100 غ",kcal:165}],
-      lunch: [{food:"سمك مشوي",qty:"120 غ",kcal:200},{food:"سلطة خضراء",qty:"100 غ",kcal:40}],
-      dinner: [{food:"خضار مطهوة",qty:"150 غ",kcal:80}],
-      snacks: [{food:"زبادي قليل الدسم",qty:"100 غ",kcal:60}]
-    },
-    {
-      breakfast: [{food:"بيض مسلوق",qty:"3 بيض",kcal:210},{food:"توست بر",qty:"1 قطعة",kcal:80}],
-      preWorkout: [{food:"تفاحة",qty:"1",kcal:80}],
-      postWorkout: [{food:"أرز بني",qty:"80 غ",kcal:110}],
-      lunch: [{food:"دجاج مشوي",qty:"120 غ",kcal:200},{food:"خضار سوتيه",qty:"100 غ",kcal:60}],
-      dinner: [{food:"سلطة تونة",qty:"1 طبق",kcal:180}],
-      snacks: [{food:"مكسرات",qty:"15 غ",kcal:90}]
-    },
-    {
-      breakfast: [{food:"توست بر مع زبدة فول سوداني",qty:"1 قطعة",kcal:200},{food:"تفاحة",qty:"1",kcal:80}],
-      preWorkout: [{food:"زبادي قليل الدسم",qty:"100 غ",kcal:60}],
-      postWorkout: [{food:"أرز بني",qty:"100 غ",kcal:130}],
-      lunch: [{food:"لحم بقري قليل الدهن",qty:"120 غ",kcal:250}],
-      dinner: [{food:"خضار مطهوة",qty:"150 غ",kcal:80}],
-      snacks: [{food:"مكسرات مشكلة",qty:"20 غ",kcal:120}]
-    }
+    { breakfast:[{food:"بيض مسلوق",qty:"2 بيض",kcal:140},{food:"شوفان",qty:"50 غ",kcal:180}], preWorkout:[{food:"موزة",qty:"1",kcal:90}], postWorkout:[{food:"صدردجاج",qty:"120 غ",kcal:200}], lunch:[{food:"سمك مشوي",qty:"120 غ",kcal:200},{food:"سلطة",qty:"100 غ",kcal:40}], dinner:[{food:"خضار مطهوة",qty:"150 غ",kcal:80}], snacks:[{food:"زبادي قليل السكر",qty:"120 غ",kcal:70}] },
+    { breakfast:[{food:"بيض مسلوق",qty:"3 بيض",kcal:210},{food:"توست بر",qty:"1 قطعة",kcal:80}], preWorkout:[{food:"تفاحة",qty:"1",kcal:80}], postWorkout:[{food:"أرز بني",qty:"90 غ",kcal:110}], lunch:[{food:"دجاج مشوي",qty:"150 غ",kcal:250},{food:"خضار سوتيه",qty:"100 غ",kcal:60}], dinner:[{food:"سلطة تونة",qty:"1 طبق",kcal:180}], snacks:[{food:"مكسرات صغيرة",qty:"20 غ",kcal:120}] },
+    { breakfast:[{food:"توست مع زبدة فول سوداني",qty:"1",kcal:200},{food:"تفاح",qty:"1",kcal:80}], preWorkout:[{food:"زبادي قليل الدسم",qty:"150 غ",kcal:90}], postWorkout:[{food:"صدر دجاج",qty:"120 غ",kcal:200}], lunch:[{food:"لحم بقري قليل الدهن",qty:"120 غ",kcal:250}], dinner:[{food:"خضار مطهوة",qty:"150 غ",kcal:80}], snacks:[{food:"خضروات مقطعة",qty:"100 غ",kcal:40}] }
   ],
   maintain: [
-    {
-      breakfast: [{food:"بيض مسلوق",qty:"3 بيض",kcal:210},{food:"توست بر",qty:"2 قطع",kcal:160}],
-      preWorkout: [{food:"موزة",qty:"1",kcal:100}],
-      postWorkout: [{food:"صدر دجاج",qty:"150 غ",kcal:250}],
-      lunch: [{food:"لحم بقري قليل الدهن",qty:"180 غ",kcal:370},{food:"سلطة",qty:"120 غ",kcal:50}],
-      dinner: [{food:"سمك مشوي",qty:"150 غ",kcal:250}],
-      snacks: [{food:"زبادي",qty:"150 غ",kcal:90}]
-    },
-    {
-      breakfast: [{food:"شوفان مع لبن",qty:"60 غ",kcal:220},{food:"تفاح",qty:"1",kcal:80}],
-      preWorkout: [{food:"مكسرات",qty:"20 غ",kcal:120}],
-      postWorkout: [{food:"أرز بني",qty:"100 غ",kcal:130}],
-      lunch: [{food:"ستيك دجاج",qty:"180 غ",kcal:300}],
-      dinner: [{food:"خضار سوتيه",qty:"150 غ",kcal:80}],
-      snacks: [{food:"تفاحة",qty:"1",kcal:80}]
-    }
+    { breakfast:[{food:"بيض مسلوق",qty:"3 بيض",kcal:210},{food:"توست بر",qty:"2",kcal:160}], preWorkout:[{food:"موزة",qty:"1",kcal:100}], postWorkout:[{food:"صدر دجاج",qty:"150 غ",kcal:250}], lunch:[{food:"لحم بقري قليل الدهن",qty:"180 غ",kcal:370}], dinner:[{food:"سمك مشوي",qty:"150 غ",kcal:250}], snacks:[{food:"زبادي",qty:"150 غ",kcal:90}] },
+    { breakfast:[{food:"شوفان مع لبن",qty:"70 غ",kcal:250},{food:"تفاحة",qty:"1",kcal:80}], preWorkout:[{food:"مكسرات",qty:"20 غ",kcal:120}], postWorkout:[{food:"أرز بني",qty:"100 غ",kcal:130}], lunch:[{food:"ستيك دجاج",qty:"180 غ",kcal:300}], dinner:[{food:"خضار سوتيه",qty:"150 غ",kcal:80}], snacks:[{food:"موزة",qty:"1",kcal:100}] }
   ],
   gain: [
-    {
-      breakfast: [{food:"بيض مسلوق",qty:"4 بيض",kcal:280},{food:"توست بزبدة فول سوداني",qty:"2",kcal:320}],
-      preWorkout: [{food:"موزة كبيرة",qty:"1",kcal:120}],
-      postWorkout: [{food:"صدر دجاج كبير",qty:"200 غ",kcal:350},{food:"أرز بني",qty:"150 غ",kcal:200}],
-      lunch: [{food:"لحم بقري قليل الدهن",qty:"250 غ",kcal:460}],
-      dinner: [{food:"سمك مشوي",qty:"200 غ",kcal:350}],
-      snacks: [{food:"مكسرات",qty:"40 غ",kcal:240}]
-    },
-    {
-      breakfast: [{food:"بيض مسلوق",qty:"3 بيض",kcal:210},{food:"شوفان مع لبن كامل الدسم",qty:"80 غ",kcal:300}],
-      preWorkout: [{food:"زبادي كامل الدسم",qty:"200 غ",kcal:160}],
-      postWorkout: [{food:"ستيك دجاج",qty:"200 غ",kcal:350}],
-      lunch: [{food:"مكرونة قمح كامل",qty:"200 غ",kcal:320}],
-      dinner: [{food:"تورتيلا دجاج وجبن",qty:"1",kcal:420}],
-      snacks: [{food:"سموثي بروتين",qty:"1 كوب",kcal:250}]
-    }
+    { breakfast:[{food:"بيض مسلوق",qty:"4 بيض",kcal:280},{food:"توست بزبدة فول سوداني",qty:"2",kcal:320}], preWorkout:[{food:"موزة كبيرة",qty:"1",kcal:120}], postWorkout:[{food:"صدر دجاج كبير",qty:"200 غ",kcal:350},{food:"أرز بني",qty:"150 غ",kcal:200}], lunch:[{food:"لحم بقري قليل الدهن",qty:"250 غ",kcal:460}], dinner:[{food:"سمك مشوي",qty:"200 غ",kcal:350}], snacks:[{food:"مكسرات",qty:"40 غ",kcal:240}] },
+    { breakfast:[{food:"شوفان مع لبن كامل الدسم",qty:"80 غ",kcal:300},{food:"بيض مسلوق",qty:"3",kcal:210}], preWorkout:[{food:"زبادي كامل الدسم",qty:"200 غ",kcal:160}], postWorkout:[{food:"ستيك دجاج",qty:"200 غ",kcal:350}], lunch:[{food:"مكرونة قمح كامل",qty:"200 غ",kcal:320}], dinner:[{food:"تورتيلا دجاج وجبن",qty:"1",kcal:420}], snacks:[{food:"سموثي بروتين",qty:"1 كوب",kcal:250}] }
   ]
 };
 
-/* ---------- حسبة BMR/TDEE ---------- */
+/* ====== حسابات BMR/TDEE ====== */
 function calcBMR(weight, height, age, gender){
   if(gender === 'male') return 10 * weight + 6.25 * height - 5 * age + 5;
   if(gender === 'female') return 10 * weight + 6.25 * height - 5 * age - 161;
   return 10 * weight + 6.25 * height - 5 * age;
 }
 
-/* ---------- اختيار قالب يومي لتنوع وجبات الـ30 يوم ---------- */
+/* ====== اختيار قالب يومي (تنويع) ====== */
 function pickTemplate(goal, dayIndex){
   const pool = mealPools[goal] || mealPools['maintain'];
-  // تدوير ذكي — نستخدم modulo مع إزاحة كل أسبوع لخلط القوالب
   const idx = (dayIndex + Math.floor(dayIndex / 7)) % pool.length;
   return pool[idx];
 }
 
-/* ---------- مفاتيح الحفظ في localStorage ---------- */
-function planKey(inputs){
-  // inputs: {age,gender,height,weight,activity,goal}
+/* ====== مفاتيح التخزين ====== */
+function planKey(inputs){ // inputs: {age,gender,height,weight,activity,goal}
   return `plan_${inputs.age}_${inputs.gender}_${inputs.height}_${inputs.weight}_${inputs.activity}_${inputs.goal}`;
 }
+function saveProgress(key, obj){ try{ localStorage.setItem(key, JSON.stringify(obj)); }catch(e){console.warn(e)} }
+function loadProgress(key){ try{ const r = localStorage.getItem(key); return r ? JSON.parse(r) : {}; }catch(e){return {}} }
 
-function saveProgress(key, obj){
-  try{ localStorage.setItem(key, JSON.stringify(obj)); }
-  catch(e){ console.warn('save failed', e); }
-}
-function loadProgress(key){
-  try{ const r = localStorage.getItem(key); return r ? JSON.parse(r) : {}; } catch(e){ return {}; }
-}
-
-/* ---------- بناء الواجهة وخطة الـ 30 يوم ========== */
+/* ====== إنشاء الخطة وعرضها ====== */
 function renderPlan(inputs){
   const bmr = calcBMR(inputs.weight, inputs.height, inputs.age, inputs.gender);
   let tdee = Math.round(bmr * inputs.activity);
@@ -274,48 +161,56 @@ function renderPlan(inputs){
   const container = document.getElementById('daysContainer');
   container.innerHTML = '';
   const key = planKey(inputs);
-  const saved = loadProgress(key);
+  const savedState = loadProgress(key);
 
-  for(let day=1; day<=30; day++){
+  for(let day = 1; day <= 30; day++){
     const tpl = pickTemplate(inputs.goal, day-1);
-    const card = document.createElement('article');
-    card.className = 'dayCard';
+    const card = document.createElement('article'); card.className = 'dayCard';
 
-    // header
     const head = document.createElement('div'); head.className = 'dayHead';
     const h = document.createElement('h4'); h.textContent = `اليوم ${day}`;
     const badge = document.createElement('div'); badge.className = 'calBadge'; badge.textContent = `${tdee} kcal`;
     head.appendChild(h); head.appendChild(badge);
     card.appendChild(head);
 
-    // gather items
+    // اجمع جميع الأصناف في مصفوفة items
     const sections = ['breakfast','preWorkout','postWorkout','lunch','dinner','snacks'];
-    let items = [];
+    const items = [];
     sections.forEach(sec => {
       if(tpl[sec] && tpl[sec].length){
-        tpl[sec].forEach(it => items.push({section:sec, ...it}));
+        tpl[sec].forEach(it => items.push({section: sec, ...it}));
       }
     });
 
+    // حساب مجموع السعرات المخطط قبل التعديل
+    const plannedKcalSum = items.reduce((s,it) => s + (it.kcal||0), 0);
+
+    // إذا المجموع 0 — نمنع القسمة على صفر (نقسم TDEE بالتساوي)
+    let scale = 1;
+    if(plannedKcalSum > 0) scale = tdee / plannedKcalSum;
+    else if(items.length > 0) scale = tdee / items.length;
+
+    // بناء واجهة الأصناف مع السعرات المعدلة (مقربة لأقرب رقم)
     const mealsList = document.createElement('div'); mealsList.className = 'mealsList';
     items.forEach((it, idx) => {
       const row = document.createElement('div'); row.className = 'mealRow';
       const left = document.createElement('div'); left.className = 'mealLeft';
       const name = document.createElement('div'); name.className = 'mealName'; name.textContent = `${it.qty} — ${it.food}`;
-      const meta = document.createElement('div'); meta.className = 'mealMeta'; meta.textContent = `${labelForSection(it.section)} • ${it.kcal} kcal`;
+      const adjKcal = Math.max(1, Math.round((it.kcal||0) * scale)); // أقل سعره 1
+      const meta = document.createElement('div'); meta.className = 'mealMeta'; meta.textContent = `${labelForSection(it.section)} • ${adjKcal} kcal`;
       left.appendChild(name); left.appendChild(meta);
 
       const cb = document.createElement('input'); cb.type = 'checkbox'; cb.className = 'checkbox';
       cb.dataset.day = day;
-      cb.dataset.kcal = it.kcal;
+      cb.dataset.kcal = adjKcal;
       const itemKey = `${key}_d${day}_i${idx}`;
       cb.dataset.key = itemKey;
-      if(saved && saved[itemKey]) cb.checked = true;
+      if(savedState && savedState[itemKey]) cb.checked = true;
 
       cb.addEventListener('change', () => {
-        const state = loadProgress(key);
-        state[itemKey] = cb.checked;
-        saveProgress(key, state);
+        const st = loadProgress(key);
+        st[itemKey] = cb.checked;
+        saveProgress(key, st);
         updateDayProgress(day, tdee, key);
       });
 
@@ -325,53 +220,36 @@ function renderPlan(inputs){
 
     card.appendChild(mealsList);
 
-    // progress area
-    const progressText = document.createElement('div'); progressText.className = 'progressInfo';
+    // progress
+    const progressInfo = document.createElement('div'); progressInfo.className = 'progressInfo';
     const countDiv = document.createElement('div'); countDiv.id = `day${day}-count`; countDiv.textContent = `0/${items.length} وجبات`;
     const pctDiv = document.createElement('div'); pctDiv.id = `day${day}-pct`; pctDiv.textContent = `0%`;
-    progressText.appendChild(countDiv); progressText.appendChild(pctDiv);
+    progressInfo.appendChild(countDiv); progressInfo.appendChild(pctDiv);
 
     const outer = document.createElement('div'); outer.className = 'progressOuter';
     const inner = document.createElement('div'); inner.className = 'progressInner'; inner.id = `day${day}-bar`; inner.textContent = '0%';
     outer.appendChild(inner);
 
-    const kcalInfo = document.createElement('div'); kcalInfo.className = 'mealMeta'; kcalInfo.innerHTML = `<span id="day${day}-kcal">0 kcal</span> • الهدف: ${tdee} kcal`;
+    const kcalDiv = document.createElement('div'); kcalDiv.className = 'mealMeta'; kcalDiv.innerHTML = `<span id="day${day}-kcal">0 kcal</span> • الهدف: ${tdee} kcal`;
 
-    card.appendChild(progressText);
+    card.appendChild(progressInfo);
     card.appendChild(outer);
-    card.appendChild(kcalInfo);
+    card.appendChild(kcalDiv);
 
     container.appendChild(card);
   }
 
-  // init update for all days
+  // init updates
   for(let d=1; d<=30; d++) updateDayProgress(d, tdee, key);
-
-  // scroll to results
-  document.querySelector('.result').scrollIntoView({behavior:'smooth'});
 }
 
-function labelForSection(s){
-  if(!s) return '';
-  if(s==='breakfast') return 'الفطور';
-  if(s==='preWorkout') return 'قبل التمرين';
-  if(s==='postWorkout') return 'بعد التمرين';
-  if(s==='lunch') return 'الغداء';
-  if(s==='dinner') return 'العشاء';
-  if(s==='snacks') return 'السناكات';
-  return s;
-}
-
-/* ---------- تحديث حالة يوم واحد (تحسب السعرات المختارة وتحوّلها لنسبة) ---------- */
+/* ====== حساب وتحديث شريط يوم واحد ====== */
 function updateDayProgress(day, tdee, key){
-  // find checkboxes for that day
   const cbs = Array.from(document.querySelectorAll(`input.checkbox[data-day="${day}"]`));
   let eatenKcal = 0, eatenCount = 0;
-  cbs.forEach(cb => {
-    if(cb.checked){ eatenCount++; eatenKcal += parseInt(cb.dataset.kcal || 0, 10); }
-  });
-
+  cbs.forEach(cb => { if(cb.checked){ eatenCount++; eatenKcal += parseInt(cb.dataset.kcal || 0, 10); }});
   const totalItems = cbs.length;
+  // pct بحسب السعرات مقارنة بالـ TDEE، لكن لأننا وسعنا السعرات لتطابق TDEE، تعليم كل العناصر سيعطي ~100%
   const pctRaw = tdee > 0 ? (eatenKcal / tdee) * 100 : 0;
   const pct = Math.min(100, Math.round(pctRaw));
 
@@ -383,7 +261,6 @@ function updateDayProgress(day, tdee, key){
   if(bar){
     bar.style.width = `${pct}%`;
     bar.textContent = `${pct}%`;
-    // ألوان: 0-40 -> أحمر، 41-99 -> أصفر، 100 -> أخضر
     if(pct === 100) bar.style.background = 'var(--green)';
     else if(pct > 40) bar.style.background = 'var(--yellow)';
     else bar.style.background = 'var(--red)';
@@ -393,12 +270,11 @@ function updateDayProgress(day, tdee, key){
   if(kcalText) kcalText.textContent = `${eatenKcal} kcal`;
 }
 
-/* ---------- أحداث الواجهة ---------- */
+/* ====== واجهة الاحداث ====== */
 document.getElementById('generateBtn').addEventListener('click', ()=>{
-  // read inputs
-  const age = parseInt(document.getElementById('age').value, 10);
+  const age = parseInt(document.getElementById('age').value,10);
   const gender = document.getElementById('gender').value;
-  const height = parseInt(document.getElementById('height').value, 10);
+  const height = parseInt(document.getElementById('height').value,10);
   const weight = parseFloat(document.getElementById('weight').value);
   const activity = parseFloat(document.getElementById('activity').value);
   const goal = document.getElementById('goal').value;
@@ -407,17 +283,13 @@ document.getElementById('generateBtn').addEventListener('click', ()=>{
     alert('يرجى تعبئة جميع الحقول بشكل صحيح.');
     return;
   }
-
-  const inputs = { age, gender, height, weight, activity, goal };
-  // render plan and prepare key
-  renderPlan(inputs);
+  renderPlan({age,gender,height,weight,activity,goal});
 });
 
-// مسح تقدم الخطة الحالية (الخاصة بالمدخلات الحالية)
 document.getElementById('clearPlanProgress').addEventListener('click', ()=>{
-  const age = parseInt(document.getElementById('age').value, 10);
+  const age = parseInt(document.getElementById('age').value,10);
   const gender = document.getElementById('gender').value;
-  const height = parseInt(document.getElementById('height').value, 10);
+  const height = parseInt(document.getElementById('height').value,10);
   const weight = parseFloat(document.getElementById('weight').value);
   const activity = parseFloat(document.getElementById('activity').value);
   const goal = document.getElementById('goal').value;
@@ -426,16 +298,14 @@ document.getElementById('clearPlanProgress').addEventListener('click', ()=>{
     return;
   }
   const key = planKey({age,gender,height,weight,activity,goal});
-  if(confirm('هل تريد مسح التقدم المحفوظ لهذه الخطة فقط؟')) {
+  if(confirm('مسح التقدم المحفوظ لهذه الخطة؟')) {
     localStorage.removeItem(key);
-    // إعادة عرض الخطة لتنعكس التغييرات
     renderPlan({age,gender,height,weight,activity,goal});
   }
 });
 
-/* ---------- ملاحظة: عند إعادة تحميل الصفحة لن نقوم بعرض خطة تلقائياً لأننا نحتاج المدخلات.
-   التقدّم محفوظ لكل خطة على حدة باستخدام مفتاح يعتمد على المدخلات.
------------------------------------------------------------------- */
+/* ====== إنهاء ====== */
+/* ملاحظة: التقدّم محفوظ في localStorage لكل خطة بشكل منفصل بواسطة المفتاح الناتج من المدخلات */
 </script>
 </body>
 </html>
