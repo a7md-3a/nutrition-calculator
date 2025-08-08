@@ -5,14 +5,65 @@
 <meta name="viewport" content="width=device-width,initial-scale=1" />
 <title>حاسبة نظام غذائي تفصيلي 30 يوم</title>
 <style>
-  body { font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif; direction: rtl; background: #f9f9f9; color: #222; padding: 20px; }
-  h1 { text-align: center; color: #0b74de; margin-bottom: 10px; }
-  label { display: block; margin-top: 15px; font-weight: 700; }
-  input, select { width: 100%; padding: 10px; font-size: 16px; margin-top: 5px; border-radius: 8px; border: 1px solid #ccc; box-sizing: border-box; }
-  button { margin-top: 20px; padding: 12px 18px; width: 100%; font-size: 18px; background-color: #0b74de; border: none; border-radius: 10px; color: white; cursor: pointer; transition: background-color 0.3s; }
-  button:hover { background-color: #094d99; }
-  .result { white-space: pre-wrap; background: white; padding: 20px; border-radius: 10px; margin-top: 30px; max-height: 600px; overflow-y: auto; box-shadow: 0 0 10px rgba(0,0,0,0.1); }
-  .small { font-size: 13px; color: #555; text-align: center; margin-top: 12px; }
+  body {
+    font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+    direction: rtl;
+    background: #f9f9f9;
+    color: #222;
+    padding: 20px;
+    line-height: 1.6;
+  }
+  h1 {
+    text-align: center;
+    color: #0b74de;
+    margin-bottom: 15px;
+  }
+  label {
+    display: block;
+    margin-top: 15px;
+    font-weight: 700;
+  }
+  input, select {
+    width: 100%;
+    padding: 10px;
+    font-size: 16px;
+    margin-top: 5px;
+    border-radius: 8px;
+    border: 1px solid #ccc;
+    box-sizing: border-box;
+  }
+  button {
+    margin-top: 25px;
+    padding: 12px 18px;
+    width: 100%;
+    font-size: 18px;
+    background-color: #0b74de;
+    border: none;
+    border-radius: 10px;
+    color: white;
+    cursor: pointer;
+    transition: background-color 0.3s;
+  }
+  button:hover {
+    background-color: #094d99;
+  }
+  .result {
+    white-space: pre-wrap;
+    background: white;
+    padding: 25px;
+    border-radius: 12px;
+    margin-top: 35px;
+    max-height: 600px;
+    overflow-y: auto;
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    font-size: 15px;
+  }
+  .small {
+    font-size: 13px;
+    color: #555;
+    text-align: center;
+    margin-top: 14px;
+  }
 </style>
 </head>
 <body>
@@ -27,7 +78,6 @@
   <option value="" disabled selected>اختر الجنس</option>
   <option value="male">ذكر</option>
   <option value="female">أنثى</option>
-  <option value="other">أفضل عدم التحديد</option>
 </select>
 
 <label for="height">الطول (سم):</label>
@@ -61,7 +111,6 @@
 <div class="small">النتائج تقديرية فقط، يرجى استشارة أخصائي تغذية لأي حالة خاصة.</div>
 
 <script>
-// بيانات الوجبات التفصيلية حسب السعرات (كمية + سعرات تقريبية لكل مكون)
 const mealsData = {
   1200: [
     {
@@ -93,7 +142,6 @@ const mealsData = {
         { food: "مكسرات مشكلة", qty: "20 غ", kcal: 120 },
       ],
     },
-    // أيام 2-7 نفس التركيبة مع تغيير بسيط (لو تبي تنوع أكبر ممكن تضيف)
   ],
   1500: [
     {
@@ -190,7 +238,6 @@ const mealsData = {
   ],
 };
 
-// تقريب السعرات للدرجة الأقرب المتاحة في بيانات الوجبات
 function roundCalories(kcal) {
   const keys = Object.keys(mealsData).map(x => parseInt(x));
   let nearest = keys[0];
@@ -205,40 +252,33 @@ function roundCalories(kcal) {
   return nearest;
 }
 
-// حساب BMR حسب الجنس والوزن والطول والعمر
 function calculateBMR(weight, height, age, gender) {
   if (gender === "male") {
     return 10 * weight + 6.25 * height - 5 * age + 5;
   } else if (gender === "female") {
     return 10 * weight + 6.25 * height - 5 * age - 161;
-  } else {
-    // متوسط بين الذكر والأنثى
-    const maleBMR = 10 * weight + 6.25 * height - 5 * age + 5;
-    const femaleBMR = 10 * weight + 6.25 * height - 5 * age - 161;
-    return (maleBMR + femaleBMR) / 2;
   }
+  // لن نستخدم خيار ثالث الآن بسبب التبسيط
+  return 10 * weight + 6.25 * height - 5 * age; 
 }
 
-// توليد خطة 30 يوم مع تنويع بسيط (نفس نموذج اليوم يتكرر لكن ممكن نعدل لو حبينا)
 function generatePlan(bandCalories) {
   const dayPlans = [];
-  const baseMeal = mealsData[bandCalories][0]; // نستخدم أول نموذج وجبة (تقدر تضيف أكثر لو تريد)
-
+  const baseMeal = mealsData[bandCalories][0];
   for (let day = 1; day <= 30; day++) {
     dayPlans.push({ day, meals: baseMeal });
   }
   return dayPlans;
 }
 
-// تحويل قائمة مكونات وجبة لنص مرتب مع السعرات
 function formatMeal(name, items) {
   let total = 0;
   let lines = [`${name}:`];
   for (const item of items) {
-    lines.push(`  • ${item.qty} ${item.food} (${item.kcal} سعر حراري)`);
+    lines.push(`  • ${item.qty} ${item.food} (${item.kcal} سعره حرارية)`);
     total += item.kcal;
   }
-  lines.push(`  مجموع السعرات: ${total} سعر حراري\n`);
+  lines.push(`  مجموع السعرات: ${total} سعره حرارية\n`);
   return lines.join("\n");
 }
 
@@ -247,29 +287,38 @@ function renderPlan(age, gender, height, weight, activity, goal) {
   let tdee = Math.round(bmr * activity);
   if (goal === "lose") tdee = Math.round(tdee - 500);
   else if (goal === "gain") tdee = Math.round(tdee + 400);
-  if (tdee < 1200) tdee = 1200; // أقل سعرات مقبولة
+  if (tdee < 1200) tdee = 1200;
 
   const band = roundCalories(tdee);
   const bmi = (weight / ((height / 100) ** 2)).toFixed(1);
   const planDays = generatePlan(band);
 
-  let output = "";
-  output += `العمر: ${age} سنة\nالجنس: ${gender === "male" ? "ذكر" : gender === "female" ? "أنثى" : "عدم تحديد"}\nالطول: ${height} سم\nالوزن: ${weight} كغ\nمستوى النشاط: ${activity}\nالهدف: ${goal}\n\n`;
-  output += `معدل الأيض الأساسي (BMR): ${Math.round(bmr)} سعر حراري\nمعدل السعرات اليومية الموصى بها (TDEE): ${tdee} سعر حراري\nBMI: ${bmi}\n\n`;
-  output += `خطة غذائية تفصيلية لمدة 30 يوم:\n\n`;
+  let outputLines = [];
+  outputLines.push(`العمر: ${age} سنة`);
+  outputLines.push(`الجنس: ${gender === "male" ? "ذكر" : "أنثى"}`);
+  outputLines.push(`الطول: ${height} سم`);
+  outputLines.push(`الوزن: ${weight} كغ`);
+  outputLines.push(`مستوى النشاط: ${activity}`);
+  outputLines.push(`الهدف: ${goal}`);
+  outputLines.push(``);
+  outputLines.push(`معدل الأيض الأساسي (BMR): ${Math.round(bmr)} سعره حرارية`);
+  outputLines.push(`معدل السعرات اليومية الموصى بها (TDEE): ${tdee} سعره حرارية`);
+  outputLines.push(`BMI: ${bmi}`);
+  outputLines.push(``);
+  outputLines.push(`خطة غذائية تفصيلية لمدة 30 يوم:\n`);
 
   planDays.forEach(({ day, meals }) => {
-    output += `اليوم ${day}:\n`;
-    output += formatMeal("الفطور", meals.breakfast);
-    output += formatMeal("وجبة قبل التمرين", meals.preWorkout);
-    output += formatMeal("وجبة بعد التمرين", meals.postWorkout);
-    output += formatMeal("الغداء", meals.lunch);
-    output += formatMeal("العشاء", meals.dinner);
-    output += formatMeal("السناكات", meals.snacks);
-    output += "--------------------------------------\n\n";
+    outputLines.push(`اليوم ${day}:`);
+    outputLines.push(formatMeal("الفطور", meals.breakfast));
+    outputLines.push(formatMeal("وجبة قبل التمرين", meals.preWorkout));
+    outputLines.push(formatMeal("وجبة بعد التمرين", meals.postWorkout));
+    outputLines.push(formatMeal("الغداء", meals.lunch));
+    outputLines.push(formatMeal("العشاء", meals.dinner));
+    outputLines.push(formatMeal("السناكات", meals.snacks));
+    outputLines.push(``);
   });
 
-  return output;
+  return outputLines.join("\n");
 }
 
 document.getElementById("generateBtn").addEventListener("click", () => {
