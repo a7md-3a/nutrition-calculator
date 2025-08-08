@@ -1,168 +1,540 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="ar" dir="rtl">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>حاسبة النظام الغذائي</title>
-<link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>حاسبة نظام غذائي تفصيلي 30 يوم — الإصدار النهائي</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+
 <style>
-    body {
-        font-family: 'Tajawal', sans-serif;
-        margin: 0;
-        padding: 0;
-        background: linear-gradient(270deg, #FFD93D, #6C63FF);
-        background-size: 400% 400%;
-        animation: gradientMove 12s ease infinite;
-        color: #333;
-    }
-    @keyframes gradientMove {
-        0% {background-position: 0% 50%;}
-        50% {background-position: 100% 50%;}
-        100% {background-position: 0% 50%;}
-    }
-    header {
-        text-align: center;
-        padding: 20px;
-        color: #fff;
-        font-size: 2em;
-        font-weight: bold;
-        text-shadow: 1px 1px 4px rgba(0,0,0,0.3);
-    }
-    .container {
-        max-width: 800px;
-        margin: auto;
-        background: rgba(255, 255, 255, 0.15);
-        padding: 20px;
-        border-radius: 12px;
-        backdrop-filter: blur(10px);
-        box-shadow: 0 4px 20px rgba(0,0,0,0.2);
-    }
-    .card {
-        background: rgba(255, 255, 255, 0.85);
-        padding: 15px;
-        margin-bottom: 15px;
-        border-radius: 10px;
-        box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-    }
-    label {
-        font-weight: bold;
-        margin-bottom: 5px;
-        display: block;
-    }
-    input, select, button {
-        width: 100%;
-        padding: 10px;
-        margin-top: 5px;
-        border-radius: 6px;
-        border: 1px solid #ccc;
-        font-size: 1em;
-    }
-    button {
-        background: linear-gradient(90deg, #FFD93D, #6C63FF);
-        border: none;
-        color: white;
-        font-weight: bold;
-        cursor: pointer;
-        transition: transform 0.2s ease, box-shadow 0.2s ease;
-    }
-    button:hover {
-        transform: scale(1.05);
-        box-shadow: 0 4px 10px rgba(0,0,0,0.3);
-    }
-    .results {
-        margin-top: 20px;
-        opacity: 0;
-        transform: translateY(20px);
-        transition: opacity 0.8s ease, transform 0.8s ease;
-    }
-    .results.show {
-        opacity: 1;
-        transform: translateY(0);
-    }
-    .meal {
-        display: flex;
-        align-items: center;
-        margin: 8px 0;
-        padding: 10px;
-        border-radius: 8px;
-        background: rgba(255,255,255,0.9);
-        box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-    }
-    .meal-icon {
-        font-size: 1.5em;
-        margin-left: 10px;
-    }
-    .icon-yellow { color: #FFD93D; }
-    .icon-green { color: #4CAF50; }
-    .icon-blue { color: #2196F3; }
-    .icon-brown { color: #8B4513; }
+:root{
+  --accent1: #FFD93D; /* أصفر */
+  --accent2: #6C63FF; /* بنفسجي */
+  --glass: rgba(255,255,255,0.85);
+  --glass-strong: rgba(255,255,255,0.95);
+  --muted:#6b7280;
+  --card-shadow: 0 12px 40px rgba(2,6,23,0.12);
+  --radius:14px;
+}
+*{box-sizing:border-box}
+html,body{height:100%;margin:0;padding:0}
+body{
+  font-family:"Tajawal",system-ui,-apple-system,"Segoe UI",Roboto,Arial;
+  background: linear-gradient(120deg,var(--accent1),var(--accent2));
+  background-size: 300% 300%;
+  animation: bgShift 14s ease infinite;
+  -webkit-font-smoothing:antialiased;
+  -moz-osx-font-smoothing:grayscale;
+  color:#07203a;
+  padding:30px;
+}
+@keyframes bgShift{
+  0%{background-position:0% 50%}
+  50%{background-position:100% 50%}
+  100%{background-position:0% 50%}
+}
+
+/* container (magazine style) */
+.container{
+  max-width:1100px;
+  margin:0 auto;
+  background: linear-gradient(180deg, rgba(255,255,255,0.92), rgba(255,255,255,0.98));
+  border-radius:22px;
+  box-shadow: var(--card-shadow);
+  overflow:hidden;
+  border:1px solid rgba(255,255,255,0.5);
+}
+
+/* header */
+.header{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  padding:28px 32px;
+  gap:20px;
+}
+.header-left{flex:1}
+.h1{
+  margin:0;
+  font-size:28px;
+  color:#0b74de;
+  font-weight:800;
+}
+.h1 small{ display:block; font-size:14px; color:var(--muted); margin-top:6px; font-weight:600;}
+
+/* main layout */
+.main{
+  display:grid;
+  grid-template-columns: 380px 1fr;
+  gap:24px;
+  padding:20px 28px 40px 28px;
+}
+
+/* panel inputs (glass card) */
+.panel{
+  background: var(--glass-strong);
+  border-radius: var(--radius);
+  padding:16px;
+  box-shadow: 0 8px 30px rgba(2,6,23,0.06);
+  border:1px solid rgba(10,10,10,0.03);
+}
+.panel h2{ margin:0 0 12px 0; color:#07203a; font-size:18px; }
+.field{ display:flex; gap:12px; align-items:center; margin-top:12px; background: white; padding:10px; border-radius:12px; border:1px solid rgba(10,10,10,0.04); transition: transform .22s ease, box-shadow .22s ease; }
+.field:hover{ transform: translateY(-4px); box-shadow: 0 10px 26px rgba(2,6,23,0.06); }
+.iconWrap{ width:46px; height:46px; border-radius:10px; display:flex; align-items:center; justify-content:center; flex-shrink:0; background: linear-gradient(180deg, rgba(255,255,255,0.6), rgba(255,255,255,0.45)); }
+.iconSVG{ width:26px; height:26px; }
+
+/* inputs */
+label{ font-weight:700; font-size:13px; color:#07203a; margin-bottom:6px; display:block; }
+input[type="number"], select{ width:100%; border:none; outline:none; font-size:15px; padding:8px 6px; background:transparent; }
+.cta{ margin-top:14px; display:flex; gap:8px;}
+button#generateBtn{ flex:1; padding:12px 14px; background: linear-gradient(90deg,var(--accent1),var(--accent2)); border:none; color:white; border-radius:12px; font-weight:800; font-size:16px; cursor:pointer; box-shadow: 0 12px 30px rgba(108,99,255,0.15); transition: transform .18s ease; }
+button#generateBtn:active{ transform: translateY(2px); }
+button#resetBtn{ padding:10px 12px; background:transparent; border:1px dashed rgba(10,10,10,0.06); border-radius:12px; color:var(--muted); cursor:pointer; font-weight:700; }
+
+/* results magazine */
+.resultWrap{ padding:6px; }
+.result{
+  min-height:70vh;
+  background: linear-gradient(180deg, rgba(255,255,255,0.98), rgba(250,250,250,0.96));
+  border-radius:16px;
+  padding:18px;
+  overflow:auto;
+  border:1px solid rgba(2,6,23,0.03);
+}
+.summary{
+  display:flex;
+  gap:18px;
+  align-items:center;
+  margin-bottom:16px;
+  padding:12px;
+  border-radius:12px;
+  background: linear-gradient(90deg, rgba(255,217,61,0.06), rgba(108,99,255,0.03));
+}
+.summary .meta p{ margin:4px 0; color:#08304a; font-weight:700; }
+.tdeeBadge{ font-weight:900; color:var(--accent2); font-size:18px; }
+
+/* day cards */
+.days{ display:grid; grid-template-columns: repeat(auto-fill, minmax(260px,1fr)); gap:16px; }
+.dayCard{ background: white; border-radius:12px; padding:12px; box-shadow: 0 8px 24px rgba(2,6,23,0.04); transition: transform .16s ease, box-shadow .16s ease; overflow:hidden; opacity:0; transform: translateY(10px); animation: cardIn .45s forwards; }
+.dayCard:hover{ transform: translateY(-6px); }
+@keyframes cardIn{ to{ opacity:1; transform: translateY(0)} }
+
+.dayHead{ display:flex; align-items:center; justify-content:space-between; margin-bottom:10px; }
+.dayHead h3{ margin:0; font-size:15px; color:#07203a; }
+.calBadge{ background:linear-gradient(135deg,var(--accent2),var(--accent1)); color:white; padding:6px 8px; border-radius:10px; font-weight:800; font-size:13px; }
+
+/* meal row */
+.meal{ display:flex; gap:10px; align-items:flex-start; margin-top:8px; padding-top:8px; border-top:1px dashed rgba(10,10,10,0.04); }
+.m-icon{ width:44px; height:44px; border-radius:10px; display:flex; align-items:center; justify-content:center; font-size:18px; color:white; flex-shrink:0; box-shadow: 0 6px 16px rgba(2,6,23,0.06); }
+.m-body{ flex:1; }
+.m-body .name{ font-weight:700; color:#07203a; font-size:13px; }
+.m-body .items{ font-size:13px; color:var(--muted); margin-top:6px; line-height:1.45; }
+
+/* colored icons per meal */
+.icon-breakfast{ background: linear-gradient(180deg,#FFD973,#FFB34D); color:#6b3b00; }
+.icon-pre{ background: linear-gradient(180deg,#C2F784,#7CE36E); color:#155724; }
+.icon-post{ background: linear-gradient(180deg,#8EC5FF,#5EA0FF); color:#05306b; }
+.icon-lunch{ background: linear-gradient(180deg,#FFD1E6,#FF9FC1); color:#5b1031; }
+.icon-dinner{ background: linear-gradient(180deg,#E6D3FF,#B69BFF); color:#2b1a4a; }
+.icon-snacks{ background: linear-gradient(180deg,#FFF7B2,#FFE07A); color:#7a5500; }
+
+/* responsive */
+@media (max-width:1000px){
+  .main{ grid-template-columns: 1fr; padding:18px;}
+  .header-right{ display:none; }
+  .container{ margin:20px; }
+}
+@media (max-width:520px){
+  body{ padding:14px; }
+  .h1{ font-size:20px; }
+}
+
+/* small helpers */
+.fadeIn{ animation: fadeIn .6s ease both; }
+@keyframes fadeIn{ from{ opacity:0; transform: translateY(8px)} to{ opacity:1; transform: translateY(0)}}
 </style>
 </head>
 <body>
-<header>حاسبة النظام الغذائي</header>
-<div class="container">
-    <div class="card">
-        <label>الوزن (كجم)</label>
-        <input type="number" id="weight" placeholder="أدخل وزنك">
-        <label>الطول (سم)</label>
-        <input type="number" id="height" placeholder="أدخل طولك">
-        <label>العمر</label>
-        <input type="number" id="age" placeholder="أدخل عمرك">
-        <label>مستوى النشاط</label>
-        <select id="activity">
-            <option value="1.2">قليل الحركة (بدون تمارين أو نادرًا)</option>
-            <option value="1.375">نشاط خفيف (تمارين 1-3 أيام بالأسبوع)</option>
-            <option value="1.55">نشاط متوسط (تمارين 3-5 أيام بالأسبوع)</option>
-            <option value="1.725">نشاط عالي (تمارين 6-7 أيام بالأسبوع)</option>
-        </select>
-        <label>الهدف</label>
-        <select id="goal">
-            <option value="lose">خسارة وزن</option>
-            <option value="maintain">حفاظ على الوزن</option>
-            <option value="gain">زيادة وزن</option>
-        </select>
-        <button onclick="calculatePlan()">احسب</button>
+
+<div class="container fadeIn">
+
+  <div class="header">
+    <div class="header-left">
+      <h1 class="h1">حاسبة نظام غذائي تفصيلي 30 يوم</h1>
+      <small>خطة غذائية مفصلة — احترافية المظهر كما في المجلات</small>
     </div>
-    <div class="results" id="results"></div>
+    <div class="header-right" style="text-align:center">
+      <div style="display:inline-block;background:linear-gradient(135deg,#fff9e6,#fff1ff);padding:8px 12px;border-radius:12px;font-weight:800;color:#6236ff">خطة 30 يوم</div>
+    </div>
+  </div>
+
+  <div class="main">
+    <!-- sidebar inputs -->
+    <aside class="panel" aria-label="إعدادات الحاسبة">
+      <h2>أدخل بياناتك</h2>
+
+      <div class="field">
+        <div class="iconWrap"><svg class="iconSVG" viewBox="0 0 24 24"><path fill="#0b74de" d="M12 12a5 5 0 100-10 5 5 0 000 10z"/><path fill="#0b74de" d="M2 22a10 10 0 0120 0H2z"/></svg></div>
+        <div class="inputs">
+          <label for="age">العمر (سنة)</label>
+          <input id="age" type="number" min="10" max="100" placeholder="مثلاً: 30" />
+        </div>
+      </div>
+
+      <div class="field">
+        <div class="iconWrap"><svg class="iconSVG" viewBox="0 0 24 24"><path fill="#0b74de" d="M12 2a5 5 0 100 10 5 5 0 000-10z"/><path fill="#0b74de" d="M4 22v-1a7 7 0 0114 0v1H4z"/></svg></div>
+        <div class="inputs">
+          <label for="gender">الجنس</label>
+          <select id="gender">
+            <option value="" disabled selected>اختر الجنس</option>
+            <option value="male">ذكر</option>
+            <option value="female">أنثى</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="field">
+        <div class="iconWrap"><svg class="iconSVG" viewBox="0 0 24 24"><rect width="18" height="2" x="3" y="11" fill="#0b74de" /></svg></div>
+        <div class="inputs">
+          <label for="height">الطول (سم)</label>
+          <input id="height" type="number" min="100" max="230" placeholder="مثلاً: 175" />
+        </div>
+      </div>
+
+      <div class="field">
+        <div class="iconWrap"><svg class="iconSVG" viewBox="0 0 24 24"><path fill="#0b74de" d="M6 6h12v2H6zM6 10h12v2H6zM6 14h12v2H6z"/></svg></div>
+        <div class="inputs">
+          <label for="weight">الوزن (كغ)</label>
+          <input id="weight" type="number" min="30" max="250" placeholder="مثلاً: 70" />
+        </div>
+      </div>
+
+      <div class="field">
+        <div class="iconWrap"><svg class="iconSVG" viewBox="0 0 24 24"><path fill="#0b74de" d="M12 2l2.2 6.8L21 9l-5 3.6L17.4 21 12 17.8 6.6 21 8 12.6 3 9l6.8-0.2z"/></svg></div>
+        <div class="inputs">
+          <label for="activity">مستوى النشاط</label>
+          <select id="activity">
+            <option value="" disabled selected>اختر مستوى النشاط</option>
+            <option value="1.2">قليل الحركة (قليل التمرين)</option>
+            <option value="1.375">تمارين خفيفة (1-3 أيام بالأسبوع)</option>
+            <option value="1.55">تمارين معتدلة (3-5 أيام بالأسبوع)</option>
+            <option value="1.725">تمارين كثيفة (6-7 أيام بالأسبوع)</option>
+            <option value="1.9">نشاط بدني عالي جداً / عمل شاق</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="field" style="margin-bottom:6px;">
+        <div class="iconWrap"><svg class="iconSVG" viewBox="0 0 24 24"><path fill="#0b74de" d="M12 2a10 10 0 100 20 10 10 0 000-20z"/></svg></div>
+        <div class="inputs">
+          <label for="goal">هدف النظام</label>
+          <select id="goal">
+            <option value="" disabled selected>اختر الهدف</option>
+            <option value="lose">نقص وزن (خسارة)</option>
+            <option value="maintain">الحفاظ على الوزن</option>
+            <option value="gain">زيادة وزن (كتلة عضلية)</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="cta">
+        <button id="generateBtn">احسب واطلع خطة الـ 30 يوم</button>
+        <button id="resetBtn" type="button">إعادة ضبط</button>
+      </div>
+
+      <p style="color:var(--muted);font-size:13px;margin-top:12px;text-align:center">
+        النتائج تقريبية — استشر أخصائي التغذية للحالات الخاصة.
+      </p>
+    </aside>
+
+    <!-- results -->
+    <section class="resultWrap">
+      <div id="resultArea" class="result" aria-live="polite">
+        <div class="summary">
+          <div class="meta">
+            <p id="metaLine">لم يتم الحساب بعد — أدخل بياناتك ثم اضغط "احسب".</p>
+            <div style="font-size:13px;color:var(--muted);">عرض النتائج يظهر على هيئة مجلّة قابلة للتصفح.</div>
+          </div>
+          <div class="tdee">
+            <div id="tdeeBadge" class="tdeeBadge">— kcal</div>
+            <div style="font-size:12px;color:var(--muted);margin-top:6px">سعرات يومية مستهدفة</div>
+          </div>
+        </div>
+
+        <div id="daysContainer">
+          <div style="text-align:center;color:var(--muted);padding:40px 20px">لا توجد بيانات بعد.</div>
+        </div>
+
+      </div>
+    </section>
+  </div>
+
 </div>
 
 <script>
-function calculatePlan() {
-    const weight = parseFloat(document.getElementById('weight').value);
-    const height = parseFloat(document.getElementById('height').value);
-    const age = parseFloat(document.getElementById('age').value);
-    const activity = parseFloat(document.getElementById('activity').value);
-    const goal = document.getElementById('goal').value;
+/* ---------- بيانات الوجبات (من الكود الأصلي مع تعديل: حذف "أومليت" -> استخدام بيض عادي) ---------- */
+const mealsData = {
+  1200: [
+    {
+      breakfast: [
+        { food: "بيض مسلوق", qty: "3 بيضات", kcal: 210 },
+        { food: "توست بر", qty: "2 قطعة", kcal: 160 },
+        { food: "زبدة فول سوداني", qty: "1.5 ملعقة كبيرة", kcal: 140 },
+        { food: "كوب عصير فواكه طبيعي", qty: "1 كوب", kcal: 100 },
+      ],
+      preWorkout: [
+        { food: "موزة", qty: "1 متوسطة", kcal: 100 },
+        { food: "زبادي قليل الدسم", qty: "100 غ", kcal: 60 },
+      ],
+      postWorkout: [
+        { food: "صدر دجاج مشوي", qty: "100 غ", kcal: 165 },
+        { food: "أرز بني", qty: "80 غ", kcal: 110 },
+      ],
+      lunch: [
+        { food: "لحم بقري قليل الدهن", qty: "120 غ", kcal: 250 },
+        { food: "بطاطا مشوية", qty: "150 غ", kcal: 130 },
+        { food: "سلطة خضراء", qty: "100 غ", kcal: 40 },
+      ],
+      dinner: [
+        { food: "سمك مشوي", qty: "120 غ", kcal: 200 },
+        { food: "خضار مطهوة", qty: "150 غ", kcal: 80 },
+        { food: "تفاحة", qty: "1", kcal: 80 },
+      ],
+      snacks: [
+        { food: "مكسرات مشكلة", qty: "20 غ", kcal: 120 },
+      ],
+    },
+  ],
+  1500: [
+    {
+      breakfast: [
+        { food: "بيض مسلوق", qty: "4 بيضات", kcal: 280 },
+        { food: "توست بر", qty: "2 قطعة", kcal: 160 },
+        { food: "زبدة فول سوداني", qty: "2 ملعقة كبيرة", kcal: 190 },
+        { food: "كوب عصير فواكه طبيعي", qty: "1 كوب", kcal: 100 },
+      ],
+      preWorkout: [
+        { food: "موزة كبيرة", qty: "1", kcal: 120 },
+        { food: "زبادي قليل الدسم", qty: "150 غ", kcal: 90 },
+      ],
+      postWorkout: [
+        { food: "صدر دجاج مشوي", qty: "150 غ", kcal: 250 },
+        { food: "أرز بني", qty: "100 غ", kcal: 130 },
+      ],
+      lunch: [
+        { food: "لحم بقري قليل الدهن", qty: "180 غ", kcal: 370 },
+        { food: "بطاطا مشوية", qty: "150 غ", kcal: 130 },
+        { food: "سلطة خضراء", qty: "120 غ", kcal: 50 },
+      ],
+      dinner: [
+        { food: "سمك مشوي", qty: "150 غ", kcal: 250 },
+        { food: "خضار مطهوة", qty: "150 غ", kcal: 80 },
+        { food: "تفاحة", qty: "1", kcal: 80 },
+      ],
+      snacks: [
+        { food: "مكسرات مشكلة", qty: "25 غ", kcal: 150 },
+      ],
+    },
+  ],
+  1800: [
+    {
+      breakfast: [
+        { food: "بيض مسلوق", qty: "4 بيضات", kcal: 280 },
+        { food: "توست بر", qty: "3 قطع", kcal: 240 },
+        { food: "زبدة فول سوداني", qty: "2 ملعقة كبيرة", kcal: 190 },
+        { food: "كوب عصير فواكه طبيعي", qty: "1 كوب", kcal: 100 },
+      ],
+      preWorkout: [
+        { food: "موزة كبيرة", qty: "1", kcal: 120 },
+        { food: "زبادي قليل الدسم", qty: "150 غ", kcal: 90 },
+      ],
+      postWorkout: [
+        { food: "صدر دجاج مشوي", qty: "180 غ", kcal: 300 },
+        { food: "أرز بني", qty: "120 غ", kcal: 150 },
+      ],
+      lunch: [
+        { food: "لحم بقري قليل الدهن", qty: "200 غ", kcal: 400 },
+        { food: "بطاطا مشوية", qty: "200 غ", kcal: 180 },
+        { food: "سلطة خضراء", qty: "150 غ", kcal: 60 },
+      ],
+      dinner: [
+        { food: "سمك مشوي", qty: "180 غ", kcal: 300 },
+        { food: "خضار مطهوة", qty: "180 غ", kcal: 100 },
+        { food: "تفاحة", qty: "1", kcal: 80 },
+      ],
+      snacks: [
+        { food: "مكسرات مشكلة", qty: "30 غ", kcal: 180 },
+      ],
+    },
+  ],
+  2200: [
+    {
+      breakfast: [
+        { food: "بيض مسلوق", qty: "5 بيضات", kcal: 350 },
+        { food: "توست بر", qty: "3 قطع", kcal: 240 },
+        { food: "زبدة فول سوداني", qty: "3 ملعقة كبيرة", kcal: 280 },
+        { food: "كوب عصير فواكه طبيعي", qty: "1 كوب", kcal: 100 },
+      ],
+      preWorkout: [
+        { food: "موزتين كبيرتين", qty: "2", kcal: 240 },
+        { food: "زبادي قليل الدسم", qty: "200 غ", kcal: 120 },
+      ],
+      postWorkout: [
+        { food: "صدر دجاج مشوي", qty: "200 غ", kcal: 350 },
+        { food: "أرز بني", qty: "150 غ", kcal: 200 },
+      ],
+      lunch: [
+        { food: "لحم بقري قليل الدهن", qty: "250 غ", kcal: 460 },
+        { food: "بطاطا مشوية", qty: "250 غ", kcal: 220 },
+        { food: "سلطة خضراء", qty: "150 غ", kcal: 60 },
+      ],
+      dinner: [
+        { food: "سمك مشوي", qty: "200 غ", kcal: 350 },
+        { food: "خضار مطهوة", qty: "200 غ", kcal: 120 },
+        { food: "تفاحة", qty: "1", kcal: 80 },
+      ],
+      snacks: [
+        { food: "مكسرات مشكلة", qty: "35 غ", kcal: 210 },
+      ],
+    },
+  ],
+};
 
-    if (!weight || !height || !age) {
-        alert("يرجى إدخال جميع القيم");
-        return;
+/* ---------- وظائف الحساب ---------- */
+function roundCalories(kcal) {
+  const keys = Object.keys(mealsData).map(x => parseInt(x));
+  let nearest = keys[0];
+  let minDiff = Math.abs(kcal - nearest);
+  for (const k of keys) {
+    const diff = Math.abs(kcal - k);
+    if (diff < minDiff) {
+      minDiff = diff;
+      nearest = k;
     }
+  }
+  return nearest;
+}
 
-    let bmr = 10 * weight + 6.25 * height - 5 * age + 5;
-    let calories = bmr * activity;
+function calculateBMR(weight, height, age, gender) {
+  if (gender === "male") {
+    return 10 * weight + 6.25 * height - 5 * age + 5;
+  } else if (gender === "female") {
+    return 10 * weight + 6.25 * height - 5 * age - 161;
+  }
+  return 10 * weight + 6.25 * height - 5 * age;
+}
 
-    if (goal === "lose") calories -= 500;
-    if (goal === "gain") calories += 500;
+function generatePlan(bandCalories) {
+  const dayPlans = [];
+  const baseMeal = mealsData[bandCalories][0];
+  for (let day = 1; day <= 30; day++) {
+    dayPlans.push({ day, meals: baseMeal });
+  }
+  return dayPlans;
+}
 
-    let meals = [
-        { icon: '<i class="fas fa-egg icon-yellow"></i>', name: "بيض مسلوق + شوفان + فواكه" },
-        { icon: '<i class="fas fa-seedling icon-green"></i>', name: "سلطة خضار + صدر دجاج مشوي" },
-        { icon: '<i class="fas fa-fish icon-blue"></i>', name: "أرز بني + سمك مشوي + خضار" },
-        { icon: '<i class="fas fa-nutritionix icon-brown"></i>', name: "مكسرات + زبادي قليل الدسم" }
-    ];
+/* ---------- رندرة النتائج بتصميم المجلة + أيقونات SVG ملونة ---------- */
+function renderMagazine(age, gender, height, weight, activity, goal) {
+  const bmr = calculateBMR(weight, height, age, gender);
+  let tdee = Math.round(bmr * activity);
+  if (goal === "lose") tdee = Math.round(tdee - 500);
+  else if (goal === "gain") tdee = Math.round(tdee + 400);
+  if (tdee < 1200) tdee = 1200;
 
-    let html = `<h3>السعرات اليومية: ${Math.round(calories)} سعرة حرارية</h3>`;
-    html += `<h4>الخطة الغذائية المقترحة:</h4>`;
-    meals.forEach(meal => {
-        html += `<div class="meal">${meal.icon}<span>${meal.name}</span></div>`;
+  const band = roundCalories(tdee);
+  const bmi = (weight / ((height / 100) ** 2)).toFixed(1);
+  const planDays = generatePlan(band);
+
+  // header meta
+  document.getElementById('metaLine').innerHTML =
+    `العمر: <strong>${age}</strong>  •  الجنس: <strong>${gender === "male" ? "ذكر" : "أنثى"}</strong>  •  الطول: <strong>${height} سم</strong>  •  الوزن: <strong>${weight} كغ</strong>  •  BMI: <strong>${bmi}</strong>`;
+  document.getElementById('tdeeBadge').textContent = `${tdee} kcal`;
+
+  // build days
+  const container = document.getElementById('daysContainer');
+  container.innerHTML = '';
+  const frag = document.createDocumentFragment();
+
+  const mealOrder = [
+    { key: 'breakfast', name: 'الفطور', cls: 'icon-breakfast', svg: breakfastSVG() },
+    { key: 'preWorkout', name: 'وجبة قبل التمرين', cls: 'icon-pre', svg: preSVG() },
+    { key: 'postWorkout', name: 'وجبة بعد التمرين', cls: 'icon-post', svg: postSVG() },
+    { key: 'lunch', name: 'الغداء', cls: 'icon-lunch', svg: lunchSVG() },
+    { key: 'dinner', name: 'العشاء', cls: 'icon-dinner', svg: dinnerSVG() },
+    { key: 'snacks', name: 'السناكات', cls: 'icon-snacks', svg: snacksSVG() },
+  ];
+
+  planDays.forEach(({ day, meals }, idx) => {
+    const card = document.createElement('article');
+    card.className = 'dayCard';
+    // add small stagger animation delay
+    card.style.animationDelay = `${idx * 30}ms`;
+    const head = document.createElement('div'); head.className = 'dayHead';
+    head.innerHTML = `<h3>اليوم ${day}</h3><div class="calBadge">${band} kcal</div>`;
+    card.appendChild(head);
+
+    mealOrder.forEach(m => {
+      if (meals[m.key] && meals[m.key].length) {
+        const row = document.createElement('div'); row.className = 'meal';
+        const iconBox = document.createElement('div'); iconBox.className = 'm-icon ' + m.cls;
+        iconBox.innerHTML = m.svg;
+        const body = document.createElement('div'); body.className = 'm-body';
+        const name = document.createElement('div'); name.className = 'name'; name.textContent = m.name;
+        const items = document.createElement('div'); items.className = 'items';
+        items.innerHTML = meals[m.key].map(it => `${it.qty} — ${it.food} (${it.kcal} kcal)`).join('<br>');
+        body.appendChild(name); body.appendChild(items);
+        row.appendChild(iconBox); row.appendChild(body);
+        card.appendChild(row);
+      }
     });
 
-    const resultsDiv = document.getElementById('results');
-    resultsDiv.innerHTML = html;
-    resultsDiv.classList.add('show');
+    frag.appendChild(card);
+  });
+
+  container.appendChild(frag);
+  // smooth scroll to results
+  document.getElementById('resultArea').scrollIntoView({ behavior: 'smooth', block: 'start' });
 }
+
+/* ---------- small SVG icons (vector) ---------- */
+function breakfastSVG(){ return `<svg width="26" height="26" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M4 19C4 19 5 22 12 22C19 22 20 19 20 19H4Z" fill="white"/><path d="M12 3C9.79 3 8 4.79 8 7C8 9.21 9.79 11 12 11C14.21 11 16 9.21 16 7C16 4.79 14.21 3 12 3Z" fill="white"/></svg>`; }
+function preSVG(){ return `<svg width="26" height="26" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M12 2L15 8H9L12 2Z" fill="white"/><path d="M4 22C4 22 6 16 12 16C18 16 20 22 20 22H4Z" fill="white"/></svg>`; }
+function postSVG(){ return `<svg width="26" height="26" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><rect x="3" y="7" width="18" height="3" rx="1.5" fill="white"/><rect x="3" y="12" width="18" height="3" rx="1.5" fill="white"/></svg>`; }
+function lunchSVG(){ return `<svg width="26" height="26" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M4 7H20V9H4V7Z" fill="white"/><path d="M6 11H18V13H6V11Z" fill="white"/><path d="M8 15H16V17H8V15Z" fill="white"/></svg>`; }
+function dinnerSVG(){ return `<svg width="26" height="26" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M6 3H9V12H6V3Z" fill="white"/><path d="M15 3H18V12H15V3Z" fill="white"/><path d="M4 18C4 18 6 22 12 22C18 22 20 18 20 18H4Z" fill="white"/></svg>`; }
+function snacksSVG(){ return `<svg width="26" height="26" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="7" cy="9" r="2" fill="white"/><circle cx="12" cy="7" r="2" fill="white"/><circle cx="17" cy="9" r="2" fill="white"/></svg>`; }
+
+/* ---------- UI events ---------- */
+document.getElementById('generateBtn').addEventListener('click', () => {
+  const age = parseInt(document.getElementById('age').value);
+  const gender = document.getElementById('gender').value;
+  const height = parseInt(document.getElementById('height').value);
+  const weight = parseInt(document.getElementById('weight').value);
+  const activity = parseFloat(document.getElementById('activity').value);
+  const goal = document.getElementById('goal').value;
+
+  if (!age || !gender || !height || !weight || !activity || !goal) {
+    alert("يرجى تعبئة جميع الحقول بشكل صحيح.");
+    return;
+  }
+
+  renderMagazine(age, gender, height, weight, activity, goal);
+});
+
+document.getElementById('resetBtn').addEventListener('click', () => {
+  document.getElementById('age').value='';
+  document.getElementById('gender').selectedIndex=0;
+  document.getElementById('height').value='';
+  document.getElementById('weight').value='';
+  document.getElementById('activity').selectedIndex=0;
+  document.getElementById('goal').selectedIndex=0;
+  document.getElementById('metaLine').textContent = 'لم يتم الحساب بعد — أدخل بياناتك ثم اضغط "احسب".';
+  document.getElementById('tdeeBadge').textContent = '— kcal';
+  document.getElementById('daysContainer').innerHTML = '<div style="text-align:center;color:var(--muted);padding:40px 20px">لا توجد بيانات بعد.</div>';
+});
 </script>
+
 </body>
 </html>
