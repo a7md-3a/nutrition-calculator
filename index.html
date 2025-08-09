@@ -9,105 +9,59 @@
   <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700;900&display=swap" rel="stylesheet">
   <style>
     :root {
-      --dark: #1A1A1A;
-      --darker: #121212;
+      --dark: #121212;
+      --darker: #0D0D0D;
       --primary: #FFD700;
       --primary-dark: #FFC000;
-      --secondary: #2A2A2A;
-      --text: #E0E0E0;
-      --text-secondary: #A0A0A0;
-      --card-bg: #252525;
+      --secondary: #1A1A1A;
+      --text: #F0F0F0;
+      --text-secondary: #B0B0B0;
+      --card-bg: #1A1A1A;
     }
 
     body {
       background-color: var(--darker);
       color: var(--text);
       font-family: 'Tajawal', sans-serif;
-    }
-
-    .sidebar {
-      background: linear-gradient(180deg, var(--dark) 0%, #000 100%);
-      min-height: 100vh;
-      padding: 30px 20px;
-      border-right: 1px solid rgba(255, 215, 0, 0.1);
-    }
-
-    .sidebar-brand {
-      display: flex;
-      align-items: center;
-      margin-bottom: 40px;
-      padding-bottom: 20px;
-      border-bottom: 1px solid rgba(255, 215, 0, 0.2);
-    }
-
-    .sidebar-brand h2 {
-      font-weight: 700;
-      color: var(--primary);
-      margin: 0;
-    }
-
-    .nav-link {
-      color: var(--text-secondary);
-      padding: 12px 15px;
-      margin-bottom: 8px;
-      border-radius: 8px;
-      transition: all 0.3s;
-      font-weight: 500;
-    }
-
-    .nav-link:hover, .nav-link.active {
-      background: rgba(255, 215, 0, 0.1);
-      color: var(--primary);
-      transform: translateX(-5px);
-    }
-
-    .nav-link i {
-      width: 25px;
-      text-align: center;
-      margin-left: 10px;
+      overflow-x: hidden;
     }
 
     .content {
       padding: 40px;
       background-color: var(--dark);
+      min-height: 100vh;
     }
 
     .header-card {
-      background: linear-gradient(135deg, var(--dark) 0%, var(--secondary) 100%);
-      border-radius: 15px;
-      padding: 30px;
+      background: linear-gradient(135deg, var(--secondary) 0%, #2A2A2A 100%);
+      border-radius: 20px;
+      padding: 40px;
       margin-bottom: 30px;
-      border: 1px solid rgba(255, 215, 0, 0.1);
-      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+      border: 1px solid rgba(255, 215, 0, 0.2);
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
     }
 
-    .form-card {
+    .form-card, .result-card {
       background-color: var(--card-bg);
-      border-radius: 15px;
-      padding: 30px;
-      margin-bottom: 30px;
-      border: 1px solid rgba(255, 215, 0, 0.1);
-    }
-
-    .result-card {
-      background-color: var(--card-bg);
-      border-radius: 15px;
+      border-radius: 20px;
       padding: 30px;
       border: 1px solid rgba(255, 215, 0, 0.1);
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
     }
 
     .btn-gold {
       background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
       color: #000;
-      font-weight: 700;
+      font-weight: 900;
       border: none;
-      padding: 12px 25px;
-      transition: all 0.3s;
+      padding: 15px 30px;
+      transition: all 0.4s ease-in-out;
+      border-radius: 10px;
     }
 
     .btn-gold:hover {
-      transform: translateY(-3px);
-      box-shadow: 0 5px 15px rgba(255, 215, 0, 0.4);
+      transform: translateY(-5px) scale(1.02);
+      box-shadow: 0 8px 20px rgba(255, 215, 0, 0.4);
       color: #000;
     }
 
@@ -116,6 +70,7 @@
       border: 1px solid #444;
       color: var(--text);
       padding: 12px 15px;
+      border-radius: 8px;
     }
 
     .form-control:focus, .form-select:focus {
@@ -126,67 +81,54 @@
     }
 
     .meal-card {
-      background-color: var(--card-bg);
-      border-radius: 12px;
-      padding: 20px;
+      background-color: #1A1A1A;
+      border-radius: 15px;
+      padding: 25px;
       margin-bottom: 20px;
-      border-left: 4px solid var(--primary);
-      transition: all 0.3s;
-      border: 1px solid rgba(255, 215, 0, 0.1);
+      border-left: 5px solid var(--primary);
+      transition: all 0.3s ease-in-out;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
     }
 
     .meal-card:hover {
       transform: translateY(-5px);
-      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
     }
 
     .calorie-badge {
-      display: inline-block;
       background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
       color: #000;
-      font-family: 'Arial', sans-serif;
       font-weight: bold;
-      padding: 5px 10px;
-      border-radius: 5px;
+      padding: 6px 12px;
+      border-radius: 6px;
       font-size: 14px;
-      margin-right: 10px;
-      min-width: 70px;
+      min-width: 80px;
       text-align: center;
     }
-
+    
     .day-plan {
-      border-bottom: 1px dashed rgba(255, 215, 0, 0.3);
-      padding-bottom: 30px;
-      margin-bottom: 30px;
+        border-bottom: 1px solid rgba(255, 215, 0, 0.2);
+        padding-bottom: 30px;
+        margin-bottom: 30px;
     }
-
+    
     .day-plan:last-child {
-      border-bottom: none;
+        border-bottom: none;
     }
 
-    @media (max-width: 768px) {
-      .sidebar {
-        min-height: auto;
-        padding: 20px;
-      }
-      .content {
-        padding: 25px;
-      }
-    }
-
-    /* تخصيصات إضافية */
+    /* Additional Customizations */
     .meal-title {
       font-weight: 700;
       color: var(--primary);
       margin-bottom: 15px;
-      font-size: 1.2rem;
+      font-size: 1.3rem;
     }
 
     .meal-item {
       display: flex;
       justify-content: space-between;
       align-items: center;
-      padding: 8px 0;
+      padding: 10px 0;
       border-bottom: 1px solid rgba(255, 255, 255, 0.05);
     }
 
@@ -199,17 +141,15 @@
     }
 
     .drink-card {
-      background-color: rgba(255, 215, 0, 0.05);
-      border-left: 4px solid var(--primary-dark);
+      background-color: #222;
+      border-left: 5px solid var(--primary-dark);
     }
 
     .goal-badge {
-      display: inline-block;
-      padding: 3px 10px;
-      border-radius: 20px;
-      font-size: 12px;
+      padding: 5px 15px;
+      border-radius: 25px;
+      font-size: 13px;
       font-weight: 700;
-      margin-right: 10px;
     }
 
     .goal-lose {
@@ -226,57 +166,26 @@
       background-color: rgba(13, 110, 253, 0.2);
       color: #0D6EFD;
     }
+
+    @media (max-width: 768px) {
+      .content {
+        padding: 25px;
+      }
+      .header-card {
+        padding: 25px;
+      }
+      .form-card, .result-card {
+        padding: 20px;
+      }
+      .btn-gold {
+        padding: 12px 20px;
+      }
+    }
   </style>
 </head>
 <body>
 
-<div class="d-flex">
-  <div class="sidebar col-lg-3 col-md-4 col-12">
-    <div class="sidebar-brand">
-      <i class="fas fa-dumbbell" style="color: var(--primary); font-size: 1.8rem; margin-left: 10px;"></i>
-      <h2>FIT PRO</h2>
-    </div>
-    <ul class="nav flex-column">
-      <li class="nav-item">
-        <a href="#" class="nav-link active">
-          <i class="fas fa-home"></i>
-          الرئيسية
-        </a>
-      </li>
-      <li class="nav-item">
-        <a href="#" class="nav-link">
-          <i class="fas fa-calculator"></i>
-          الحاسبة
-        </a>
-      </li>
-      <li class="nav-item">
-        <a href="#" class="nav-link">
-          <i class="fas fa-utensils"></i>
-          التغذية
-        </a>
-      </li>
-      <li class="nav-item">
-        <a href="#" class="nav-link">
-          <i class="fas fa-running"></i>
-          التمارين
-        </a>
-      </li>
-      <li class="nav-item">
-        <a href="#" class="nav-link">
-          <i class="fas fa-chart-line"></i>
-          التقدم
-        </a>
-      </li>
-      <li class="nav-item">
-        <a href="#" class="nav-link">
-          <i class="fas fa-cog"></i>
-          الإعدادات
-        </a>
-      </li>
-    </ul>
-  </div>
-
-  <div class="content col-lg-9 col-md-8 col-12">
+<div class="content col-12">
     <div class="header-card">
       <h1 class="mb-3"><i class="fas fa-calculator" style="color: var(--primary);"></i> حاسبة اللياقة البدنية</h1>
       <p class="mb-0" style="color: var(--text-secondary);">احسب احتياجاتك اليومية من السعرات واحصل على خطة غذائية متكاملة لمدة 30 يومًا</p>
@@ -431,7 +340,6 @@ function calculateBMI(weight, height) {
 function generateDailyPlan(targetCalories) {
   const dailyPlan = { breakfast: [], snack1: [], lunch: [], snack2: [], dinner: [], drink: [] };
   
-  // توزيع السعرات الحرارية التقريبي
   const mealRatios = {
     breakfast: 0.25,
     snack1: 0.05,
@@ -440,25 +348,18 @@ function generateDailyPlan(targetCalories) {
     dinner: 0.30
   };
 
-  // اختيار وجبة لكل وقت بناءً على السعرات
   for (const mealType in mealRatios) {
     const targetMealCalories = targetCalories * mealRatios[mealType];
-    const suitableMeals = mealsDatabase.snack.filter(meal => meal.kcal <= targetMealCalories);
+    const mealsList = mealType.includes('snack') ? mealsDatabase.snack : mealsDatabase[mealType];
+    const suitableMeals = mealsList.filter(meal => meal.kcal <= targetMealCalories);
 
-    if (mealType.includes('snack')) {
-      const suitableSnacks = mealsDatabase.snack.filter(snack => snack.kcal <= targetMealCalories);
-      if (suitableSnacks.length > 0) {
-        dailyPlan[mealType].push(suitableSnacks[Math.floor(Math.random() * suitableSnacks.length)]);
-      }
-    } else {
-      const suitableMainMeals = mealsDatabase[mealType].filter(meal => meal.kcal <= targetMealCalories);
-      if (suitableMainMeals.length > 0) {
-        dailyPlan[mealType].push(suitableMainMeals[Math.floor(Math.random() * suitableMainMeals.length)]);
-      }
+    if (suitableMeals.length > 0) {
+      dailyPlan[mealType].push(suitableMeals[Math.floor(Math.random() * suitableMeals.length)]);
+    } else if (mealsList.length > 0) {
+      dailyPlan[mealType].push(mealsList[Math.floor(Math.random() * mealsList.length)]);
     }
   }
 
-  // إضافة المشروبات الثابتة
   dailyPlan.drink.push(...mealsDatabase.drink);
   
   return dailyPlan;
@@ -480,7 +381,7 @@ function renderPlan(age, gender, height, weight, activity, goal) {
                 <h3 class="mb-4" style="color: var(--primary);"><i class="fas fa-chart-pie me-2"></i>النتائج الشخصية</h3>
                 <div class="row">
                   <div class="col-md-6 mb-3">
-                    <div class="p-3" style="background-color: var(--secondary); border-radius: 10px;">
+                    <div class="p-4" style="background-color: var(--secondary); border-radius: 15px;">
                       <h5><i class="fas fa-user me-2"></i>البيانات الشخصية</h5>
                       <p class="mb-1"><strong>العمر:</strong> ${age} سنة</p>
                       <p class="mb-1"><strong>الجنس:</strong> ${gender === "male" ? "ذكر" : "أنثى"}</p>
@@ -489,7 +390,7 @@ function renderPlan(age, gender, height, weight, activity, goal) {
                     </div>
                   </div>
                   <div class="col-md-6 mb-3">
-                    <div class="p-3" style="background-color: var(--secondary); border-radius: 10px;">
+                    <div class="p-4" style="background-color: var(--secondary); border-radius: 15px;">
                       <h5><i class="fas fa-chart-line me-2"></i>المؤشرات الصحية</h5>
                       <p class="mb-1"><strong>مؤشر كتلة الجسم (BMI):</strong> ${bmi.value} (${bmi.category})</p>
                       <p class="mb-1"><strong>معدل الأيض الأساسي (BMR):</strong> ${Math.round(bmr)} سعرة/يوم</p>
