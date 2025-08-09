@@ -265,45 +265,80 @@
 </div>
 
 <script>
-// قاعدة بيانات وجبات كبيرة ومتنوعة
+// قاعدة بيانات وجبات عربية وخليجية صحية
 const mealsDatabase = {
   breakfast: [
-    { food: "شوفان مع حليب خالي الدسم", qty: "40 جرام", kcal: 180, protein: 8, carbs: 30, fat: 3 },
-    { food: "عجة بيض", qty: "2 بيضات", kcal: 140, protein: 12, carbs: 1, fat: 10 },
-    { food: "زبادي يوناني مع توت", qty: "150 جرام", kcal: 150, protein: 15, carbs: 15, fat: 3 },
-    { food: "خبز توست أسمر مع جبنة قريش", qty: "2 شريحة", kcal: 200, protein: 18, carbs: 20, fat: 5 },
-    { food: "أومليت بالخضار", qty: "3 بيضات", kcal: 220, protein: 18, carbs: 5, fat: 15 },
-    { food: "فول مدمس", qty: "100 جرام", kcal: 170, protein: 10, carbs: 25, fat: 4 },
-    { food: "سندويش جبن أبيض وخيار", qty: "1 حبة", kcal: 190, protein: 10, carbs: 25, fat: 5 },
-    { food: "بان كيك الشوفان", qty: "2 حبة", kcal: 250, protein: 10, carbs: 30, fat: 8 }
+    {
+      food: "بيضتان مسلوقتان + ملعقة فول سوداني طبيعي + شريحة توست أسمر",
+      kcal: 350, protein: 20, carbs: 25, fat: 18
+    },
+    {
+      food: "فول مدمس بالزيتون والخضار + خبز أسمر",
+      kcal: 400, protein: 15, carbs: 50, fat: 15
+    },
+    {
+      food: "شوفان مع حليب قليل الدسم ومكسرات + ملعقة عسل",
+      kcal: 300, protein: 12, carbs: 40, fat: 10
+    },
+    {
+      food: "شكشوكة بالبيض والخضار + خبز أسمر",
+      kcal: 380, protein: 18, carbs: 30, fat: 20
+    },
+    {
+      food: "جبن قريش مع طماطم وخيار + خبز أسمر",
+      kcal: 280, protein: 20, carbs: 20, fat: 10
+    }
   ],
   lunch: [
-    { food: "صدر دجاج مشوي", qty: "150 جرام", kcal: 220, protein: 35, carbs: 0, fat: 5 },
-    { food: "سمك مشوي", qty: "150 جرام", kcal: 210, protein: 30, carbs: 0, fat: 9 },
-    { food: "سلطة كينوا مع خضار", qty: "طبق", kcal: 350, protein: 12, carbs: 50, fat: 12 },
-    { food: "لحم بقري مشوي", qty: "120 جرام", kcal: 250, protein: 30, carbs: 0, fat: 14 },
-    { food: "عدس مطبوخ", qty: "150 جرام", kcal: 230, protein: 18, carbs: 35, fat: 2 },
-    { food: "ساندويتش دجاج مشوي", qty: "1 حبة", kcal: 300, protein: 25, carbs: 30, fat: 10 },
-    { food: "مكرونة قمح كامل", qty: "150 جرام", kcal: 280, protein: 10, carbs: 50, fat: 5 }
+    {
+      food: "صدر دجاج مشوي + أرز أسمر + سلطة خضراء",
+      kcal: 500, protein: 40, carbs: 50, fat: 15
+    },
+    {
+      food: "سمك فيليه مشوي + بطاطا حلوة مشوية + بروكلي مسلوق",
+      kcal: 450, protein: 35, carbs: 40, fat: 15
+    },
+    {
+      food: "لحم مشوي قليل الدهن + خضار سوتيه + شوربة عدس",
+      kcal: 550, protein: 45, carbs: 35, fat: 25
+    },
+    {
+      food: "كفتة بالفرن + أرز أبيض (مقدار كوب) + سلطة زبادي",
+      kcal: 520, protein: 38, carbs: 55, fat: 20
+    },
+    {
+      food: "مكبوس دجاج صحي (بمقدار كوبين) + سلطة",
+      kcal: 600, protein: 40, carbs: 65, fat: 25
+    }
   ],
   dinner: [
-    { food: "صدر دجاج مشوي مع خضار", qty: "120 جرام", kcal: 180, protein: 28, carbs: 5, fat: 5 },
-    { food: "شوربة خضار", qty: "طبق كبير", kcal: 120, protein: 5, carbs: 20, fat: 2 },
-    { food: "سمك فيليه", qty: "100 جرام", kcal: 160, protein: 24, carbs: 0, fat: 7 },
-    { food: "زبادي مع فواكه", qty: "كوب", kcal: 180, protein: 10, carbs: 25, fat: 4 },
-    { food: "سلطة تونا", qty: "طبق", kcal: 220, protein: 25, carbs: 5, fat: 10 },
-    { food: "جبن أبيض وبيض مسلوق", qty: "100 جرام", kcal: 200, protein: 15, carbs: 5, fat: 12 }
+    {
+      food: "صدر دجاج مشوي + سلطة فواكه",
+      kcal: 350, protein: 30, carbs: 30, fat: 10
+    },
+    {
+      food: "حمص باللحم المفروم الصحي + خبز أسمر",
+      kcal: 400, protein: 25, carbs: 35, fat: 20
+    },
+    {
+      food: "شوربة عدس مع ليمون + صدر دجاج مسلوق",
+      kcal: 320, protein: 25, carbs: 25, fat: 10
+    },
+    {
+      food: "سلطة يونانية مع جبن فيتا وزيت زيتون",
+      kcal: 280, protein: 10, carbs: 15, fat: 20
+    },
+    {
+      food: "كفتة بالفرن (3 قطع) + طبق صغير من الكينوا",
+      kcal: 450, protein: 35, carbs: 25, fat: 25
+    }
   ],
   snack: [
-    { food: "موزة صغيرة", qty: "1 حبة", kcal: 90, protein: 1, carbs: 23, fat: 0 },
-    { food: "تفاح", qty: "1 حبة متوسطة", kcal: 95, protein: 0, carbs: 25, fat: 0 },
-    { food: "لوز", qty: "10 حبات", kcal: 70, protein: 3, carbs: 2, fat: 6 },
-    { food: "جزر", qty: "2 حبة متوسطة", kcal: 50, protein: 1, carbs: 12, fat: 0 },
-    { food: "حمص", qty: "30 جرام", kcal: 50, protein: 3, carbs: 6, fat: 2 },
-    { food: "جبنة قريش", qty: "50 جرام", kcal: 50, protein: 11, carbs: 2, fat: 1 },
-    { food: "كوب حليب خالي الدسم", qty: "1 كوب", kcal: 90, protein: 8, carbs: 12, fat: 0 },
-    { food: "برتقال", qty: "1 حبة", kcal: 60, protein: 1, carbs: 15, fat: 0 },
-    { food: "كوب زبادي", qty: "1 كوب", kcal: 100, protein: 6, carbs: 15, fat: 2 }
+    { food: "تفاحة مع حفنة لوز", kcal: 150, protein: 5, carbs: 20, fat: 8 },
+    { food: "كوب زبادي يوناني قليل الدسم", kcal: 120, protein: 12, carbs: 8, fat: 2 },
+    { food: "موزة كبيرة", kcal: 100, protein: 1, carbs: 27, fat: 0 },
+    { food: "خضار مقطعة (جزر، خيار) مع حمص", kcal: 180, protein: 6, carbs: 25, fat: 8 },
+    { food: "تمرتان مع كوب قهوة عربي", kcal: 100, protein: 1, carbs: 25, fat: 0 }
   ],
   drink: [
     { food: "شاي أخضر", qty: "كوب", kcal: 0, protein: 0, carbs: 0, fat: 0 },
@@ -453,7 +488,7 @@ function formatMealHtml(mealName, items) {
     totalFat += item.fat || 0;
     
     html += `<div class="meal-item">
-              <span class="meal-name">${item.qty} ${item.food}</span>
+              <span class="meal-name">${item.food}</span>
               <span class="calorie-badge">${item.kcal} kcal</span>
             </div>`;
   });
