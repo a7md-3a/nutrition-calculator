@@ -283,7 +283,7 @@
     </div>
 
     <div class="form-card">
-      <form id="nutritionForm">
+      <form id="nutritionForm" novalidate>
         <div class="row">
           <div class="col-md-6 mb-4">
             <label for="age" class="form-label"><i class="fas fa-birthday-cake me-2" style="color: var(--primary);"></i>العمر (سنة):</label>
@@ -356,84 +356,51 @@
 </div>
 
 <script>
-// بيانات الوجبات الكاملة لجميع الأهداف (خسارة، حفاظ، زيادة)
-const mealsData = {
-  lose: {
-    1200: [
-      // يوم 1
-      {
-        breakfast: [
-          { food: "شوفان مع حليب خالي الدسم", qty: "40 جرام", kcal: 180, protein: 8, carbs: 30, fat: 3 },
-          { food: "موزة صغيرة", qty: "1 حبة", kcal: 90, protein: 1, carbs: 23, fat: 0 },
-          { food: "قهوة سوداء", qty: "كوب", kcal: 5, protein: 0, carbs: 0, fat: 0 }
-        ],
-        snack1: [
-          { food: "زبادي يوناني خالي الدسم", qty: "100 جرام", kcal: 60, protein: 10, carbs: 4, fat: 0 },
-          { food: "لوز", qty: "10 حبات", kcal: 70, protein: 3, carbs: 2, fat: 6 }
-        ],
-        lunch: [
-          { food: "صدر دجاج مشوي", qty: "120 جرام", kcal: 165, protein: 31, carbs: 0, fat: 3.6 },
-          { food: "أرز بني", qty: "100 جرام", kcal: 110, protein: 2.6, carbs: 23, fat: 0.9 },
-          { food: "خضار سوتيه", qty: "كوب", kcal: 50, protein: 2, carbs: 10, fat: 0 },
-          { food: "سلطة خضراء مع ليمون", qty: "طبق", kcal: 30, protein: 1, carbs: 6, fat: 0 }
-        ],
-        snack2: [
-          { food: "جزر", qty: "2 حبة متوسطة", kcal: 50, protein: 1, carbs: 12, fat: 0 },
-          { food: "حمص", qty: "30 جرام", kcal: 50, protein: 3, carbs: 6, fat: 2 }
-        ],
-        dinner: [
-          { food: "سمك مشوي", qty: "100 جرام", kcal: 140, protein: 26, carbs: 0, fat: 3 },
-          { food: "بطاطا حلوة صغيرة", qty: "1 حبة", kcal: 90, protein: 2, carbs: 21, fat: 0 },
-          { food: "خضار مشوي", qty: "كوب", kcal: 50, protein: 2, carbs: 10, fat: 0 }
-        ],
-        drink: [
-          { food: "شاي أخضر", qty: "كوب", kcal: 0, protein: 0, carbs: 0, fat: 0 },
-          { food: "ماء", qty: "2 لتر", kcal: 0, protein: 0, carbs: 0, fat: 0 }
-        ]
-      },
-      // يوم 2
-      {
-        breakfast: [
-          { food: "عجة بيض", qty: "2 بيضات", kcal: 140, protein: 12, carbs: 1, fat: 10 },
-          { food: "خبز توست أسمر", qty: "1 شريحة", kcal: 70, protein: 3, carbs: 12, fat: 1 },
-          { food: "شاي بدون سكر", qty: "كوب", kcal: 0, protein: 0, carbs: 0, fat: 0 }
-        ],
-        snack1: [
-          { food: "تفاح", qty: "1 حبة متوسطة", kcal: 95, protein: 0, carbs: 25, fat: 0 },
-          { food: "جبنة قريش", qty: "50 جرام", kcal: 50, protein: 11, carbs: 2, fat: 1 }
-        ],
-        lunch: [
-          { food: "لحم بقري مشوي", qty: "100 جرام", kcal: 200, protein: 26, carbs: 0, fat: 10 },
-          { food: "بروكلي مطهو على البخار", qty: "كوب", kcal: 55, protein: 5, carbs: 11, fat: 1 },
-          { food: "كينوا", qty: "100 جرام", kcal: 120, protein: 4, carbs: 21, fat: 2 }
-        ],
-        snack2: [
-          { food: "زبادي مع توت", qty: "100 جرام", kcal: 80, protein: 5, carbs: 12, fat: 1 }
-        ],
-        dinner: [
-          { food: "دجاج بالخضار", qty: "150 جرام", kcal: 180, protein: 32, carbs: 8, fat: 3 },
-          { food: "سلطة يوناني", qty: "طبق صغير", kcal: 100, protein: 5, carbs: 6, fat: 7 }
-        ],
-        drink: [
-          { food: "ليموناضة بدون سكر", qty: "كوب", kcal: 10, protein: 0, carbs: 3, fat: 0 },
-          { food: "ماء", qty: "2 لتر", kcal: 0, protein: 0, carbs: 0, fat: 0 }
-        ]
-      },
-      // ... (أيام أخرى بنفس الهيكل)
-    ],
-    1500: [ /* خطة 1500 سعرة لخسارة الوزن */ ],
-    1800: [ /* خطة 1800 سعرة لخسارة الوزن */ ]
-  },
-  maintain: {
-    1500: [ /* خطة 1500 سعرة للحفاظ */ ],
-    1800: [ /* خطة 1800 سعرة للحفاظ */ ],
-    2200: [ /* خطة 2200 سعرة للحفاظ */ ]
-  },
-  gain: {
-    2200: [ /* خطة 2200 سعرة لزيادة الوزن */ ],
-    2500: [ /* خطة 2500 سعرة لزيادة الوزن */ ],
-    3000: [ /* خطة 3000 سعرة لزيادة الوزن */ ]
-  }
+// قاعدة بيانات وجبات كبيرة ومتنوعة
+const mealsDatabase = {
+  breakfast: [
+    { food: "شوفان مع حليب خالي الدسم", qty: "40 جرام", kcal: 180, protein: 8, carbs: 30, fat: 3 },
+    { food: "عجة بيض", qty: "2 بيضات", kcal: 140, protein: 12, carbs: 1, fat: 10 },
+    { food: "زبادي يوناني مع توت", qty: "150 جرام", kcal: 150, protein: 15, carbs: 15, fat: 3 },
+    { food: "خبز توست أسمر مع جبنة قريش", qty: "2 شريحة", kcal: 200, protein: 18, carbs: 20, fat: 5 },
+    { food: "أومليت بالخضار", qty: "3 بيضات", kcal: 220, protein: 18, carbs: 5, fat: 15 },
+    { food: "فول مدمس", qty: "100 جرام", kcal: 170, protein: 10, carbs: 25, fat: 4 },
+    { food: "سندويش جبن أبيض وخيار", qty: "1 حبة", kcal: 190, protein: 10, carbs: 25, fat: 5 },
+    { food: "بان كيك الشوفان", qty: "2 حبة", kcal: 250, protein: 10, carbs: 30, fat: 8 }
+  ],
+  lunch: [
+    { food: "صدر دجاج مشوي", qty: "150 جرام", kcal: 220, protein: 35, carbs: 0, fat: 5 },
+    { food: "سمك مشوي", qty: "150 جرام", kcal: 210, protein: 30, carbs: 0, fat: 9 },
+    { food: "سلطة كينوا مع خضار", qty: "طبق", kcal: 350, protein: 12, carbs: 50, fat: 12 },
+    { food: "لحم بقري مشوي", qty: "120 جرام", kcal: 250, protein: 30, carbs: 0, fat: 14 },
+    { food: "عدس مطبوخ", qty: "150 جرام", kcal: 230, protein: 18, carbs: 35, fat: 2 },
+    { food: "ساندويتش دجاج مشوي", qty: "1 حبة", kcal: 300, protein: 25, carbs: 30, fat: 10 },
+    { food: "مكرونة قمح كامل", qty: "150 جرام", kcal: 280, protein: 10, carbs: 50, fat: 5 }
+  ],
+  dinner: [
+    { food: "صدر دجاج مشوي مع خضار", qty: "120 جرام", kcal: 180, protein: 28, carbs: 5, fat: 5 },
+    { food: "شوربة خضار", qty: "طبق كبير", kcal: 120, protein: 5, carbs: 20, fat: 2 },
+    { food: "سمك فيليه", qty: "100 جرام", kcal: 160, protein: 24, carbs: 0, fat: 7 },
+    { food: "زبادي مع فواكه", qty: "كوب", kcal: 180, protein: 10, carbs: 25, fat: 4 },
+    { food: "سلطة تونا", qty: "طبق", kcal: 220, protein: 25, carbs: 5, fat: 10 },
+    { food: "جبن أبيض وبيض مسلوق", qty: "100 جرام", kcal: 200, protein: 15, carbs: 5, fat: 12 }
+  ],
+  snack: [
+    { food: "موزة صغيرة", qty: "1 حبة", kcal: 90, protein: 1, carbs: 23, fat: 0 },
+    { food: "تفاح", qty: "1 حبة متوسطة", kcal: 95, protein: 0, carbs: 25, fat: 0 },
+    { food: "لوز", qty: "10 حبات", kcal: 70, protein: 3, carbs: 2, fat: 6 },
+    { food: "جزر", qty: "2 حبة متوسطة", kcal: 50, protein: 1, carbs: 12, fat: 0 },
+    { food: "حمص", qty: "30 جرام", kcal: 50, protein: 3, carbs: 6, fat: 2 },
+    { food: "جبنة قريش", qty: "50 جرام", kcal: 50, protein: 11, carbs: 2, fat: 1 },
+    { food: "كوب حليب خالي الدسم", qty: "1 كوب", kcal: 90, protein: 8, carbs: 12, fat: 0 },
+    { food: "برتقال", qty: "1 حبة", kcal: 60, protein: 1, carbs: 15, fat: 0 },
+    { food: "كوب زبادي", qty: "1 كوب", kcal: 100, protein: 6, carbs: 15, fat: 2 }
+  ],
+  drink: [
+    { food: "شاي أخضر", qty: "كوب", kcal: 0, protein: 0, carbs: 0, fat: 0 },
+    { food: "قهوة سوداء", qty: "كوب", kcal: 5, protein: 0, carbs: 0, fat: 0 },
+    { food: "ماء", qty: "2 لتر", kcal: 0, protein: 0, carbs: 0, fat: 0 }
+  ]
 };
 
 // حساب معدل الأيض الأساسي (BMR)
@@ -443,50 +410,6 @@ function calculateBMR(weight, height, age, gender) {
   } else {
     return (10 * weight) + (6.25 * height) - (5 * age) - 161;
   }
-}
-
-// تقريب السعرات الحرارية إلى أقرب نطاق
-function roundCalories(calories, goal) {
-  if (goal === 'lose') {
-    if (calories < 1350) return 1200;
-    else if (calories < 1650) return 1500;
-    else return 1800;
-  } else if (goal === 'maintain') {
-    if (calories < 1950) return 1800;
-    else if (calories < 2350) return 2200;
-    else return 2500;
-  } else { // gain
-    if (calories < 2350) return 2200;
-    else if (calories < 2750) return 2500;
-    else return 3000;
-  }
-}
-
-// توليد خطة غذائية لمدة 30 يومًا
-function generatePlan(band, goal) {
-  const days = [];
-  const availablePlans = mealsData[goal][band].length;
-  
-  for (let i = 1; i <= 30; i++) {
-    const planIndex = (i - 1) % availablePlans;
-    const dayPlan = JSON.parse(JSON.stringify(mealsData[goal][band][planIndex]));
-    
-    // إضافة تغييرات طفيفة لتجنب التكرار
-    if (i % 7 === 0) {
-      const snacks = dayPlan.snack2;
-      if (snacks && snacks.length > 0) {
-        const randomSnackIndex = Math.floor(Math.random() * snacks.length);
-        snacks[randomSnackIndex].food = "بديل: " + snacks[randomSnackIndex].food;
-      }
-    }
-    
-    days.push({
-      day: i,
-      meals: dayPlan
-    });
-  }
-  
-  return days;
 }
 
 // حساب مؤشر كتلة الجسم وتصنيفه
@@ -504,8 +427,115 @@ function calculateBMI(weight, height) {
   return { value: bmiValue, category: bmiCategory };
 }
 
+// توليد خطة غذائية عشوائية لليوم الواحد
+function generateDailyPlan(targetCalories) {
+  const dailyPlan = { breakfast: [], snack1: [], lunch: [], snack2: [], dinner: [], drink: [] };
+  
+  // توزيع السعرات الحرارية التقريبي
+  const mealRatios = {
+    breakfast: 0.25,
+    snack1: 0.05,
+    lunch: 0.35,
+    snack2: 0.05,
+    dinner: 0.30
+  };
+
+  // اختيار وجبة لكل وقت بناءً على السعرات
+  for (const mealType in mealRatios) {
+    const targetMealCalories = targetCalories * mealRatios[mealType];
+    const suitableMeals = mealsDatabase.snack.filter(meal => meal.kcal <= targetMealCalories);
+
+    if (mealType.includes('snack')) {
+      const suitableSnacks = mealsDatabase.snack.filter(snack => snack.kcal <= targetMealCalories);
+      if (suitableSnacks.length > 0) {
+        dailyPlan[mealType].push(suitableSnacks[Math.floor(Math.random() * suitableSnacks.length)]);
+      }
+    } else {
+      const suitableMainMeals = mealsDatabase[mealType].filter(meal => meal.kcal <= targetMealCalories);
+      if (suitableMainMeals.length > 0) {
+        dailyPlan[mealType].push(suitableMainMeals[Math.floor(Math.random() * suitableMainMeals.length)]);
+      }
+    }
+  }
+
+  // إضافة المشروبات الثابتة
+  dailyPlan.drink.push(...mealsDatabase.drink);
+  
+  return dailyPlan;
+}
+
+// عرض الخطة كاملة
+function renderPlan(age, gender, height, weight, activity, goal) {
+  const bmr = calculateBMR(weight, height, age, gender);
+  let tdee = Math.round(bmr * activity);
+  
+  if (goal === "lose") tdee = Math.round(tdee - 500);
+  else if (goal === "gain") tdee = Math.round(tdee + 500);
+  
+  if (tdee < 1200) tdee = 1200;
+  
+  const bmi = calculateBMI(weight, height);
+  
+  let html = `<div class="mb-5">
+                <h3 class="mb-4" style="color: var(--primary);"><i class="fas fa-chart-pie me-2"></i>النتائج الشخصية</h3>
+                <div class="row">
+                  <div class="col-md-6 mb-3">
+                    <div class="p-3" style="background-color: var(--secondary); border-radius: 10px;">
+                      <h5><i class="fas fa-user me-2"></i>البيانات الشخصية</h5>
+                      <p class="mb-1"><strong>العمر:</strong> ${age} سنة</p>
+                      <p class="mb-1"><strong>الجنس:</strong> ${gender === "male" ? "ذكر" : "أنثى"}</p>
+                      <p class="mb-1"><strong>الطول:</strong> ${height} سم</p>
+                      <p class="mb-1"><strong>الوزن:</strong> ${weight} كغ</p>
+                    </div>
+                  </div>
+                  <div class="col-md-6 mb-3">
+                    <div class="p-3" style="background-color: var(--secondary); border-radius: 10px;">
+                      <h5><i class="fas fa-chart-line me-2"></i>المؤشرات الصحية</h5>
+                      <p class="mb-1"><strong>مؤشر كتلة الجسم (BMI):</strong> ${bmi.value} (${bmi.category})</p>
+                      <p class="mb-1"><strong>معدل الأيض الأساسي (BMR):</strong> ${Math.round(bmr)} سعرة/يوم</p>
+                      <p class="mb-1"><strong>إجمالي السعرات اليومية (TDEE):</strong> ${tdee} سعرة/يوم</p>
+                      <p class="mb-0"><strong>النظام الموصى به:</strong> ${tdee} سعرة/يوم</p>
+                    </div>
+                  </div>
+                </div>
+              </div>`;
+  
+  html += `<h3 class="mb-4" style="color: var(--primary);"><i class="fas fa-calendar-alt me-2"></i>الخطة الغذائية لمدة 30 يوم</h3>
+           <div class="alert alert-dark" style="background-color: var(--secondary); border: none;">
+             <i class="fas fa-info-circle me-2" style="color: var(--primary);"></i>
+             نظامك الغذائي اليومي يحتوي على ${tdee} سعرة حرارية مع توزيع مثالي للمغذيات الكبرى
+           </div>`;
+  
+  for (let i = 1; i <= 30; i++) {
+    const dayPlan = generateDailyPlan(tdee);
+    html += `<div class="day-plan">
+              <h4 class="mb-4 d-flex justify-content-between align-items-center">
+                <span><i class="fas fa-calendar-day me-2"></i>اليوم ${i}</span>
+                <span class="goal-badge ${goal === 'lose' ? 'goal-lose' : goal === 'gain' ? 'goal-gain' : 'goal-maintain'}">
+                  ${goal === 'lose' ? 'خسارة وزن' : goal === 'gain' ? 'زيادة وزن' : 'حفاظ'}
+                </span>
+              </h4>
+              
+              ${formatMealHtml("breakfast", dayPlan.breakfast)}
+              ${dayPlan.snack1.length > 0 ? formatMealHtml("snack1", dayPlan.snack1) : ''}
+              ${formatMealHtml("lunch", dayPlan.lunch)}
+              ${dayPlan.snack2.length > 0 ? formatMealHtml("snack2", dayPlan.snack2) : ''}
+              ${formatMealHtml("dinner", dayPlan.dinner)}
+              ${dayPlan.drink.length > 0 ? formatMealHtml("drink", dayPlan.drink) : ''}
+            </div>`;
+  }
+  
+  html += `<div class="mt-5 text-center">
+            <button class="btn btn-gold me-3"><i class="fas fa-file-pdf me-2"></i>حفظ الخطة كـ PDF</button>
+            <button class="btn btn-outline-light"><i class="fas fa-envelope me-2"></i>إرسال إلى بريدي</button>
+          </div>`;
+  
+  return html;
+}
+
 // تنسيق الوجبات للعرض
 function formatMealHtml(mealName, items) {
+  if (items.length === 0) return '';
   let totalCalories = 0;
   let totalProtein = 0;
   let totalCarbs = 0;
@@ -539,98 +569,21 @@ function formatMealHtml(mealName, items) {
   return html;
 }
 
-// عرض الخطة كاملة
-function renderPlan(age, gender, height, weight, activity, goal) {
-  // حساب BMR و TDEE
-  const bmr = calculateBMR(weight, height, age, gender);
-  let tdee = Math.round(bmr * activity);
-  
-  // تعديل السعرات حسب الهدف
-  if (goal === "lose") tdee = Math.round(tdee - 500);
-  else if (goal === "gain") tdee = Math.round(tdee + 500);
-  
-  // الحد الأدنى للسعرات الحرارية
-  if (goal === 'lose' && tdee < 1200) tdee = 1200;
-  else if (goal === 'gain' && tdee < 2200) tdee = 2200;
-  
-  // تحديد نطاق السعرات
-  const band = roundCalories(tdee, goal);
-  
-  // حساب مؤشر كتلة الجسم
-  const bmi = calculateBMI(weight, height);
-  
-  // توليد الخطة الغذائية
-  const planDays = generatePlan(band, goal);
-  
-  // بناء واجهة النتائج
-  let html = `<div class="mb-5">
-                <h3 class="mb-4" style="color: var(--primary);"><i class="fas fa-chart-pie me-2"></i>النتائج الشخصية</h3>
-                <div class="row">
-                  <div class="col-md-6 mb-3">
-                    <div class="p-3" style="background-color: var(--secondary); border-radius: 10px;">
-                      <h5><i class="fas fa-user me-2"></i>البيانات الشخصية</h5>
-                      <p class="mb-1"><strong>العمر:</strong> ${age} سنة</p>
-                      <p class="mb-1"><strong>الجنس:</strong> ${gender === "male" ? "ذكر" : "أنثى"}</p>
-                      <p class="mb-1"><strong>الطول:</strong> ${height} سم</p>
-                      <p class="mb-1"><strong>الوزن:</strong> ${weight} كغ</p>
-                    </div>
-                  </div>
-                  <div class="col-md-6 mb-3">
-                    <div class="p-3" style="background-color: var(--secondary); border-radius: 10px;">
-                      <h5><i class="fas fa-chart-line me-2"></i>المؤشرات الصحية</h5>
-                      <p class="mb-1"><strong>مؤشر كتلة الجسم (BMI):</strong> ${bmi.value} (${bmi.category})</p>
-                      <p class="mb-1"><strong>معدل الأيض الأساسي (BMR):</strong> ${Math.round(bmr)} سعرة/يوم</p>
-                      <p class="mb-1"><strong>إجمالي السعرات اليومية (TDEE):</strong> ${tdee} سعرة/يوم</p>
-                      <p class="mb-0"><strong>النظام الموصى به:</strong> ${band} سعرة/يوم</p>
-                    </div>
-                  </div>
-                </div>
-              </div>`;
-  
-  html += `<h3 class="mb-4" style="color: var(--primary);"><i class="fas fa-calendar-alt me-2"></i>الخطة الغذائية لمدة 30 يوم</h3>
-           <div class="alert alert-dark" style="background-color: var(--secondary); border: none;">
-             <i class="fas fa-info-circle me-2" style="color: var(--primary);"></i>
-             نظامك الغذائي اليومي يحتوي على ${band} سعرة حرارية مع توزيع مثالي للمغذيات الكبرى
-           </div>`;
-  
-  // عرض جميع الأيام
-  planDays.forEach(day => {
-    html += `<div class="day-plan">
-              <h4 class="mb-4 d-flex justify-content-between align-items-center">
-                <span><i class="fas fa-calendar-day me-2"></i>اليوم ${day.day}</span>
-                <span class="goal-badge ${goal === 'lose' ? 'goal-lose' : goal === 'gain' ? 'goal-gain' : 'goal-maintain'}">
-                  ${goal === 'lose' ? 'خسارة وزن' : goal === 'gain' ? 'زيادة وزن' : 'حفاظ'}
-                </span>
-              </h4>
-              
-              ${formatMealHtml("breakfast", day.meals.breakfast)}
-              ${day.meals.snack1 ? formatMealHtml("snack1", day.meals.snack1) : ''}
-              ${formatMealHtml("lunch", day.meals.lunch)}
-              ${day.meals.snack2 ? formatMealHtml("snack2", day.meals.snack2) : ''}
-              ${formatMealHtml("dinner", day.meals.dinner)}
-              ${day.meals.drink ? formatMealHtml("drink", day.meals.drink) : ''}
-            </div>`;
-  });
-  
-  html += `<div class="mt-5 text-center">
-            <button class="btn btn-gold me-3"><i class="fas fa-file-pdf me-2"></i>حفظ الخطة كـ PDF</button>
-            <button class="btn btn-outline-light"><i class="fas fa-envelope me-2"></i>إرسال إلى بريدي</button>
-          </div>`;
-  
-  return html;
-}
-
 // إدارة عملية الإرسال
 document.getElementById("nutritionForm").addEventListener("submit", function(e) {
   e.preventDefault();
   
-  // إظهار مؤشر التحميل
+  const form = e.target;
+  if (!form.checkValidity()) {
+    form.reportValidity();
+    return;
+  }
+  
   const loading = document.getElementById("loading");
   const output = document.getElementById("output");
   loading.style.display = "block";
   output.style.display = "none";
   
-  // الحصول على القيم من النموذج
   const age = parseInt(document.getElementById("age").value);
   const gender = document.getElementById("gender").value;
   const height = parseInt(document.getElementById("height").value);
@@ -638,14 +591,6 @@ document.getElementById("nutritionForm").addEventListener("submit", function(e) 
   const activity = parseFloat(document.getElementById("activity").value);
   const goal = document.getElementById("goal").value;
   
-  // التحقق من صحة البيانات
-  if (!age || !gender || !height || !weight || !activity || !goal) {
-    alert("يرجى تعبئة جميع الحقول بشكل صحيح.");
-    loading.style.display = "none";
-    return;
-  }
-  
-  // معالجة الحساب بشكل غير متزامن
   setTimeout(() => {
     try {
       const planHtml = renderPlan(age, gender, height, weight, activity, goal);
@@ -653,7 +598,6 @@ document.getElementById("nutritionForm").addEventListener("submit", function(e) 
       output.innerHTML = planHtml;
       loading.style.display = "none";
       
-      // التمرير إلى النتائج
       window.scrollTo({
         top: output.offsetTop - 20,
         behavior: "smooth"
