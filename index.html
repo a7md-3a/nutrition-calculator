@@ -392,16 +392,20 @@ function generateDailyPlan(targetCalories) {
     const targetMealCalories = targetCalories * mealRatios[mealType];
     const mealsList = mealsDatabase[mealType];
     
-    // فلترة الوجبات التي تناسب السعرات الحرارية
-    const suitableMeals = mealsList.filter(mealItems => {
-        const totalMealKcal = mealItems.reduce((acc, item) => acc + item.kcal, 0);
-        return totalMealKcal <= targetMealCalories;
-    });
+    // في حالة الوجبات الرئيسية والسناك، نختار مجموعة من المكونات
+    if (Array.isArray(mealsList[0])) {
+      const suitableMeals = mealsList.filter(mealItems => {
+          const totalMealKcal = mealItems.reduce((acc, item) => acc + item.kcal, 0);
+          return totalMealKcal <= targetMealCalories;
+      });
 
-    if (suitableMeals.length > 0) {
-      dailyPlan[mealType] = suitableMeals[Math.floor(Math.random() * suitableMeals.length)];
-    } else if (mealsList.length > 0) {
-      dailyPlan[mealType] = mealsList[Math.floor(Math.random() * mealsList.length)];
+      if (suitableMeals.length > 0) {
+        dailyPlan[mealType] = suitableMeals[Math.floor(Math.random() * suitableMeals.length)];
+      } else if (mealsList.length > 0) {
+        dailyPlan[mealType] = mealsList[Math.floor(Math.random() * mealsList.length)];
+      }
+    } else { // في حالة المشروبات أو السناكات المفردة
+      dailyPlan[mealType] = mealsList;
     }
   }
 
@@ -463,9 +467,9 @@ function renderPlan(age, gender, height, weight, activity, goal) {
               </h4>
               
               ${formatMealHtml("breakfast", dayPlan.breakfast)}
-              ${dayPlan.snack1.length > 0 ? formatMealHtml("snack1", dayPlan.snack1) : ''}
+              ${dayPlan.snack1.length > 0 ? formatMealHtml("snack1", [dayPlan.snack1[Math.floor(Math.random() * dayPlan.snack1.length)]]) : ''}
               ${formatMealHtml("lunch", dayPlan.lunch)}
-              ${dayPlan.snack2.length > 0 ? formatMealHtml("snack2", dayPlan.snack2) : ''}
+              ${dayPlan.snack2.length > 0 ? formatMealHtml("snack2", [dayPlan.snack2[Math.floor(Math.random() * dayPlan.snack2.length)]]) : ''}
               ${formatMealHtml("dinner", dayPlan.dinner)}
               ${dayPlan.drink.length > 0 ? formatMealHtml("drink", dayPlan.drink) : ''}
             </div>`;
@@ -501,9 +505,9 @@ function formatMealHtml(mealName, items) {
               <span class="calorie-badge">${item.kcal} kcal</span>
             </div>
             <div class="macro-info">
-              <i class="fas fa-dumbbell me-1"></i> ${item.protein}g بروتين -
-              <i class="fas fa-bread-slice me-1"></i> ${item.carbs}g كارب -
-              <i class="fas fa-oil-can me-1"></i> ${item.fat}g دهون
+              <span class="me-3"><i class="fas fa-dumbbell me-1"></i> ${item.protein}g بروتين</span>
+              <span class="me-3"><i class="fas fa-bread-slice me-1"></i> ${item.carbs}g كارب</span>
+              <span><i class="fas fa-oil-can me-1"></i> ${item.fat}g دهون</span>
             </div>`;
   });
   
