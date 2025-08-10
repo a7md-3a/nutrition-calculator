@@ -391,16 +391,19 @@ function generateDailyPlan(targetCalories) {
   for (const mealType in mealRatios) {
     const targetMealCalories = targetCalories * mealRatios[mealType];
     const mealsList = mealsDatabase[mealType];
-    
-    if (mealType === 'snack1' || mealType === 'snack2') {
+
+    if (mealType.includes('snack')) {
+      // التعامل مع الوجبات الخفيفة التي هي عناصر فردية
       const suitableSnacks = mealsList.filter(snack => snack.kcal <= targetMealCalories);
       if (suitableSnacks.length > 0) {
+        // اختيار وجبة خفيفة واحدة عشوائياً
         dailyPlan[mealType] = [suitableSnacks[Math.floor(Math.random() * suitableSnacks.length)]];
       }
     } else {
+      // التعامل مع الوجبات الرئيسية التي هي قوائم من العناصر
       const suitableMeals = mealsList.filter(mealItems => {
-          const totalMealKcal = mealItems.reduce((acc, item) => acc + item.kcal, 0);
-          return totalMealKcal <= targetMealCalories;
+        const totalMealKcal = mealItems.reduce((acc, item) => acc + item.kcal, 0);
+        return totalMealKcal <= targetMealCalories;
       });
 
       if (suitableMeals.length > 0) {
