@@ -392,8 +392,12 @@ function generateDailyPlan(targetCalories) {
     const targetMealCalories = targetCalories * mealRatios[mealType];
     const mealsList = mealsDatabase[mealType];
     
-    // في حالة الوجبات الرئيسية والسناك، نختار مجموعة من المكونات
-    if (Array.isArray(mealsList[0])) {
+    if (mealType === 'snack1' || mealType === 'snack2') {
+      const suitableSnacks = mealsList.filter(snack => snack.kcal <= targetMealCalories);
+      if (suitableSnacks.length > 0) {
+        dailyPlan[mealType] = [suitableSnacks[Math.floor(Math.random() * suitableSnacks.length)]];
+      }
+    } else {
       const suitableMeals = mealsList.filter(mealItems => {
           const totalMealKcal = mealItems.reduce((acc, item) => acc + item.kcal, 0);
           return totalMealKcal <= targetMealCalories;
@@ -404,8 +408,6 @@ function generateDailyPlan(targetCalories) {
       } else if (mealsList.length > 0) {
         dailyPlan[mealType] = mealsList[Math.floor(Math.random() * mealsList.length)];
       }
-    } else { // في حالة المشروبات أو السناكات المفردة
-      dailyPlan[mealType] = mealsList;
     }
   }
 
@@ -467,9 +469,9 @@ function renderPlan(age, gender, height, weight, activity, goal) {
               </h4>
               
               ${formatMealHtml("breakfast", dayPlan.breakfast)}
-              ${dayPlan.snack1.length > 0 ? formatMealHtml("snack1", [dayPlan.snack1[Math.floor(Math.random() * dayPlan.snack1.length)]]) : ''}
+              ${dayPlan.snack1.length > 0 ? formatMealHtml("snack1", dayPlan.snack1) : ''}
               ${formatMealHtml("lunch", dayPlan.lunch)}
-              ${dayPlan.snack2.length > 0 ? formatMealHtml("snack2", [dayPlan.snack2[Math.floor(Math.random() * dayPlan.snack2.length)]]) : ''}
+              ${dayPlan.snack2.length > 0 ? formatMealHtml("snack2", dayPlan.snack2) : ''}
               ${formatMealHtml("dinner", dayPlan.dinner)}
               ${dayPlan.drink.length > 0 ? formatMealHtml("drink", dayPlan.drink) : ''}
             </div>`;
