@@ -18,232 +18,92 @@
       --text-secondary: #B0B0B0;
       --card-bg: #1A1A1A;
     }
-
     body {
       background-color: var(--darker);
       color: var(--text);
       font-family: 'Tajawal', sans-serif;
       overflow-x: hidden;
     }
-
-    .content {
-      padding: 40px;
-      background-color: var(--dark);
-      min-height: 100vh;
-    }
-
+    .content { padding: 28px; background-color: var(--dark); min-height: 100vh; }
     .header-card {
       background: linear-gradient(135deg, var(--secondary) 0%, #2A2A2A 100%);
-      border-radius: 20px;
-      padding: 40px;
-      margin-bottom: 30px;
-      border: 1px solid rgba(255, 215, 0, 0.2);
-      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
+      border-radius: 16px; padding: 28px; margin-bottom: 22px;
+      border: 1px solid rgba(255,215,0,0.12); box-shadow: 0 8px 20px rgba(0,0,0,0.45);
     }
-
     .form-card, .result-card {
-      background-color: var(--card-bg);
-      border-radius: 20px;
-      padding: 30px;
-      border: 1px solid rgba(255, 215, 0, 0.1);
-      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+      background-color: var(--card-bg); border-radius: 16px; padding: 22px;
+      border: 1px solid rgba(255,215,0,0.08); box-shadow: 0 4px 12px rgba(0,0,0,0.35);
     }
-
     .btn-gold {
-      background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
-      color: #000;
-      font-weight: 900;
-      border: none;
-      padding: 15px 30px;
-      transition: all 0.4s ease-in-out;
-      border-radius: 10px;
+      background: linear-gradient(135deg,var(--primary) 0%,var(--primary-dark) 100%);
+      color:#000; font-weight:900; border:none; padding:12px 22px; border-radius:10px;
     }
-
-    .btn-gold:hover {
-      transform: translateY(-5px) scale(1.02);
-      box-shadow: 0 8px 20px rgba(255, 215, 0, 0.4);
-      color: #000;
-    }
-
     .form-control, .form-select {
-      background-color: #333;
-      border: 1px solid #444;
-      color: var(--text);
-      padding: 12px 15px;
-      border-radius: 8px;
+      background:#222; border:1px solid #333; color:var(--text); padding:10px 12px; border-radius:8px;
     }
-
-    .form-control:focus, .form-select:focus {
-      background-color: #333;
-      color: var(--text);
-      border-color: var(--primary);
-      box-shadow: 0 0 0 0.25rem rgba(255, 215, 0, 0.25);
-    }
-
-    .meal-card {
-      background-color: #1A1A1A;
-      border-radius: 15px;
-      padding: 25px;
-      margin-bottom: 20px;
-      border-left: 5px solid var(--primary);
-      transition: all 0.3s ease-in-out;
-      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
-    }
-
-    .meal-card:hover {
-      transform: translateY(-5px);
-      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
-    }
-
-    .calorie-badge {
-      background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
-      color: #000;
-      font-weight: bold;
-      padding: 6px 12px;
-      border-radius: 6px;
-      font-size: 14px;
-      min-width: 80px;
-      text-align: center;
-    }
-    
-    .day-plan {
-        border-bottom: 1px solid rgba(255, 215, 0, 0.2);
-        padding-bottom: 30px;
-        margin-bottom: 30px;
-    }
-    
-    .day-plan:last-child {
-        border-bottom: none;
-    }
-
-    /* Additional Customizations */
-    .meal-title {
-      font-weight: 700;
-      color: var(--primary);
-      margin-bottom: 15px;
-      font-size: 1.3rem;
-    }
-
-    .meal-item {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 10px 0;
-      border-bottom: 1px solid rgba(255, 255, 255, 0.05);
-    }
-
-    .meal-item:last-child {
-      border-bottom: none;
-    }
-
-    .meal-name {
-      font-weight: 500;
-    }
-
-    .drink-card {
-      background-color: #222;
-      border-left: 5px solid var(--primary-dark);
-    }
-
-    .goal-badge {
-      padding: 5px 15px;
-      border-radius: 25px;
-      font-size: 13px;
-      font-weight: 700;
-    }
-
-    .goal-lose {
-      background-color: rgba(40, 167, 69, 0.2);
-      color: #28A745;
-    }
-
-    .goal-gain {
-      background-color: rgba(220, 53, 69, 0.2);
-      color: #DC3545;
-    }
-
-    .goal-maintain {
-      background-color: rgba(13, 110, 253, 0.2);
-      color: #0D6EFD;
-    }
-
-    .macro-info {
-        font-size: 0.8rem;
-        color: var(--text-secondary);
-        display: block;
-        margin-top: 5px;
-    }
-
-    @media (max-width: 768px) {
-      .content {
-        padding: 25px;
-      }
-      .header-card {
-        padding: 25px;
-      }
-      .form-card, .result-card {
-        padding: 20px;
-      }
-      .btn-gold {
-        padding: 12px 20px;
-      }
+    .meal-card { background:#151515; border-radius:12px; padding:18px; margin-bottom:14px; border-left:4px solid var(--primary); }
+    .meal-title { font-weight:700; color:var(--primary); margin-bottom:10px; font-size:1.1rem; }
+    .meal-item { display:flex; justify-content:space-between; align-items:center; padding:8px 0; border-bottom:1px solid rgba(255,255,255,0.03); }
+    .meal-item:last-child { border-bottom:none; }
+    .calorie-badge { background:linear-gradient(135deg,var(--primary) 0%,var(--primary-dark) 100%); color:#000; font-weight:700; padding:6px 10px; border-radius:6px; min-width:90px; text-align:center; }
+    .macro-info { font-size:0.85rem; color:var(--text-secondary); margin-top:6px; display:block; }
+    .goal-badge { padding:6px 14px; border-radius:20px; font-weight:700; font-size:0.85rem; }
+    .goal-lose { background: rgba(40,167,69,0.12); color:#28A745; }
+    .goal-gain { background: rgba(220,53,69,0.12); color:#DC3545; }
+    .goal-maintain { background: rgba(13,110,253,0.12); color:#0D6EFD; }
+    .day-plan { border-bottom:1px solid rgba(255,215,0,0.06); padding-bottom:20px; margin-bottom:22px; }
+    .small-muted { color:var(--text-secondary); font-size:0.9rem; }
+    @media (max-width:768px){
+      .content { padding:16px; }
     }
   </style>
 </head>
 <body>
-
-<div class="content col-12">
+  <div class="content container">
     <div class="header-card">
-      <h1 class="mb-3"><i class="fas fa-calculator" style="color: var(--primary);"></i> حاسبة اللياقة البدنية</h1>
-      <p class="mb-0" style="color: var(--text-secondary);">احسب احتياجاتك اليومية من السعرات واحصل على خطة غذائية متكاملة لمدة 30 يومًا</p>
+      <h1 class="mb-2"><i class="fas fa-calculator me-2" style="color:var(--primary)"></i>حاسبة اللياقة الغذائية</h1>
+      <p class="mb-0 small-muted">ادخل معلوماتك وسيتم توليد خطة غذائية مفصلة (30 يوم) قابلة للحفظ على جهازك.</p>
     </div>
 
-    <div class="form-card">
+    <div class="form-card mb-4">
       <form id="nutritionForm" novalidate>
-        <div class="row">
-          <div class="col-md-6 mb-4">
-            <label for="age" class="form-label"><i class="fas fa-birthday-cake me-2" style="color: var(--primary);"></i>العمر (سنة):</label>
-            <input type="number" id="age" class="form-control form-control-lg" min="10" max="100" placeholder="مثلاً: 30" required>
+        <div class="row g-3">
+          <div class="col-md-3">
+            <label class="form-label">العمر</label>
+            <input id="age" class="form-control" type="number" min="10" max="100" placeholder="مثلاً 30" required>
           </div>
-          
-          <div class="col-md-6 mb-4">
-            <label for="gender" class="form-label"><i class="fas fa-venus-mars me-2" style="color: var(--primary);"></i>الجنس:</label>
-            <select id="gender" class="form-select form-select-lg" required>
-              <option value="" disabled selected>اختر الجنس</option>
+          <div class="col-md-3">
+            <label class="form-label">الجنس</label>
+            <select id="gender" class="form-select" required>
+              <option value="" disabled selected>اختر</option>
               <option value="male">ذكر</option>
               <option value="female">أنثى</option>
             </select>
           </div>
-        </div>
-
-        <div class="row">
-          <div class="col-md-6 mb-4">
-            <label for="height" class="form-label"><i class="fas fa-text-height me-2" style="color: var(--primary);"></i>الطول (سم):</label>
-            <input type="number" id="height" class="form-control form-control-lg" min="100" max="230" placeholder="مثلاً: 175" required>
+          <div class="col-md-3">
+            <label class="form-label">الطول (سم)</label>
+            <input id="height" class="form-control" type="number" min="100" max="230" placeholder="مثلاً 175" required>
           </div>
-          
-          <div class="col-md-6 mb-4">
-            <label for="weight" class="form-label"><i class="fas fa-weight-scale me-2" style="color: var(--primary);"></i>الوزن (كغ):</label>
-            <input type="number" id="weight" class="form-control form-control-lg" min="30" max="250" placeholder="مثلاً: 70" required>
+          <div class="col-md-3">
+            <label class="form-label">الوزن (كغ)</label>
+            <input id="weight" class="form-control" type="number" min="30" max="250" placeholder="مثلاً 70" required>
           </div>
-        </div>
 
-        <div class="row">
-          <div class="col-md-6 mb-4">
-            <label for="activity" class="form-label"><i class="fas fa-walking me-2" style="color: var(--primary);"></i>مستوى النشاط البدني:</label>
-            <select id="activity" class="form-select form-select-lg" required>
+          <div class="col-md-6">
+            <label class="form-label">مستوى النشاط البدني</label>
+            <select id="activity" class="form-select" required>
               <option value="" disabled selected>اختر مستوى النشاط</option>
-              <option value="1.2">قليل الحركة (قليل التمرين)</option>
-              <option value="1.375">تمارين خفيفة 1-3 أيام في الأسبوع</option>
-              <option value="1.55">تمارين معتدلة 3-5 أيام في الأسبوع</option>
-              <option value="1.725">تمارين كثيفة 6-7 أيام في الأسبوع</option>
-              <option value="1.9">نشاط بدني عالي جداً / عمل شاق</option>
+              <option value="1.2">قليل الحركة - تمارين نادرًا</option>
+              <option value="1.375">خفيف - تمارين 1–3 مرات/الأسبوع</option>
+              <option value="1.55">معتدل - تمارين 3–5 مرات/الأسبوع</option>
+              <option value="1.725">كثيف - تمارين 6–7 مرات/الأسبوع</option>
+              <option value="1.9">نشيط جدًا - نشاط بدني بشكل يومي/عمل شاق</option>
             </select>
           </div>
-          
-          <div class="col-md-6 mb-4">
-            <label for="goal" class="form-label"><i class="fas fa-bullseye me-2" style="color: var(--primary);"></i>هدف النظام الغذائي:</label>
-            <select id="goal" class="form-select form-select-lg" required>
+
+          <div class="col-md-6">
+            <label class="form-label">الهدف</label>
+            <select id="goal" class="form-select" required>
               <option value="" disabled selected>اختر الهدف</option>
               <option value="lose">نقص وزن (خسارة)</option>
               <option value="maintain">الحفاظ على الوزن</option>
@@ -252,27 +112,24 @@
           </div>
         </div>
 
-        <div class="d-grid">
-          <button type="submit" class="btn btn-gold btn-lg py-3">
-            <i class="fas fa-calculator me-2"></i>احسب واطلع خطة الـ 30 يوم
-          </button>
+        <div class="d-flex gap-2 justify-content-end mt-3">
+          <button id="generateBtn" type="submit" class="btn btn-gold"><i class="fas fa-calculator me-2"></i>احسب الخطة</button>
+          <button id="saveBtn" type="button" class="btn btn-outline-light"><i class="fas fa-save me-2"></i>حفظ التقدم</button>
+          <button id="clearSavedBtn" type="button" class="btn btn-secondary"><i class="fas fa-trash me-2"></i>مسح الحفظ</button>
         </div>
       </form>
     </div>
 
-    <div id="loading" class="text-center my-5" style="display:none;">
-      <div class="spinner-border" style="color: var(--primary); width: 4rem; height: 4rem;" role="status">
-        <span class="visually-hidden">جاري التحميل...</span>
-      </div>
-      <p class="mt-3" style="font-size: 1.2rem;">جاري تحليل بياناتك وإعداد خطتك الغذائية الشخصية...</p>
+    <div id="loading" style="display:none" class="text-center my-4">
+      <div class="spinner-border" style="color:var(--primary);width:3.5rem;height:3.5rem" role="status"><span class="visually-hidden">تحميل...</span></div>
+      <p class="mt-2 small-muted">جاري إعداد الخطة ...</p>
     </div>
 
-    <div id="output" class="result-card mt-4" style="display:none;"></div>
+    <div id="output" class="result-card" style="display:none"></div>
   </div>
-</div>
 
 <script>
-// قاعدة بيانات وجبات عربية وخليجية صحية ومفصلة
+// ---------- قاعدة وجبات مبسطة (قابلة للتوسيع لاحقاً)
 const mealsDatabase = {
   breakfast: [
     [
@@ -281,296 +138,292 @@ const mealsDatabase = {
       { food: "أفوكادو", qty: "نصف حبة", kcal: 160, protein: 2, carbs: 9, fat: 15 }
     ],
     [
+      { food: "شوفان", qty: "40 غ", kcal: 150, protein: 5, carbs: 27, fat: 3 },
+      { food: "حليب قليل الدسم", qty: "1 كوب", kcal: 90, protein: 8, carbs: 12, fat: 2 },
+      { food: "موز", qty: "1 حبة", kcal: 100, protein: 1, carbs: 27, fat: 0 }
+    ],
+    [
       { food: "زبادي يوناني قليل الدسم", qty: "1 كوب", kcal: 150, protein: 15, carbs: 15, fat: 3 },
       { food: "فواكه مشكلة", qty: "نصف كوب", kcal: 50, protein: 1, carbs: 12, fat: 0 },
-      { food: "جوز", qty: "5 حبات", kcal: 65, protein: 1.5, carbs: 1, fat: 6.5 }
-    ],
-    [
-      { food: "شوفان", qty: "40 جرام", kcal: 150, protein: 5, carbs: 27, fat: 3 },
-      { food: "حليب قليل الدسم", qty: "1 كوب", kcal: 90, protein: 8, carbs: 12, fat: 2 },
-      { food: "فول سوداني", qty: "1 ملعقة", kcal: 90, protein: 4, carbs: 3, fat: 8 }
-    ],
-    [
-      { food: "جبن قريش قليل الدسم", qty: "100 جرام", kcal: 100, protein: 20, carbs: 4, fat: 1 },
-      { food: "توست أسمر", qty: "2 شريحة", kcal: 160, protein: 8, carbs: 30, fat: 2 },
-      { food: "خضار (طماطم، خيار)", qty: "طبق", kcal: 30, protein: 1, carbs: 6, fat: 0 }
+      { food: "جوز (5 حبات)", qty: "5 حبات", kcal: 65, protein: 1.5, carbs: 1, fat: 6.5 }
     ]
   ],
   lunch: [
     [
-      { food: "صدر دجاج مشوي", qty: "150 جرام", kcal: 220, protein: 35, carbs: 0, fat: 5 },
-      { food: "أرز أسمر مطبوخ", qty: "200 جرام", kcal: 250, protein: 5, carbs: 55, fat: 2 },
+      { food: "صدر دجاج مشوي", qty: "150 غ", kcal: 220, protein: 35, carbs: 0, fat: 5 },
+      { food: "أرز أسمر مطبوخ", qty: "200 غ", kcal: 250, protein: 5, carbs: 55, fat: 2 },
       { food: "خضار سوتيه", qty: "طبق", kcal: 80, protein: 3, carbs: 15, fat: 2 }
     ],
     [
-      { food: "سمك فيليه مشوي", qty: "150 جرام", kcal: 210, protein: 30, carbs: 0, fat: 9 },
-      { food: "بطاطا حلوة مشوية", qty: "200 جرام", kcal: 180, protein: 4, carbs: 40, fat: 1 },
-      { food: "سلطة مشكلة", qty: "طبق كبير", kcal: 60, protein: 2, carbs: 12, fat: 1 }
+      { food: "سمك فيليه مشوي", qty: "150 غ", kcal: 210, protein: 30, carbs: 0, fat: 9 },
+      { food: "بطاطا حلوة مشوية", qty: "200 غ", kcal: 180, protein: 4, carbs: 40, fat: 1 },
+      { food: "سلطة مشكلة", qty: "طبق", kcal: 60, protein: 2, carbs: 12, fat: 1 }
     ],
     [
-      { food: "لحم بقري قليل الدهن", qty: "120 جرام", kcal: 250, protein: 30, carbs: 0, fat: 14 },
-      { food: "فريك مطبوخ", qty: "150 جرام", kcal: 200, protein: 7, carbs: 40, fat: 2 },
+      { food: "لحم بقري قليل الدهن", qty: "150 غ", kcal: 300, protein: 32, carbs: 0, fat: 14 },
+      { food: "فريك مطبوخ", qty: "150 غ", kcal: 200, protein: 7, carbs: 40, fat: 2 },
       { food: "شوربة عدس", qty: "كوب", kcal: 150, protein: 10, carbs: 25, fat: 2 }
-    ],
-    [
-      { food: "تونا بالماء", qty: "علبة", kcal: 120, protein: 25, carbs: 0, fat: 1 },
-      { food: "خبز أسمر", qty: "2 شريحة", kcal: 160, protein: 8, carbs: 30, fat: 2 },
-      { food: "سلطة خضراء مع زيت زيتون", qty: "طبق", kcal: 120, protein: 2, carbs: 8, fat: 9 }
     ]
   ],
   dinner: [
     [
-      { food: "صدر دجاج مشوي", qty: "120 جرام", kcal: 180, protein: 28, carbs: 5, fat: 5 },
-      { food: "سلطة خضراء", qty: "طبق كبير", kcal: 50, protein: 2, carbs: 10, fat: 1 }
+      { food: "سلمون مشوي", qty: "150 غ", kcal: 300, protein: 34, carbs: 0, fat: 18 },
+      { food: "خضار سوتيه", qty: "طبق", kcal: 80, protein: 3, carbs: 15, fat: 2 }
     ],
     [
-      { food: "شوربة خضار", qty: "طبق كبير", kcal: 120, protein: 5, carbs: 20, fat: 2 },
-      { food: "بيض مسلوق", qty: "2 حبة", kcal: 140, protein: 12, carbs: 1, fat: 10 },
-      { food: "حمص", qty: "50 جرام", kcal: 70, protein: 3, carbs: 10, fat: 2 }
+      { food: "شوربة خضار", qty: "كوب كبير", kcal: 120, protein: 5, carbs: 20, fat: 2 },
+      { food: "بيض مسلوق", qty: "2 حبة", kcal: 140, protein: 12, carbs: 1, fat: 10 }
     ],
     [
-      { food: "زبادي يوناني", qty: "150 جرام", kcal: 150, protein: 15, carbs: 15, fat: 3 },
-      { food: "قطعة فاكهة (موز أو تفاح)", qty: "1 حبة", kcal: 100, protein: 1, carbs: 25, fat: 0 }
-    ],
-    [
-      { food: "جبن أبيض", qty: "100 جرام", kcal: 200, protein: 15, carbs: 5, fat: 12 },
-      { food: "خضار مقطعة", qty: "طبق", kcal: 30, protein: 1, carbs: 6, fat: 0 }
+      { food: "زبادي يوناني", qty: "150 غ", kcal: 150, protein: 15, carbs: 15, fat: 3 },
+      { food: "فاكهة", qty: "1 حبة", kcal: 100, protein: 1, carbs: 25, fat: 0 }
     ]
   ],
   snack: [
-    { food: "تفاح", qty: "1 حبة متوسطة", kcal: 95, protein: 0, carbs: 25, fat: 0 },
-    { food: "لوز", qty: "10 حبات", kcal: 70, protein: 3, carbs: 2, fat: 6 },
-    { food: "كوب زبادي", qty: "1 كوب", kcal: 100, protein: 6, carbs: 15, fat: 2 },
-    { food: "جزر", qty: "2 حبة متوسطة", kcal: 50, protein: 1, carbs: 12, fat: 0 },
-    { food: "تمر", qty: "3 حبات", kcal: 65, protein: 0, carbs: 18, fat: 0 },
-    { food: "حفنة من المكسرات", qty: "20 جرام", kcal: 110, protein: 4, carbs: 5, fat: 9 }
+    { food: "تفاح", qty: "1 حبة", kcal: 95, protein: 0, carbs: 25, fat: 0 },
+    { food: "لوز (10 حبات)", qty: "10 حبات", kcal: 70, protein: 3, carbs: 2, fat: 6 },
+    { food: "زبادي", qty: "1 كوب", kcal: 100, protein: 6, carbs: 15, fat: 2 },
+    { food: "تمر (3 حبات)", qty: "3 حبات", kcal: 65, protein: 0, carbs: 18, fat: 0 }
   ],
   drink: [
+    { food: "ماء", qty: "2 لتر", kcal: 0, protein: 0, carbs: 0, fat: 0 },
     { food: "شاي أخضر", qty: "كوب", kcal: 0, protein: 0, carbs: 0, fat: 0 },
-    { food: "قهوة سوداء", qty: "كوب", kcal: 5, protein: 0, carbs: 0, fat: 0 },
-    { food: "ماء", qty: "2 لتر", kcal: 0, protein: 0, carbs: 0, fat: 0 }
+    { food: "قهوة سوداء", qty: "كوب", kcal: 5, protein: 0, carbs: 0, fat: 0 }
   ]
 };
 
-// حساب معدل الأيض الأساسي (BMR)
-function calculateBMR(weight, height, age, gender) {
-  if (gender === 'male') {
-    return (10 * weight) + (6.25 * height) - (5 * age) + 5;
-  } else {
-    return (10 * weight) + (6.25 * height) - (5 * age) - 161;
-  }
+// ---------- دوال حسابية ومولّد الخطة
+function calculateBMR(weight, height, age, gender){
+  if (gender === 'male') return (10*weight) + (6.25*height) - (5*age) + 5;
+  return (10*weight) + (6.25*height) - (5*age) - 161;
+}
+function calculateBMI(weight, height){
+  const v = +(weight / Math.pow(height/100,2)).toFixed(1);
+  let cat = "";
+  if (v < 18.5) cat = "نقص في الوزن";
+  else if (v < 24.9) cat = "وزن طبيعي";
+  else if (v < 29.9) cat = "زيادة في الوزن";
+  else if (v < 34.9) cat = "سمنة من الدرجة الأولى";
+  else if (v < 39.9) cat = "سمنة من الدرجة الثانية";
+  else cat = "سمنة مفرطة";
+  return { value: v, category: cat };
 }
 
-// حساب مؤشر كتلة الجسم وتصنيفه
-function calculateBMI(weight, height) {
-  const bmiValue = (weight / Math.pow(height / 100, 2)).toFixed(1);
-  let bmiCategory = "";
-  
-  if (bmiValue < 18.5) bmiCategory = "نقص في الوزن";
-  else if (bmiValue < 24.9) bmiCategory = "وزن طبيعي";
-  else if (bmiValue < 29.9) bmiCategory = "زيادة في الوزن";
-  else if (bmiValue < 34.9) bmiCategory = "سمنة من الدرجة الأولى";
-  else if (bmiValue < 39.9) bmiCategory = "سمنة من الدرجة الثانية";
-  else bmiCategory = "سمنة مفرطة";
-  
-  return { value: bmiValue, category: bmiCategory };
-}
+function pickRandom(arr){ return arr[Math.floor(Math.random()*arr.length)]; }
 
-// توليد خطة غذائية عشوائية لليوم الواحد
-function generateDailyPlan(targetCalories) {
+function generateDailyPlan(targetCalories){
   const dailyPlan = { breakfast: [], snack1: [], lunch: [], snack2: [], dinner: [], drink: [] };
-  
-  const mealRatios = {
-    breakfast: 0.25,
-    snack1: 0.05,
-    lunch: 0.35,
-    snack2: 0.05,
-    dinner: 0.30
-  };
+  const mealRatios = { breakfast: 0.25, snack1: 0.05, lunch: 0.35, snack2: 0.05, dinner: 0.30 };
 
-  for (const mealType in mealRatios) {
+  for (const mealType in mealRatios){
     const targetMealCalories = targetCalories * mealRatios[mealType];
     const mealsList = mealsDatabase[mealType];
 
-    if (mealType.includes('snack')) {
-      // التعامل مع الوجبات الخفيفة التي هي عناصر فردية
-      const suitableSnacks = mealsList.filter(snack => snack.kcal <= targetMealCalories);
-      if (suitableSnacks.length > 0) {
-        // اختيار وجبة خفيفة واحدة عشوائياً
-        dailyPlan[mealType] = [suitableSnacks[Math.floor(Math.random() * suitableSnacks.length)]];
-      }
+    if (mealType.startsWith('snack')){
+      const suitable = mealsList.filter(s => s.kcal <= targetMealCalories);
+      dailyPlan[mealType] = suitable.length ? [ pickRandom(suitable) ] : [ pickRandom(mealsList) ];
     } else {
-      // التعامل مع الوجبات الرئيسية التي هي قوائم من العناصر
-      const suitableMeals = mealsList.filter(mealItems => {
-        const totalMealKcal = mealItems.reduce((acc, item) => acc + item.kcal, 0);
-        return totalMealKcal <= targetMealCalories;
-      });
-
-      if (suitableMeals.length > 0) {
-        dailyPlan[mealType] = suitableMeals[Math.floor(Math.random() * suitableMeals.length)];
-      } else if (mealsList.length > 0) {
-        dailyPlan[mealType] = mealsList[Math.floor(Math.random() * mealsList.length)];
-      }
+      // mealsList is array of arrays (each array is items for that meal)
+      const suitable = mealsList.filter(items => items.reduce((acc,it)=>acc+it.kcal,0) <= targetMealCalories);
+      dailyPlan[mealType] = suitable.length ? pickRandom(suitable) : pickRandom(mealsList);
     }
   }
-
   dailyPlan.drink = mealsDatabase.drink;
-  
   return dailyPlan;
 }
 
-// عرض الخطة كاملة
-function renderPlan(age, gender, height, weight, activity, goal) {
-  const bmr = calculateBMR(weight, height, age, gender);
-  let tdee = Math.round(bmr * activity);
-  
-  if (goal === "lose") tdee = Math.round(tdee - 500);
-  else if (goal === "gain") tdee = Math.round(tdee + 500);
-  
-  if (tdee < 1200) tdee = 1200;
-  
-  const bmi = calculateBMI(weight, height);
-  
-  let html = `<div class="mb-5">
-                <h3 class="mb-4" style="color: var(--primary);"><i class="fas fa-chart-pie me-2"></i>النتائج الشخصية</h3>
-                <div class="row">
-                  <div class="col-md-6 mb-3">
-                    <div class="p-4" style="background-color: var(--secondary); border-radius: 15px;">
-                      <h5><i class="fas fa-user me-2"></i>البيانات الشخصية</h5>
-                      <p class="mb-1"><strong>العمر:</strong> ${age} سنة</p>
-                      <p class="mb-1"><strong>الجنس:</strong> ${gender === "male" ? "ذكر" : "أنثى"}</p>
-                      <p class="mb-1"><strong>الطول:</strong> ${height} سم</p>
-                      <p class="mb-1"><strong>الوزن:</strong> ${weight} كغ</p>
-                    </div>
-                  </div>
-                  <div class="col-md-6 mb-3">
-                    <div class="p-4" style="background-color: var(--secondary); border-radius: 15px;">
-                      <h5><i class="fas fa-chart-line me-2"></i>المؤشرات الصحية</h5>
-                      <p class="mb-1"><strong>مؤشر كتلة الجسم (BMI):</strong> ${bmi.value} (${bmi.category})</p>
-                      <p class="mb-1"><strong>معدل الأيض الأساسي (BMR):</strong> ${Math.round(bmr)} سعرة/يوم</p>
-                      <p class="mb-1"><strong>إجمالي السعرات اليومية (TDEE):</strong> ${tdee} سعرة/يوم</p>
-                      <p class="mb-0"><strong>النظام الموصى به:</strong> ${tdee} سعرة/يوم</p>
-                    </div>
-                  </div>
-                </div>
-              </div>`;
-  
-  html += `<h3 class="mb-4" style="color: var(--primary);"><i class="fas fa-calendar-alt me-2"></i>الخطة الغذائية لمدة 30 يوم</h3>
-           <div class="alert alert-dark" style="background-color: var(--secondary); border: none;">
-             <i class="fas fa-info-circle me-2" style="color: var(--primary);"></i>
-             نظامك الغذائي اليومي يحتوي على ${tdee} سعرة حرارية مع توزيع مثالي للمغذيات الكبرى
-           </div>`;
-  
-  for (let i = 1; i <= 30; i++) {
-    const dayPlan = generateDailyPlan(tdee);
-    html += `<div class="day-plan">
-              <h4 class="mb-4 d-flex justify-content-between align-items-center">
-                <span><i class="fas fa-calendar-day me-2"></i>اليوم ${i}</span>
-                <span class="goal-badge ${goal === 'lose' ? 'goal-lose' : goal === 'gain' ? 'goal-gain' : 'goal-maintain'}">
-                  ${goal === 'lose' ? 'خسارة وزن' : goal === 'gain' ? 'زيادة وزن' : 'حفاظ'}
-                </span>
-              </h4>
-              
-              ${formatMealHtml("breakfast", dayPlan.breakfast)}
-              ${dayPlan.snack1.length > 0 ? formatMealHtml("snack1", dayPlan.snack1) : ''}
-              ${formatMealHtml("lunch", dayPlan.lunch)}
-              ${dayPlan.snack2.length > 0 ? formatMealHtml("snack2", dayPlan.snack2) : ''}
-              ${formatMealHtml("dinner", dayPlan.dinner)}
-              ${dayPlan.drink.length > 0 ? formatMealHtml("drink", dayPlan.drink) : ''}
-            </div>`;
-  }
-  
-  html += `<div class="mt-5 text-center">
-            <button class="btn btn-gold me-3"><i class="fas fa-save me-2"></i>حفظ التقدم</button>
-          </div>`;
-  
-  return html;
+// تعديل السعرات حسب الهدف: خسارة -> -10% ، زيادة -> +15%
+// عندما نولد خطة 30 يوم نطبق العامل على إجمالي TDEE (تم التعامل في renderPlan)
+
+// ====== تنسيق العرض (عناوين عربية للقِسم)
+function mealLabel(mealName){
+  if(mealName === 'breakfast') return 'الفطور';
+  if(mealName === 'lunch') return 'الغداء';
+  if(mealName === 'dinner') return 'العشاء';
+  if(mealName === 'snack1') return 'سناك 1';
+  if(mealName === 'snack2') return 'سناك 2';
+  if(mealName === 'drink') return 'المشروبات';
+  return mealName;
 }
 
-// تنسيق الوجبات للعرض
-function formatMealHtml(mealName, items) {
-  if (!items || items.length === 0) return '';
-  let totalCalories = 0;
-  let totalProtein = 0;
-  let totalCarbs = 0;
-  let totalFat = 0;
-  
-  let html = `<div class="meal-card ${mealName === 'drink' ? 'drink-card' : ''}">
-                <h5 class="meal-title"><i class="fas fa-${mealName === 'breakfast' ? 'sun' : mealName === 'lunch' ? 'utensils' : mealName === 'dinner' ? 'moon' : mealName.includes('snack') ? 'apple-alt' : 'glass-whiskey'} me-2"></i>${mealName === 'snack1' ? 'وجبة خفيفة 1' : mealName === 'snack2' ? 'وجبة خفيفة 2' : mealName === 'drink' ? 'المشروبات' : mealName}</h5>
-                <div class="meal-items">`;
-  
-  items.forEach(item => {
-    totalCalories += item.kcal;
-    totalProtein += item.protein || 0;
-    totalCarbs += item.carbs || 0;
-    totalFat += item.fat || 0;
-    
-    html += `<div class="meal-item">
-              <span class="meal-name">${item.qty} ${item.food}</span>
-              <span class="calorie-badge">${item.kcal} kcal</span>
-            </div>
-            <div class="macro-info">
-              <span class="me-3"><i class="fas fa-dumbbell me-1"></i> ${item.protein}g بروتين</span>
-              <span class="me-3"><i class="fas fa-bread-slice me-1"></i> ${item.carbs}g كارب</span>
-              <span><i class="fas fa-oil-can me-1"></i> ${item.fat}g دهون</span>
-            </div>`;
+function formatMealHtml(mealName, items){
+  if(!items || items.length === 0) return '';
+  let totalCalories = 0, totalProtein = 0, totalCarbs = 0, totalFat = 0;
+  let html = `<div class="meal-card ${mealName==='drink'?'drink-card':''}">`;
+  html += `<div class="meal-title">${mealLabel(mealName)}</div>`;
+  html += `<div class="meal-items">`;
+  items.forEach(it=>{
+    totalCalories += it.kcal || 0;
+    totalProtein += it.protein || 0;
+    totalCarbs += it.carbs || 0;
+    totalFat += it.fat || 0;
+    html += `<div class="meal-item"><div class="meal-name">${it.qty} ${it.food}</div><div class="calorie-badge">${it.kcal} kcal</div></div>`;
+    html += `<div class="macro-info"><span class="me-3"><i class="fas fa-dumbbell me-1"></i>${it.protein || 0}g بروتين</span><span class="me-3"><i class="fas fa-bread-slice me-1"></i>${it.carbs || 0}g كارب</span><span><i class="fas fa-oil-can me-1"></i>${it.fat || 0}g دهون</span></div>`;
   });
-  
-  html += `</div>
-           <div class="mt-3" style="font-size: 1rem; font-weight: bold; color: var(--text-secondary);">
-             <span class="me-3"><i class="fas fa-fire me-1"></i> الإجمالي: ${totalCalories} سعرة</span>
-             <span class="me-3"><i class="fas fa-dumbbell me-1"></i> ${Math.round(totalProtein)}g بروتين</span>
-             <span class="me-3"><i class="fas fa-bread-slice me-1"></i> ${Math.round(totalCarbs)}g كارب</span>
-             <span><i class="fas fa-oil-can me-1"></i> ${Math.round(totalFat)}g دهون</span>
-           </div>
-           </div>`;
-  
+  html += `</div>`;
+  html += `<div class="mt-2 small-muted"><strong>الإجمالي:</strong> ${totalCalories} سعره حرارية (${totalCalories} kcal) — <span class="me-3">${Math.round(totalProtein)}g بروتين</span><span class="me-3">${Math.round(totalCarbs)}g كارب</span><span>${Math.round(totalFat)}g دهون</span></div>`;
+  html += `</div>`;
   return html;
 }
 
-// إدارة عملية الإرسال
-document.getElementById("nutritionForm").addEventListener("submit", function(e) {
+// ====== توليد الخطة الكاملة
+function renderPlan(age, gender, height, weight, activity, goal){
+  const bmr = Math.round(calculateBMR(weight,height,age,gender));
+  let tdee = Math.round(bmr * activity);
+
+  // تعديل حسب الهدف
+  if(goal === 'lose') tdee = Math.round(tdee * 0.9); // تقليل ~10%
+  else if(goal === 'gain') tdee = Math.round(tdee * 1.15); // زيادة ~15%
+
+  if(tdee < 1000) tdee = 1000;
+
+  const bmi = calculateBMI(weight,height);
+
+  let html = `<div class="mb-4"><div class="row g-3">`;
+  html += `<div class="col-md-6"><div style="background:var(--secondary);padding:14px;border-radius:12px;"><h5>البيانات الشخصية</h5><p class="mb-0">العمر: ${age} سنة<br>الجنس: ${gender==='male'?'ذكر':'أنثى'}<br>الطول: ${height} سم<br>الوزن: ${weight} كغ</p></div></div>`;
+  html += `<div class="col-md-6"><div style="background:var(--secondary);padding:14px;border-radius:12px;"><h5>المؤشرات</h5><p class="mb-0">BMI: ${bmi.value} (${bmi.category})<br>BMR: ${bmr} سعره حرارية (${bmr} kcal)<br>TDEE (معدل الحاجة اليومية): ${tdee} سعره حرارية (${tdee} kcal)</p></div></div>`;
+  html += `</div></div>`;
+
+  html += `<h4 style="color:var(--primary)">الخطة الغذائية — 30 يوم</h4>`;
+  html += `<div class="small-muted mb-3">نظامك اليومي يحتوي تقريبًا على ${tdee} سعره حرارية. (القيم تقريبية)</div>`;
+
+  for(let day=1; day<=30; day++){
+    // كل يوم نولد خطة يومية جديدة (عشوائية من قاعدة البيانات)
+    const dayPlan = generateDailyPlan(tdee);
+
+    html += `<div class="day-plan">`;
+    html += `<div class="d-flex justify-content-between align-items-center mb-3"><div><strong>اليوم ${day}</strong></div><div><span class="goal-badge ${goal==='lose'?'goal-lose':goal==='gain'?'goal-gain':'goal-maintain'}">${goal==='lose'?'خسارة وزن':goal==='gain'?'زيادة وزن':'حفاظ'}</span></div></div>`;
+
+    html += formatMealHtml('breakfast', dayPlan.breakfast);
+    if(dayPlan.snack1 && dayPlan.snack1.length) html += formatMealHtml('snack1', dayPlan.snack1);
+    html += formatMealHtml('lunch', dayPlan.lunch);
+    if(dayPlan.snack2 && dayPlan.snack2.length) html += formatMealHtml('snack2', dayPlan.snack2);
+    html += formatMealHtml('dinner', dayPlan.dinner);
+    if(dayPlan.drink && dayPlan.drink.length) html += formatMealHtml('drink', dayPlan.drink);
+
+    html += `</div>`;
+  }
+
+  // زر حفظ إضافي (سيتم التعامل مع الزر العام الموجود في الواجهة)
+  html += `<div class="text-center mt-4"><div class="small-muted">يمكنك حفظ التقدم بالضغط على زر "حفظ التقدم"</div></div>`;
+
+  return { html, meta: { bmr, tdee, bmi } };
+}
+
+// ====== حفظ / استرجاع التقدم (localStorage)
+const STORAGE_KEY = 'fitpro_saved_progress_v1';
+
+function saveProgress(state){
+  try{
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
+    return true;
+  }catch(e){ return false; }
+}
+function loadProgress(){
+  try{
+    const raw = localStorage.getItem(STORAGE_KEY);
+    return raw ? JSON.parse(raw) : null;
+  }catch(e){ return null; }
+}
+function clearProgress(){
+  try{ localStorage.removeItem(STORAGE_KEY); return true; }catch(e){ return false; }
+}
+
+// ====== تعامل الواجهة
+const form = document.getElementById('nutritionForm');
+const loading = document.getElementById('loading');
+const outputEl = document.getElementById('output');
+const saveBtn = document.getElementById('saveBtn');
+const clearSavedBtn = document.getElementById('clearSavedBtn');
+
+// تحميل البيانات المحفوظة إن وُجدت
+window.addEventListener('load', ()=>{
+  const saved = loadProgress();
+  if(saved){
+    // اعرض رسالة بسيطة إن هناك حفظ سابق
+    // واملأ الحقول
+    if(saved.inputs){
+      document.getElementById('age').value = saved.inputs.age || '';
+      document.getElementById('gender').value = saved.inputs.gender || '';
+      document.getElementById('height').value = saved.inputs.height || '';
+      document.getElementById('weight').value = saved.inputs.weight || '';
+      document.getElementById('activity').value = saved.inputs.activity || '';
+      document.getElementById('goal').value = saved.inputs.goal || '';
+    }
+    if(saved.planHtml){
+      outputEl.style.display = 'block';
+      outputEl.innerHTML = saved.planHtml;
+      // تنبيه خفيف
+      const alertBox = document.createElement('div');
+      alertBox.className = 'alert alert-info';
+      alertBox.style.background = 'rgba(255,215,0,0.08)';
+      alertBox.style.border = 'none';
+      alertBox.innerHTML = 'تم استرجاع آخر حفظ — يمكنك تعديل المدخلات ثم حفظ جديد.';
+      outputEl.insertAdjacentElement('afterbegin', alertBox);
+    }
+  }
+});
+
+// زر حفظ التقدم
+saveBtn.addEventListener('click', ()=>{
+  // نأخذ القيم الحالية
+  const age = parseInt(document.getElementById('age').value || 0);
+  const gender = document.getElementById('gender').value;
+  const height = parseInt(document.getElementById('height').value || 0);
+  const weight = parseInt(document.getElementById('weight').value || 0);
+  const activity = parseFloat(document.getElementById('activity').value || 0);
+  const goal = document.getElementById('goal').value;
+
+  // لو مافي عرض للخطة لا نحفظ إلا المدخلات
+  const planHtml = outputEl.innerHTML || '';
+
+  const state = { savedAt: Date.now(), inputs: { age, gender, height, weight, activity, goal }, planHtml };
+  const ok = saveProgress(state);
+  if(ok) alert('تم حفظ التقدم محلياً على جهازك.');
+  else alert('لم يتم الحفظ — تأكد من إعدادات المتصفح.');
+});
+
+// زر مسح الحفظ
+clearSavedBtn.addEventListener('click', ()=>{
+  if(confirm('هل متأكد أنك تريد مسح الحفظ المحلي؟')) {
+    clearProgress();
+    alert('تم مسح الحفظ المحلي.');
+  }
+});
+
+// حدث الإرسالة لتوليد الخطة
+form.addEventListener('submit', function(e){
   e.preventDefault();
-  
-  const form = e.target;
-  if (!form.checkValidity()) {
+  if(!form.checkValidity()){
     form.reportValidity();
     return;
   }
-  
-  const loading = document.getElementById("loading");
-  const output = document.getElementById("output");
-  loading.style.display = "block";
-  output.style.display = "none";
-  
-  const age = parseInt(document.getElementById("age").value);
-  const gender = document.getElementById("gender").value;
-  const height = parseInt(document.getElementById("height").value);
-  const weight = parseInt(document.getElementById("weight").value);
-  const activity = parseFloat(document.getElementById("activity").value);
-  const goal = document.getElementById("goal").value;
-  
-  setTimeout(() => {
-    try {
-      const planHtml = renderPlan(age, gender, height, weight, activity, goal);
-      output.style.display = "block";
-      output.innerHTML = planHtml;
-      loading.style.display = "none";
-      
-      window.scrollTo({
-        top: output.offsetTop - 20,
-        behavior: "smooth"
-      });
-      
-    } catch (error) {
-      console.error("حدث خطأ:", error);
-      loading.style.display = "none";
-      output.innerHTML = `<div class="alert alert-danger">حدث خطأ أثناء معالجة طلبك. يرجى المحاولة مرة أخرى.</div>`;
-      output.style.display = "block";
+  // جلب المدخلات
+  const age = parseInt(document.getElementById('age').value);
+  const gender = document.getElementById('gender').value;
+  const height = parseInt(document.getElementById('height').value);
+  const weight = parseInt(document.getElementById('weight').value);
+  const activity = parseFloat(document.getElementById('activity').value);
+  const goal = document.getElementById('goal').value;
+
+  loading.style.display = 'block';
+  outputEl.style.display = 'none';
+  setTimeout(()=>{
+    try{
+      const { html, meta } = renderPlan(age, gender, height, weight, activity, goal);
+      outputEl.innerHTML = html;
+      outputEl.style.display = 'block';
+      loading.style.display = 'none';
+      // تمرير إلى الأعلى
+      window.scrollTo({ top: outputEl.offsetTop - 20, behavior: 'smooth' });
+    }catch(err){
+      console.error(err);
+      loading.style.display = 'none';
+      outputEl.style.display = 'block';
+      outputEl.innerHTML = `<div class="alert alert-danger">حدث خطأ أثناء إعداد الخطة.</div>`;
     }
-  }, 1500);
+  }, 700);
 });
 </script>
-
 </body>
 </html>
